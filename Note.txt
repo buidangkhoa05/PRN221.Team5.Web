@@ -1,0 +1,6 @@
+
+
+
+Add-Migration [NameForNewMigration]
+
+Update-Migration [NameOfMigrationUpdate]
