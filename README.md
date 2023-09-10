@@ -1,18 +1,19 @@
 ﻿# Zoo Management Application (Project of PRN221 course)
 
 # Team Introduction 
-	## Group Name : 5
-	### SE150257	Phạm Thiên Nhi
-	###	SE160060	Nguyễn Mạnh Hùng
-	###	SE160769	Hạp Thị Niên Kết
-	###	SE161282	Bùi Đăng Khoa
+> ## Group Name : 5
+> ### SE150257	Phạm Thiên Nhi
+> ###	SE160060	Nguyễn Mạnh Hùng
+> ###	SE160769	Hạp Thị Niên Kết
+> ###	SE161282	Bùi Đăng Khoa
 
 # Technologies 
-	## (ASP.NET Core 7)[https://docs.microsoft.com/en-us/aspnet/core/whats-new/?view=aspnetcore-7.0]
-	## (ASP.NET Core MVC 7)[https://docs.microsoft.com/en-us/aspnet/core/mvc/overview/?view=aspnetcore-7.0]
-	## (EF 7)[https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-7.0/whatsnew]
+> ## [ASP.NET Core 7](https://docs.microsoft.com/en-us/aspnet/core/whats-new/?view=aspnetcore-7.0)
+> ## [ASP.NET Core MVC 7](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview/?view=aspnetcore-7.0)
+> ## [EF Core 7.0](https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-7.0/whatsnew)
+
 # Database 
-	## (SQL Server)[https://www.microsoft.com/en-us/sql-server/sql-server-2022]
+> ## [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2022)
 
 # Topic Context
 	 Manage ticket entry at the Zoo gate, collect data on a daily, weekly, monthly, and yearly basis.
