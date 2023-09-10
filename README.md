@@ -2,10 +2,10 @@
 
 # Team Introduction 
 > ## Group Name : 5
-> ### SE150257	Phạm Thiên Nhi
-> ###	SE160060	Nguyễn Mạnh Hùng
-> ###	SE160769	Hạp Thị Niên Kết
-> ###	SE161282	Bùi Đăng Khoa
+> ### [SE150257	Phạm Thiên Nhi](https://github.com/pthiennhi)
+> ### [SE160060	Nguyễn Mạnh Hùng](https://github.com/HungNMse)
+> ### [SE160769	Hạp Thị Niên Kết]()
+> ### [SE161282	Bùi Đăng Khoa](https://github.com/buidangkhoa05)
 
 # Technologies 
 > ## [ASP.NET Core 7](https://docs.microsoft.com/en-us/aspnet/core/whats-new/?view=aspnetcore-7.0)
