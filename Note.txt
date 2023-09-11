@@ -1,6 +1,9 @@
 
 
+Command to create migration and update database
+	Add-Migration [NameForNewMigration]
 
-Add-Migration [NameForNewMigration]
+	Update-Migration [NameOfMigrationUpdate]
 
-Update-Migration [NameOfMigrationUpdate]
+
+After create one service then must register service intio DI container in ServicesRegister.cs file

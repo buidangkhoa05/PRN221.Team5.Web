@@ -11,6 +11,10 @@ namespace PRN221.Team5.Web
 
             builder.Services.AddDbConfig();
 
+            builder.Services.AddServices();
+
+            builder.Services.AddRepositories();
+
             builder.Services.AddRazorPages();
 
             builder.Services.Configure<RouteOptions>(options =>

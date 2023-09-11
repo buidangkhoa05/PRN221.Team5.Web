@@ -16,9 +16,23 @@ namespace PRN221.Team5.Application.Repository.Implement
         }
 
         #region Create
+        /// <summary>
+        /// Add an entity to DbSet, need to call SaveChanges to save to database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public async Task CreateAsync(T entity)
         {
             await dbSet.AddAsync(entity);
+        }
+        /// <summary>
+        /// Add a list of entities to DbSet, need to call SaveChanges to save to database
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <returns></returns>
+        public async Task CreateAsync(IEnumerable<T> entities)
+        {
+            await dbSet.AddRangeAsync(entities);
         }
         #endregion
 
@@ -31,10 +45,9 @@ namespace PRN221.Team5.Application.Repository.Implement
         public async Task DeleteAsync(Func<T, bool> predicate)
         {
             var result = await dbSet.Where(predicate).AsQueryable().ExecuteDeleteAsync();
-
         }
         /// <summary>
-        /// 
+        /// Update IsDeleted to true by condition predicate without SaveChanges action
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -54,13 +67,24 @@ namespace PRN221.Team5.Application.Repository.Implement
         #endregion Delete
 
         #region Update
-        public async Task UpdateAsync(T entity)
+        /// <summary>
+        ///  Change stated of entity to Modified (mark this entity will update), need to call SaveChanges to save to database
+        /// </summary>
+        /// <param name="entity"></param>
+        public void Update(T entity)
         {
             _context.Attach(entity).State = EntityState.Modified;
         }
         #endregion Update
 
         #region Retrieve
+        /// <summary>
+        /// Get an entity is active by id and match orther condition predicate, this function is AsNoTracking 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="predicate">can null</param>
+        /// <param name="includes"></param>
+        /// <returns></returns>
         public async Task<T> GetById(Guid id, Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes)
         {
             Expression<Func<T, bool>> isNotDeleteCondition = p => p.IsDeleted == false && p.Id == id;
@@ -84,7 +108,12 @@ namespace PRN221.Team5.Application.Repository.Implement
                 return await query.Includes(includes).SingleOrDefaultAsync();
             }
         }
-
+        /// <summary>
+        /// Get all entities are active and match condition predicate, this function is AsNoTracking
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="includes"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<T>> GetWithCondition(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes)
         {
             Expression<Func<T, bool>> isNotDeleteCondition = p => p.IsDeleted == false;
@@ -141,6 +170,14 @@ namespace PRN221.Team5.Application.Repository.Implement
             return pagedRequests;
         }
         #endregion Retrieve
+        /// <summary>
+        /// Function save changes to database (Excute command to Db like: update, create, delete)
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
 
         //public async Task<IList<T>> WhereAsync(Expression<Func<T, bool>> predicate, params string[] navigationProperties)
         //{
