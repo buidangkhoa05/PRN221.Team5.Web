@@ -79,7 +79,12 @@ namespace PRN221.Team5.Application.Repository.Implement
         {
             dbContext.Attach(entity).State = EntityState.Modified;
         }
-
+        /// <summary>
+        /// reposiopry.Update(a => a.Name = "ABC", setter => setter.SetProperty(i => i.Age, 18).SetProperty(i => i.Name = "CCC"))
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="setPropertyCalls"></param>
+        /// <returns></returns>
         public async Task<int> Update(Expression<Func<T, bool>>? predicate, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> setPropertyCalls)
         {
             var query = dbSet.AsQueryable();

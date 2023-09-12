@@ -1,4 +1,4 @@
-namespace PRN221.Team5.Web
+namespace PRN211.Team5.Web
 {
     public class Program
     {
@@ -7,28 +7,14 @@ namespace PRN221.Team5.Web
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Configuration.BindingSetting();
-
-            builder.Services.AddDbConfig();
-
-            builder.Services.AddServices();
-
-            builder.Services.AddRepositories();
-
-            builder.Services.AddRazorPages();
-
-            builder.Services.Configure<RouteOptions>(options =>
-            {
-                options.LowercaseUrls = true;
-                options.LowercaseQueryStrings = true;
-            });
+            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -40,7 +26,9 @@ namespace PRN221.Team5.Web
 
             app.UseAuthorization();
 
-            app.MapRazorPages();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
