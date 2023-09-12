@@ -1,5 +1,6 @@
 ﻿
 using LinqKit;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -7,11 +8,11 @@ namespace PRN221.Team5.Application.Repository.Implement
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        protected readonly DbContext _context;
+        protected readonly DbContext dbContext;
         protected readonly DbSet<T> dbSet;
         public GenericRepository(DbContext context)
         {
-            _context = context;
+            dbContext = context;
             dbSet = context.Set<T>();
         }
 
@@ -69,11 +70,26 @@ namespace PRN221.Team5.Application.Repository.Implement
         #region Update
         /// <summary>
         ///  Change stated of entity to Modified (mark this entity will update), need to call SaveChanges to save to database
+        ///  
+        /// Update(t => t.Name == "ABC", setter => setter.SetProperty(i => i.Name, "CCC")
+        ///                                                  .SetProperty(i => i.Age, "18"))
         /// </summary>
         /// <param name="entity"></param>
         public void Update(T entity)
         {
-            _context.Attach(entity).State = EntityState.Modified;
+            dbContext.Attach(entity).State = EntityState.Modified;
+        }
+
+        public async Task<int> Update(Expression<Func<T, bool>>? predicate, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> setPropertyCalls)
+        {
+            var query = dbSet.AsQueryable();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+
+            }
+            return await query.ExecuteUpdateAsync(setPropertyCalls);
         }
         #endregion Update
 
@@ -176,7 +192,7 @@ namespace PRN221.Team5.Application.Repository.Implement
         /// <returns></returns>
         public async Task<int> SaveChangesAsync()
         {
-            return await _context.SaveChangesAsync();
+            return await dbContext.SaveChangesAsync();
         }
 
         //public async Task<IList<T>> WhereAsync(Expression<Func<T, bool>> predicate, params string[] navigationProperties)
