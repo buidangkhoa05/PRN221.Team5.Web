@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace PRN211.Team5.Web.Controllers
 {
+    [Route("home-controler")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,6 +22,21 @@ namespace PRN211.Team5.Web.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [HttpGet("[Action]")]
+        
+        public IActionResult People()
+        {
+            return View(new PeopleModel());
+        }
+
+        [HttpPost]
+        public IActionResult Create()
+        {
+            var companyName = Request.Form["CompanyName"];
+
+            return View(new Student());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -18,6 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRN211.Team5.Web", "PRN211.Team5.Web\PRN211.Team5.Web.csproj", "{1C152E85-82F0-4B79-8EEA-AD2DC670A629}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42B9DBF2-4D2F-4C48-8295-BA7C8A814785} = {42B9DBF2-4D2F-4C48-8295-BA7C8A814785}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
