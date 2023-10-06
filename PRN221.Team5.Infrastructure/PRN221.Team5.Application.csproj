@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="7.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.10" />
+		<PackageReference Include="EFCore.NamingConventions" Version="7.0.2" />
+		<PackageReference Include="LinqKit" Version="1.2.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PRN221.Team5.Domain\PRN221.Team5.Domain.csproj" />
+	</ItemGroup>
+
+</Project>
