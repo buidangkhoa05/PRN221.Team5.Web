@@ -359,3 +359,5 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+/PRN221.Team5.Web/appsettings.json
+/PRN221.Team5.Web/appsettings.Development.json
