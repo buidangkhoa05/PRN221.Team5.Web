@@ -4,6 +4,10 @@ using System.CodeDom;
 using Team5.Domain.Common;
 using Team5.Infrastructure.DBContext;
 using Team5.Infrastructure.Repository;
+using PRN221.Team5.Domain.Entity;
+using Microsoft.AspNetCore.Identity;
+using PRN221.Team5.Application.DBContext;
+using System;
 
 namespace PRN221.Team5.Web.Configuration
 {
@@ -11,6 +15,10 @@ namespace PRN221.Team5.Web.Configuration
     {
         public static void AddServices(this IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdsDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         }
@@ -20,6 +28,8 @@ namespace PRN221.Team5.Web.Configuration
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                            options.UseSqlServer(AppConfig.ConnectionStrings.DefaultConnection));
+
+            services.AddDbContext<IdsDbContext>(options => options.UseSqlServer(AppConfig.ConnectionStrings.DefaultConnection));
         }
     }
 }

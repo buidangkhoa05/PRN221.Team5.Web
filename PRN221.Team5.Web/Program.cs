@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using PRN221.Team5.Web.Configuration;
 
 namespace PRN221.Team5.Web
@@ -20,6 +21,8 @@ namespace PRN221.Team5.Web
                 options.Cookie.IsEssential = true;
             });
 
+            builder.Services.AddIdentityOptions();
+
             builder.Services.AddDbContext();
 
             builder.Services.AddServices();
@@ -35,13 +38,14 @@ namespace PRN221.Team5.Web
                 app.UseHsts();
             }
 
-
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapRazorPages();
 

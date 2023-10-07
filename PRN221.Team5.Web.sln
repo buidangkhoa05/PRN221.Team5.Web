@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRN221.Team5.Web", "PRN221.Team5.Web\PRN221.Team5.Web.csproj", "{2D19358C-8708-4FFC-A2BD-691FCCD8A677}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRN221.Team5.Web", "PRN221.Team5.Web\PRN221.Team5.Web.csproj", "{2D19358C-8708-4FFC-A2BD-691FCCD8A677}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRN221.Team5.Application", "PRN221.Team5.Infrastructure\PRN221.Team5.Application.csproj", "{FD36592D-88C4-4177-96EB-402489D66381}"
 EndProject
