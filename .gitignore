@@ -361,3 +361,6 @@ healthchecksdb
 MigrationBackup/
 
 
+/PRN221.Team5.Web/package.json
+/PRN221.Team5.Web/package-lock.json
+/PRN221.Team5.Web/pnpm-lock.yaml
