@@ -13,13 +13,16 @@ namespace Team5.Infrastructure.Repository
         private IDbContextTransaction _transaction;
 
 
-        public UnitOfWork(ApplicationDbContext dbContext)
+        public UnitOfWork()
         {
-            _dbContext = dbContext;
+            if (_dbContext == null)
+            {
+                _dbContext = new ApplicationDbContext();
+            }
         }
 
         #region Repository 
-      
+
         #endregion Repository
 
 

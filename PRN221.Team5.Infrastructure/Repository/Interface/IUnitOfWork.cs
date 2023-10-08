@@ -13,5 +13,10 @@ namespace Team5.Application.Repository
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();
         Task RolebackTransactionAsync();
+
+        #region Repository
+
+
+        #endregion Repository
     }
 }

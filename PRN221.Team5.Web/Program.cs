@@ -21,7 +21,7 @@ namespace PRN221.Team5.Web
                 options.Cookie.IsEssential = true;
             });
 
-            builder.Services.AddIdentityOptions();
+            //builder.Services.AddIdentityOptions();
 
             builder.Services.AddDbContext();
 

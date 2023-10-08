@@ -90,7 +90,7 @@ namespace Team5.Application.Repository
 
         #endregion Version 2.0
 
-        #region Comming soon  - Địt chưa làm đc đừng có sài
+        #region Comming soon  - chưa làm đc đừng có sài
         /// <summary>
         /// Update entity by id and other conditions with DTO object - Hàng lỗi nha đừng có sài 
         /// </summary>
