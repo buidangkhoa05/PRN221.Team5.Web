@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRN221.Team5.Domain.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,18 @@ namespace Team5.Infrastructure.Repository
         }
 
         #region Repository 
-
+        private IGenericRepository<Account> _account;
+        public IGenericRepository<Account> Account
+        {
+            get
+            {
+                if (_account == null)
+                {
+                    _account = new GenericRepository<Account>(_dbContext);
+                }
+                return _account;
+            }
+        }
         #endregion Repository
 
 

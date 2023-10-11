@@ -1,4 +1,5 @@
 ﻿
+using PRN221.Team5.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Team5.Application.Repository
         Task RolebackTransactionAsync();
 
         #region Repository
-
+        public IGenericRepository<Account> Account { get; }
 
         #endregion Repository
     }

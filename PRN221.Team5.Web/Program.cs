@@ -1,5 +1,8 @@
+using Autofac.Core;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using PRN221.Team5.Web.Configuration;
+using PRN221.Team5.Web.Middleware;
 
 namespace PRN221.Team5.Web
 {
@@ -16,9 +19,20 @@ namespace PRN221.Team5.Web
 
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(5); // Life time of session
                 options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.IdleTimeout = TimeSpan.FromMinutes(5); // Life time of cookie
+            });
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+
+                options.LoginPath = "/Auth/Login";
+                options.AccessDeniedPath = "/Auth/AccessDenied";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                options.SlidingExpiration = true;
+                options.Cookie.HttpOnly = true;
             });
 
             //builder.Services.AddIdentityOptions();
@@ -42,9 +56,11 @@ namespace PRN221.Team5.Web
 
             app.UseStaticFiles();
 
+
             app.UseRouting();
 
             app.UseAuthentication();
+            //app.UseMiddleware<SeesionHandleMiddleware>();
             app.UseAuthorization();
 
             app.MapRazorPages();
