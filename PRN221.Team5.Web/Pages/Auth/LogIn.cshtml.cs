@@ -12,7 +12,6 @@ using Team5.Domain.Common;
 namespace PRN221.Team5.Web.Pages.Auth
 {
     [AllowAnonymous]
-    []
     public class LogInModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
