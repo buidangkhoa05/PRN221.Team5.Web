@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PRN221.Team5.Web</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PRN221.Team5.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/satoshi.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+
+</head>
+<body x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+      x-init="darkMode=JSON.parse(localStorage.getItem('darkMode'));$watch('darkMode',value=>localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+     @* @await Html.PartialAsync("./Partials/_Preloader.cshtml") *@
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- ===== Sidebar Start ===== -->
+        @await Html.PartialAsync("../Partials/_Sidebar.cshtml")
+        <!-- ===== Sidebar End ===== -->
+        <!-- ===== Content Area Start ===== -->
+        <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+            <!-- ===== Header Start ===== -->
+            @await Html.PartialAsync("../Partials/_Header.cshtml")
+            <!-- ===== Header End ===== -->
+            <!-- ===== Main Content Start ===== -->
+            <main>
+                @RenderBody()
+            </main>
+
+        </div>
+
+    </div>
+
+
+
+
+    <footer class="border-top footer text-muted">
+        <div class="text-center">
+            &copy; 2023 - PRN221.Team5.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+        <script
+  defer
+  src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"
+></script>
+
+<script
+  defer
+  src="https://unpkg.com/@@alpinejs/persist@3.x.x/dist/cdn.min.js"
+></script>
+
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.43.0/dist/apexcharts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+<script type="module" src="~/js/site.js" asp-append-version="true"></script>
+    <script type="module" src="~/js/index.js" asp-append-version="true"></script>
+
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
