@@ -13,8 +13,8 @@
 </head>
 <body x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
       x-init="darkMode=JSON.parse(localStorage.getItem('darkMode'));$watch('darkMode',value=>localStorage.setItem('darkMode', JSON.stringify(value)))"
-    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
-     @* @await Html.PartialAsync("./Partials/_Preloader.cshtml") *@
+      :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+    @* @await Html.PartialAsync("./Partials/_Preloader.cshtml") *@
     <div class="flex h-screen overflow-hidden">
 
         <!-- ===== Sidebar Start ===== -->
@@ -44,22 +44,18 @@
     </footer>
 
 
-        <script
-  defer
-  src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"
-></script>
+    <script defer
+            src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"></script>
 
-<script
-  defer
-  src="https://unpkg.com/@@alpinejs/persist@3.x.x/dist/cdn.min.js"
-></script>
+    <script defer
+            src="https://unpkg.com/@@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
 
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.43.0/dist/apexcharts.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
-<script type="module" src="~/js/site.js" asp-append-version="true"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.43.0/dist/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <script type="module" src="~/js/site.js" asp-append-version="true"></script>
     <script type="module" src="~/js/index.js" asp-append-version="true"></script>
 
 
