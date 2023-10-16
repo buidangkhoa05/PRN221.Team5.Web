@@ -1,4 +1,6 @@
-﻿using PRN221.Team5.Domain.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using PRN221.Team5.Domain.Entity;
 
 namespace Team5.Infrastructure.DBContext
 {
@@ -14,8 +16,18 @@ namespace Team5.Infrastructure.DBContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(AppConfig.ConnectionStrings.DefaultConnection);
+            optionsBuilder.UseSqlServer(GetConnectionString());
             base.OnConfiguring(optionsBuilder);
+        }
+
+        private string GetConnectionString()
+        {
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", true, true)
+                .Build();
+            var strConn = config["ConnectionStrings:DefaultConnection"];
+            return strConn;
         }
 
         #region DbSet
