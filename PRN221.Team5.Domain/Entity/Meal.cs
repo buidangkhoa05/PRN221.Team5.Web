@@ -27,7 +27,6 @@ namespace PRN221.Team5.Domain.Entity
         [Required]
         public float FoodFrequency { get; set; }
 
-        public virtual ICollection<Animal> Animals { get; set; }
-        public virtual ICollection<AnimalGroup> AnimalGroups { get; set; }
+        public virtual ICollection<Meal_Animal> Meal_Animals{ get; set; }
     }
 }

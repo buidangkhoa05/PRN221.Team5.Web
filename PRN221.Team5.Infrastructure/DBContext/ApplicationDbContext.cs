@@ -33,16 +33,16 @@ namespace Team5.Infrastructure.DBContext
         #region DbSet
         private DbSet<Account> Accounts { get; set; }
         private DbSet<ZooNews> ZooNews { get; set; }
+        private DbSet<TraineerProfile> TraineerProfiles { get; set; }
+        private DbSet<AnimalTraining> AnimalTrainings { get; set; }
         private DbSet<Animal> Animals { get; set; }
         private DbSet<AnimalSpecie> AnimalSpecies { get; set; }
-        private DbSet<AnimalGroup> AnimalGroups { get; set; }
         private DbSet<ZooSection> ZooSections { get; set; }
         private DbSet<Cage> Cages { get; set; }
-        private DbSet<TraineerProfile> TraineerProfiles { get; set; }
         private DbSet<Cage_Animal> Cage_Animals { get; set; }
         private DbSet<Food> Foods { get; set; }
-        private DbSet<FoodType> FoodTypes { get; set; }
         private DbSet<Meal> Meals { get; set; }
+        private DbSet<Meal_Animal> Meal_Animals { get; set; }
         #endregion DbSet
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -57,34 +57,33 @@ namespace Team5.Infrastructure.DBContext
                .HasForeignKey(z => z.OwnerId)
                .OnDelete(DeleteBehavior.Cascade);
 
+            //config for Account - TraineerProfile one-to-one relationship
+            modelBuilder.Entity<TraineerProfile>()
+              .HasOne(a => a.Account)
+              .WithOne(a => a.TraineerProfile)
+              .HasForeignKey<TraineerProfile>(z => z.AccountId)
+              .OnDelete(DeleteBehavior.Cascade);
+
+            //config for Animal - AnimalTraining one-to-many relationship
+            modelBuilder.Entity<Animal>()
+               .HasMany(a => a.AnimalTrainings)
+               .WithOne(z => z.Animal)
+               .HasForeignKey(z => z.AnimalId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            //config for TraineerProfile - AnimalTraining one-to-many relationship
+            modelBuilder.Entity<TraineerProfile>()
+               .HasMany(a => a.AnimalTrainings)
+               .WithOne(z => z.Trainer)
+               .HasForeignKey(z => z.TrainerId)
+               .OnDelete(DeleteBehavior.Cascade);
+
             //config for AnimalSpecie - Animal one-to-many relationship
             modelBuilder.Entity<AnimalSpecie>()
                .HasMany(a => a.Animals)
                .WithOne(z => z.Specie)
                .HasForeignKey(z => z.SpecieId)
                .OnDelete(DeleteBehavior.Cascade);
-
-            //config for AnimalGroup - Animal one-to-many relationship
-            modelBuilder.Entity<AnimalGroup>()
-               .HasMany(a => a.Animals)
-               .WithOne(z => z.Group)
-               .HasForeignKey(z => z.GroupId)
-               .OnDelete(DeleteBehavior.SetNull)
-               .IsRequired(false);
-
-            //config for Animal - TraineerProfile one-to-many relationship
-            modelBuilder.Entity<Animal>()
-               .HasMany(a => a.TraineerProfiles)
-               .WithOne(z => z.Animal)
-               .HasForeignKey(z => z.AnimalId)
-               .OnDelete(DeleteBehavior.Cascade);
-
-            //config for Account - TraineerProfile one-to-many relationship
-            modelBuilder.Entity<Account>()
-              .HasMany(a => a.TraineerProfiles)
-              .WithOne(z => z.Traineer)
-              .HasForeignKey(z => z.TraineerId)
-              .OnDelete(DeleteBehavior.Cascade);
 
             //config for ZooSection - Cage one-to-many relationship
             modelBuilder.Entity<ZooSection>()
@@ -98,29 +97,42 @@ namespace Team5.Infrastructure.DBContext
                .HasMany(a => a.Cages)
                .WithOne(z => z.AnimalSpecie)
                .HasForeignKey(z => z.AnimalSpecieId)
-               .OnDelete(DeleteBehavior.Cascade);
+               .OnDelete(DeleteBehavior.NoAction);
+
+            //config for Cage - Cage_Animal one-to-many relationship
+            modelBuilder.Entity<Cage>()
+               .HasMany(a => a.Cage_Animals)
+               .WithOne(z => z.Cage)
+               .HasForeignKey(z => z.CageId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            //config for Animal - Cage_Animal one-to-many relationship
+            modelBuilder.Entity<Animal>()
+               .HasMany(a => a.Cage_Animals)
+               .WithOne(z => z.Animal)
+               .HasForeignKey(z => z.AnimalId)
+               .OnDelete(DeleteBehavior.NoAction);
 
             //config for FoodTye - Food one-to-many relationship
-            modelBuilder.Entity<FoodType>()
-               .HasMany(a => a.Foods)
-               .WithOne(z => z.Type)
-               .HasForeignKey(z => z.TypeId)
-               .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Food>()
+               .HasMany(a => a.Meals)
+               .WithOne(z => z.Food)
+               .HasForeignKey(z => z.FoodId)
+               .OnDelete(DeleteBehavior.NoAction);
 
             //config for Meal - Animal one-to-many relationship
             modelBuilder.Entity<Meal>()
-               .HasMany(a => a.Animals)
+               .HasMany(a => a.Meal_Animals)
                .WithOne(z => z.Meal)
                .HasForeignKey(z => z.MealId)
                .OnDelete(DeleteBehavior.NoAction);
 
-            //config for Meal - AnimalGroup one-to-many relationship
-            modelBuilder.Entity<Meal>()
-               .HasMany(a => a.AnimalGroups)
-               .WithOne(z => z.Meal)
-               .HasForeignKey(z => z.MealId)
+            //config for Animal - Meal_Animal one-to-many relationship
+            modelBuilder.Entity<Animal>()
+               .HasMany(a => a.Meal_Animals)
+               .WithOne(z => z.Animal)
+               .HasForeignKey(z => z.AnimalId)
                .OnDelete(DeleteBehavior.NoAction);
-
         }
 
 

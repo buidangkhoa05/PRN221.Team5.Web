@@ -10,18 +10,18 @@ namespace PRN221.Team5.Domain.Entity
 {
     public class TraineerProfile : BaseEntity
     {
-        [Required]
-        public DateTime Start { get; set; } = DateTime.Now;
-        public DateTime? End { get; set; } = null;
         [DataType(DataType.Text)]
-        public string Experience { get; set; }
+        public string Exprerience { get; set; }
+
         [Required]
-        public bool IsTraning { get; set; } = true;
+        public DateTime JoinDate { get; set; }
 
-        public Guid TraineerId { get; set; }
-        public virtual Account Traineer { get; set; }
+        public DateTime? OutDate { get; set; } = null;
 
-        public Guid AnimalId { get; set; }
-        public virtual Animal Animal { get; set; }
+        [Required]
+        public Guid AccountId { get; set; } 
+        public virtual Account Account { get; set; }
+
+        public virtual ICollection<AnimalTraining> AnimalTrainings { get; set; }
     }
 }

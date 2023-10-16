@@ -14,14 +14,15 @@ namespace PRN221.Team5.Domain.Entity
         public Guid CageId { get; set; }
         public virtual Cage Cage { get; set; }
 
+        [Required]
         public Guid? AnimalId { get; set; }
         public virtual Animal Animal { get; set; }
 
-        public Guid? AnimalGroupId { get; set; }
-        public virtual AnimalGroup AnimalGroup { get; set; }
-
+        [Required]
         public DateTime FromDate { get; set; } = DateTime.Now;
+
         public DateTime? ToDate { get; set; }
+
         public bool IsPresent { get; set; } = true;
     }
 }

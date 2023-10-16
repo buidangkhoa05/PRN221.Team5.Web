@@ -27,16 +27,14 @@ namespace PRN221.Team5.Domain.Entity
         public Gender Gender { get; set; }
         public bool IsHerd { get; set; } //is herd animal
 
+        [Required]
         public Guid SpecieId { get; set; }
         public virtual AnimalSpecie Specie { get; set; }
 
-        public Guid? GroupId { get; set; } = null;
-        public virtual AnimalGroup? Group { get; set; } = null;
+        public virtual ICollection<AnimalTraining> AnimalTrainings { get; set; }
 
-        [Required]
-        public Guid MealId { get; set; }
-        public virtual Meal Meal { get; set; }
+        public virtual ICollection<Cage_Animal> Cage_Animals { get; set; }
 
-        public virtual ICollection<TraineerProfile> TraineerProfiles { get; set; }
+        public virtual ICollection<Meal_Animal> Meal_Animals { get; set; }
     }
 }

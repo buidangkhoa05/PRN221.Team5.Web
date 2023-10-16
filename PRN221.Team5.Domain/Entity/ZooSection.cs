@@ -14,7 +14,7 @@ namespace PRN221.Team5.Domain.Entity
         [MinLength(5)]
         public string Name { get; set; }
         public string Description { get; set; }
-        public ZooSectionStatus zooSectionStatus { get; set; } = ZooSectionStatus.Available;
+        public ZooSectionStatus ZooSectionStatus { get; set; } = ZooSectionStatus.Available;
 
         public virtual ICollection<Cage> Cages { get; set; }
     }

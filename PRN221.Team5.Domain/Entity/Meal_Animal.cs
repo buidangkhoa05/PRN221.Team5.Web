@@ -8,19 +8,14 @@ using Team5.Domain.Entity;
 
 namespace PRN221.Team5.Domain.Entity
 {
-    public class AnimalGroup : BaseEntity
+    public class Meal_Animal : BaseEntity
     {
-        [Required]
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-        [Required]
-        public float FoodQuantity { get; set; }
-
         [Required]
         public Guid MealId { get; set; }
         public virtual Meal Meal { get; set; }
 
-        public virtual ICollection<Animal> Animals { get; set; }
+        [Required]
+        public Guid AnimalId { get; set; }
+        public virtual Animal Animal { get; set; }
     }
 }

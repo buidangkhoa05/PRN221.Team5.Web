@@ -24,6 +24,8 @@ namespace PRN221.Team5.Domain.Entity
 
         public Guid AnimalSpecieId { get; set; }
         public virtual AnimalSpecie AnimalSpecie { get; set; }
+
+        public virtual ICollection<Cage_Animal> Cage_Animals { get; set; }
     }
 
     public enum CageStatus

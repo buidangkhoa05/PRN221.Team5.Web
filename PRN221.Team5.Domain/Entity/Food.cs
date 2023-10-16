@@ -11,11 +11,12 @@ namespace PRN221.Team5.Domain.Entity
     public class Food : BaseEntity
     {
         [Required]
-        public Guid TypeId { get; set; }
-        public virtual FoodType Type { get; set; }
+        public string Type { get; set; }
 
         [Required]
         [MinLength(5)]
         public string Name { get; set; }
+
+        public virtual ICollection<Meal> Meals { get; set; }
     }
 }

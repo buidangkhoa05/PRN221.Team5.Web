@@ -12,21 +12,25 @@ namespace PRN221.Team5.Domain.Entity
     {
         [Required]
         public string Username { get; set; }
+
         [MinLength(5)]
         [MaxLength(20)]
         [Required]
         public string Password { get; set; }
+
         [Required]
         [Range(16, 100)]
         public string Age { get; set; }
+
         [Phone]
         public string PhoneNumber { get; set; }
+
         [Required]
         public Role Role { get; set; }
 
-        public virtual ICollection<ZooNews> ZooNews { get; set; }
-        public virtual ICollection<TraineerProfile> TraineerProfiles { get; set; }
+        public virtual TraineerProfile TraineerProfile { get; set; }
 
+        public virtual ICollection<ZooNews> ZooNews { get; set; }
     }
 
     public enum Role
