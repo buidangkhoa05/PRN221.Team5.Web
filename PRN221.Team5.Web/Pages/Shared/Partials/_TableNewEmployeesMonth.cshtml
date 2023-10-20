@@ -1,0 +1,50 @@
+<h4 class="mb-6 px-7.5 text-xl font-bold text-black dark:text-white">
+    New Employees last 30 days
+</h4>
+
+<table id="top_account_month" class="w-full">
+    <thead class="hidden">
+        <tr class="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4">
+            <th class="p-5 flex items-center justify-center">
+                <h5 class="text-sm font-medium uppercase xsm:text-base">Avatar</h5>
+            </th>
+            <th class="text-center p-5 flex items-center justify-center">
+                <h5 class="text-sm font-medium uppercase xsm:text-base">Name</h5>
+            </th>
+            <th class="text-center p-5 flex items-center justify-center">
+                <h5 class="text-sm font-medium uppercase xsm:text-base">Role</h5>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="flex flex-col">
+
+        @foreach (var account in Model.Accounts)
+        {
+
+            <tr class="flex items-center hover:bg-gray-3 dark:hover:bg-meta-4">
+                <td class="relative h-12 w-12 rounded-full">
+                    <img asp-append-version="true" src="~/images/user/user-03.png" alt="User" />
+                </td>
+
+                <td class="flex flex-1 items-center justify-between">
+                    <div class="flex flex-col items-start justify-center">
+                        <h5 class="font-medium text-black dark:text-white line-clamp-1">
+                            @account.Name
+                        </h5>
+                        <p class="text-xs font-medium text-black dark:text-white">
+                            Create:
+                            <span class="text-black/60"> @account.CreatedDate</span>
+                        </p>
+                    </div>
+
+                </td>
+                <td class="text-sm font-medium text-primary dark:text-white text-end">
+                    @account.Role
+                </td>
+            </tr>
+
+
+        }
+    </tbody>
+
+</table>

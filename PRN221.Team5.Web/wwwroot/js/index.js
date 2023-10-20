@@ -2,19 +2,24 @@
 // import "flatpickr/dist/flatpickr.min.css";
 // import "../css/style.css";
 
+// const Alpine = require("alpinejs");
+// const persist = require("@alpinejs/persist");
+// const flatpickr = require("flatpickr");
+// const chart01 = require("./components/chart-01");
+// const chart02 = require("./components/chart-02");
+// const chart03 = require("./components/chart-03");
+// const chart04 = require("./components/chart-04");
+// const map01 = require("./components/map-01");
 import Alpine from "alpinejs";
-import persist from '@alpinejs/persist'
+import persist from "@alpinejs/persist";
 import flatpickr from "flatpickr";
 import chart01 from "./components/chart-01";
 import chart02 from "./components/chart-02";
 import chart03 from "./components/chart-03";
 import chart04 from "./components/chart-04";
 import map01 from "./components/map-01";
-alert("Hello! hahaha, I'm in your");
 
-
-
-Alpine.plugin(persist)
+Alpine.plugin(persist);
 window.Alpine = Alpine;
 Alpine.start();
 
@@ -43,6 +48,7 @@ flatpickr(".datepicker", {
 
 // Document Loaded
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("ddd");
   chart01();
   chart02();
   chart03();

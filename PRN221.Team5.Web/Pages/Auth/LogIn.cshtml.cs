@@ -20,7 +20,7 @@ namespace PRN221.Team5.Web.Pages.Auth
         public string Username { get; set; }
         [BindProperty]
         public string Password { get; set; }
-
+        
         public LogInModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -44,7 +44,7 @@ namespace PRN221.Team5.Web.Pages.Auth
 
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Invalid username or password");
+                    ModelState.AddModelError("invalid", "Username or password is incorrect");
                     return Page();
                 }
                 else
