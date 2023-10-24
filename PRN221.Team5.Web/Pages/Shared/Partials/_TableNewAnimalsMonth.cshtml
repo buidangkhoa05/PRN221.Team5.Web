@@ -1,11 +1,17 @@
 <div
   class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-  <h4 class="mb-6 text-xl font-bold text-black dark:text-white">
-    New animals during the last 30 days
-  </h4>
+  <div class="flex flex-row justify-between">
+
+    <h4 class="mb-6 text-xl font-bold text-black dark:text-white">
+      New animals during the last 30 days
+    </h4>
+    <a asp-page="/Dashboard/ManageAnimals" class="mb-6 text-base font-bold text-primary underline dark:text-white">
+      View all
+    </a>
+  </div>
 
   <table id="top_animals_month" class="w-full table-auto" data-page-length="5">
-    
+
     <thead class="flex flex-col">
       <tr class="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
         <th class="p-5 flex items-center justify-center">
