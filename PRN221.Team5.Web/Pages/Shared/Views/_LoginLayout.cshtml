@@ -5,11 +5,13 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>@ViewData["Title"] PRN221.Team5.Web</title>
-      <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+      <link rel="stylesheet" href="~/css/site.css?t=@DateTime.Now.Ticks" asp-append-version="true" />
       <link rel="stylesheet" href="~/PRN221.Team5.Web.styles.css" asp-append-version="true" />
       <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
       <link rel="stylesheet" href="~/css/satoshi.css" asp-append-version="true" />
       <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"
+            asp-append-version="true">
 </head>
 
 <body class="mb-0">
@@ -36,7 +38,8 @@
                               <div class="hidden w-full xl:block xl:w-1/2">
                                     <div class="py-17.5 px-26 text-center">
                                           <a class="mb-5.5 inline-block" asp-page="/">
-                                                <div class="hidden dark:block flex flex-row gap-2 justify-center items-center">
+                                                <div
+                                                      class="hidden dark:block flex flex-row gap-2 justify-center items-center">
                                                       <img class="hidden dark:block" src="~/images/logo/logo.svg"
                                                             alt="Logo" />
                                                       <span class="text-2xl font-extrabold text-primary">ZOO</span>
@@ -127,15 +130,23 @@
       </main>
 
 
-      <script defer src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+            integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
       <script defer src="https://unpkg.com/@@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
-
-      <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-      <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.43.0/dist/apexcharts.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js" defer></script>
+      <script defer src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"></script>
+      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"
+            integrity="sha512-9ktqS1nS/L6/PPv4S4FdD2+guYGmKF+5DzxRKYkS/fV5gR0tXoDaLqqQ6V93NlTj6ITsanjwVWZ3xe6YkObIQQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
       <script type="module" src="~/js/site.js" asp-append-version="true"></script>
       <script type="module" src="~/js/index.js" asp-append-version="true"></script>
 

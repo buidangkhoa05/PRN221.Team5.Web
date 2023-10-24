@@ -64,24 +64,24 @@
             </div>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-       
+
         @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="mb-4">
-                    
-                    @if(ViewData.ModelState["invalid"] != null)
-                    {
-                        <span class="text-danger">@ViewData.ModelState["invalid"].Errors[0].ErrorMessage</span>
-                    }
-                    else
-                    {
-                        <span class="text-danger"></span>
-                    }
-                    
-                </div>
-            }
-          
-        
+        {
+            <div class="mb-4">
+
+                @if (ViewData.ModelState["invalid"] != null)
+                {
+                    <span class="text-danger">@ViewData.ModelState["invalid"].Errors[0].ErrorMessage</span>
+                }
+                else
+                {
+                    <span class="text-danger"></span>
+                }
+
+            </div>
+        }
+
+
 
 
         <div class="mb-5">

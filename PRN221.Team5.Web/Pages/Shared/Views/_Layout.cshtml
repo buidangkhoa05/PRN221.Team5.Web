@@ -40,7 +40,7 @@
         </div>
 
     </div>
-    @await Html.PartialAsync("../Partials/_ModalViewDetailPost.cshtml")
+    @* @await Html.PartialAsync("../Partials/_ModalViewDetailPost.cshtml") *@
 
 
 
@@ -57,18 +57,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <script defer src="https://unpkg.com/@@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
 
 
+    <script defer src="https://unpkg.com/@@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"
         integrity="sha512-9ktqS1nS/L6/PPv4S4FdD2+guYGmKF+5DzxRKYkS/fV5gR0tXoDaLqqQ6V93NlTj6ITsanjwVWZ3xe6YkObIQQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -96,27 +97,38 @@
                 "columnDefs": [
                     { "orderable": false, "targets": 'no-sort' }
                 ],
+                "scrollX": true,
             });
 
         });
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            // Add a click event handler to the "haha" button
-            $("#viewBlogDetailModal").click(function () {
-                // Show the modal when the button is clicked
-                $("#blogDetailModal").removeClass("hidden");
+        @* $(document).ready(function () {
+            $('#table_accounts').DataTable({
+                "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+                "responsive": true,
+                "ordering": false,
+                "scrollX": true,
             });
 
-            // Add a click event handler to close the modal
-            $("#blogDetailModal").click(function (e) {
-                if ($(e.target).is("#blogDetailModal")) {
-                    $("#blogDetailModal").addClass("hidden");
-                }
-            });
-        });
+        }); *@
+
     </script>
+
+    @* <script>
+    $(document).ready(function () {
+    // Add a click event handler to the "haha" button
+    $("#viewBlogDetailModal").click(function () {
+    // Show the modal when the button is clicked
+    $("#blogDetailModal").removeClass("hidden");
+    });
+
+    // Add a click event handler to close the modal
+    $("#blogDetailModal").click(function (e) {
+    if ($(e.target).is("#blogDetailModal")) {
+    $("#blogDetailModal").addClass("hidden");
+    }
+    });
+    });
+    </script> *@
 
     <script type="module" src="~/js/site.js" asp-append-version="true"></script>
     <script type="module" src="~/js/index.js" asp-append-version="true"></script>

@@ -38,7 +38,7 @@ html {
 .dataTables_length select {
   width: 20% !important;
   border-radius: 8px !important;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e5e7eb !important;
 }
 .dataTables_filter label {
   display: flex !important;
@@ -69,8 +69,15 @@ html {
   color: #000000 !important;
 }
 
-table.dataTable thead th,
+
 table.dataTable tbody td {
-  padding: 20px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
   border-bottom: none !important;
 }
+table.dataTable tr.selected {
+  background: #f1f5f9 !important;
+}
+/* .dataTables_scrollBody #table_accounts thead th{
+  padding: 0px !important;
+} */
