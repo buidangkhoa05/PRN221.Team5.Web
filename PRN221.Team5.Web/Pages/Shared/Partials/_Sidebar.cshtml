@@ -28,7 +28,7 @@
         <nav class="mt-2 py-4 px-4 lg:mt-4 lg:px-6" x-data="{selected: $persist('Dashboard')}">
             <!-- Menu Group -->
             <div>
-                <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">MENU</h3>
+                <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">GENERAL</h3>
 
                 <ul class="mb-6 flex flex-col gap-1.5">
                     <!-- Menu Item Dashboard -->
@@ -62,7 +62,7 @@
                     <!-- Menu Item Manage Account -->
                     <li>
                         <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                            asp-page="/Dashboard/ManageAccount"
+                            asp-page="/Dashboard/ManageAccounts"
                             x-on:click="selected = (selected === 'Profile' ? '':'Profile')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
                             :class="page === 'profile' && 'bg-graydark'">
@@ -76,28 +76,94 @@
                                     fill="" />
                             </svg>
 
-                            Manage Account
+                            Manage Accounts
                         </a>
                     </li>
                     <!-- Menu Item Manage Account -->
                     <!-- Menu Item News  -->
                     <li>
                         <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                            asp-page="/Dashboard/ManageNew"
-                            x-on:click="selected = (selected === 'Profile' ? '':'Profile')"
-                            :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
-                            :class="page === 'profile' && 'bg-graydark'">
+                            href="#" x-on:click.prevent="selected = (selected === 'News' ? '':'News')"
+                            :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'News') || (page === 'mangeNews' || page === 'viewNews') }">
                             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" id="Layer_1"
                                 data-name="Layer 1" viewBox="0 0 24 24" width="18" height="18">
                                 <path
                                     d="M19,2H5C2.24,2,0,4.24,0,7v10c0,2.76,2.24,5,5,5h14c2.76,0,5-2.24,5-5V7c0-2.76-2.24-5-5-5ZM5,4h14c1.65,0,3,1.35,3,3H2c0-1.65,1.35-3,3-3Zm14,16H5c-1.65,0-3-1.35-3-3V9H22v8c0,1.65-1.35,3-3,3ZM10,12c0,.55-.45,1-1,1h-1v4c0,.55-.45,1-1,1s-1-.45-1-1v-4h-1c-.55,0-1-.45-1-1s.45-1,1-1h4c.55,0,1,.45,1,1Zm10,0c0,.55-.45,1-1,1h-6c-.55,0-1-.45-1-1s.45-1,1-1h6c.55,0,1,.45,1,1Zm0,4c0,.55-.45,1-1,1h-6c-.55,0-1-.45-1-1s.45-1,1-1h6c.55,0,1,.45,1,1Z" />
                             </svg>
 
+                            Manage News
 
-                            Manage New
+                            <svg class="absolute right-4 top-1/2 -translate-y-1/2 fill-current"
+                                :class="{ 'rotate-180': (selected === 'News') }" width="20" height="20"
+                                viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M4.41107 6.9107C4.73651 6.58527 5.26414 6.58527 5.58958 6.9107L10.0003 11.3214L14.4111 6.91071C14.7365 6.58527 15.2641 6.58527 15.5896 6.91071C15.915 7.23614 15.915 7.76378 15.5896 8.08922L10.5896 13.0892C10.2641 13.4147 9.73651 13.4147 9.41107 13.0892L4.41107 8.08922C4.08563 7.76378 4.08563 7.23614 4.41107 6.9107Z"
+                                    fill="" />
+                            </svg>
                         </a>
+
+                        <!-- Dropdown Menu Start -->
+                        <div class="overflow-hidden" :class="(selected === 'News') ? 'block' :'hidden'">
+                            <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                                <li>
+                                    <a asp-page="/Dashboard/ManageNews" class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                                         :class="page === 'manageNews' && '!text-white'">
+                                        Manage News</a>
+                                </li>
+                                <li>
+                                    <a asp-page="/News" class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                                         :class="page === 'viewNews' && '!text-white'">
+                                        View News</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Dropdown Menu End -->
+
                     </li>
                     <!-- Menu Item News  -->
+
+                </ul>
+            </div>
+
+            <!-- Others Group -->
+            <div>
+                <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">ZOO MANAGEMENT</h3>
+
+                <ul class="mb-6 flex flex-col gap-1.5" <!-- Menu Item Sections -->
+                    <li>
+                        <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+                            asp-page="/Dashboard/Sections"
+                            x-on:click="selected = (selected === 'Profile' ? '':'Profile')"
+                            :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
+                            :class="page === 'profile' && 'bg-graydark'">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" viewBox="0 0 24 24" width="18" height="18">
+                                <path
+                                    d="M21.867,1.612,17.515.155A2.956,2.956,0,0,0,15.724.12L8.538,2.092,4.155.233A3,3,0,0,0,0,3V21.754l7.982,2.281,8.021-2,8,1.948V4.483A3,3,0,0,0,21.867,1.612ZM15,2.384V20.219l-6,1.5V3.972ZM2,3A1,1,0,0,1,3.387,2.08L7,3.581V21.674L2,20.246Zm20,18.43-5-1.218V2.092l4.275,1.43A1,1,0,0,1,22,4.483Z" />
+                            </svg>
+
+                            Manage Sections
+                        </a>
+                    </li>
+                    <!-- Menu Item Sections -->
+                    <!-- Menu Item Cages -->
+                    <li>
+                        <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+                            asp-page="/Dashboard/ManageAnimals"
+                            x-on:click="selected = (selected === 'Profile' ? '':'Profile')"
+                            :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
+                            :class="page === 'profile' && 'bg-graydark'">
+                            <svg class="fill-current" width="18" height="18" xmlns="http://www.w3.org/2000/svg"
+                                id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                                <path
+                                    d="m12.136,19.103c-.512,0-1.023-.171-1.45-.513-1.401-1.122-4.051-3.853-4.051-6.159,0-1.892,1.458-3.43,3.25-3.43.89,0,1.675.318,2.25.852.575-.533,1.36-.852,2.25-.852,1.792,0,3.25,1.539,3.25,3.43,0,2.307-2.649,5.038-4.05,6.16-.427.342-.938.513-1.449.513Zm-2.251-8.103c-.689,0-1.25.642-1.25,1.43,0,1.276,1.917,3.49,3.301,4.598.118.097.279.097.399,0,1.384-1.108,3.3-3.322,3.3-4.599,0-.789-.561-1.43-1.25-1.43-.622,0-1.25.374-1.25,1.209,0,.552-.447,1-1,1s-1-.448-1-1c0-.893-.674-1.209-1.25-1.209Zm9.115,13H5c-2.757,0-5-2.243-5-5v-9.276c0-1.664.823-3.213,2.203-4.145L9.203.855c1.698-1.146,3.895-1.147,5.595,0l7,4.723c1.379.931,2.202,2.48,2.202,4.145v9.276c0,2.757-2.243,5-5,5ZM12.001,1.998c-.585,0-1.169.172-1.679.516L3.322,7.237c-.828.559-1.322,1.488-1.322,2.487v9.276c0,1.654,1.346,3,3,3h14c1.654,0,3-1.346,3-3v-9.276c0-.999-.494-1.929-1.321-2.487l-7-4.723c-.51-.344-1.094-.516-1.678-.516Z" />
+                            </svg>
+
+
+                            Manage Cages
+                        </a>
+                    </li>
+                    <!-- Menu Item Cages -->
                     <!-- Menu Item Animals -->
                     <li>
                         <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
@@ -105,8 +171,8 @@
                             x-on:click="selected = (selected === 'Profile' ? '':'Profile')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
                             :class="page === 'profile' && 'bg-graydark'">
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"
-                                width="18" height="18">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" viewBox="0 0 24 24" width="18" height="18">
                                 <path
                                     d="M8.164,8a2.5,2.5,0,0,1-1.579-.594A4.833,4.833,0,0,1,5.028,4.145C4.785,1.652,6.145.181,7.614.017A2.655,2.655,0,0,1,9.6.611a4.179,4.179,0,0,1,1.376,2.9C11.2,5.835,10.128,8,8.164,8Zm-.328-6c-.577.064-.921.883-.817,1.946a2.868,2.868,0,0,0,.826,1.9A.539.539,0,0,0,8.2,6c.351-.039.916-.941.783-2.3h0C8.641,1.834,7.861,2,7.836,2.005ZM3.164,14a2.5,2.5,0,0,1-1.579-.594A4.833,4.833,0,0,1,.028,10.145C-.215,7.652,1.145,6.181,2.614,6.017A2.663,2.663,0,0,1,4.6,6.611a4.179,4.179,0,0,1,1.376,2.9C6.2,11.835,5.077,14,3.164,14Zm-.328-6c-.577.064-.921.883-.817,1.946a2.868,2.868,0,0,0,.826,1.9A.557.557,0,0,0,3.2,12c.351-.039.916-.941.783-2.3h0C3.718,7.872,2.861,8,2.836,8.005Zm13,0c-1.708.012-3.034-2.166-2.807-4.492h0a4.179,4.179,0,0,1,1.376-2.9A2.659,2.659,0,0,1,16.386.017c1.469.164,2.829,1.635,2.586,4.128a4.833,4.833,0,0,1-1.557,3.262A2.5,2.5,0,0,1,15.836,8ZM15.02,3.7h0c-.133,1.355.432,2.257.783,2.3a.553.553,0,0,0,.352-.145,2.868,2.868,0,0,0,.826-1.9C17.191,1.334,15.2,1.505,15.02,3.7ZM20.836,14c-1.862,0-3.034-2.166-2.807-4.492h0a4.179,4.179,0,0,1,1.376-2.9,2.653,2.653,0,0,1,1.981-.594c1.469.164,2.829,1.635,2.586,4.128a4.833,4.833,0,0,1-1.557,3.262A2.5,2.5,0,0,1,20.836,14ZM20.02,9.7h0c-.133,1.355.432,2.257.783,2.3a.574.574,0,0,0,.352-.145,2.868,2.868,0,0,0,.826-1.9c.1-1.063-.24-1.882-.817-1.946C21.139,8,20.115,7.911,20.02,9.7ZM16,24a4.853,4.853,0,0,1-2.447-.606,3.332,3.332,0,0,0-3.106,0C7.434,25.083,3.922,23.227,4,19c0-4.635,4.507-9,8-9s8,4.364,8,9C20,21.944,18.355,24,16,24Zm-4-3a4.865,4.865,0,0,1,2.447.605C16.684,22.823,18.035,21.172,18,19c0-3.38-3.521-7-6-7s-6,3.62-6,7c-.032,2.169,1.308,3.823,3.553,2.605A4.865,4.865,0,0,1,12,21Z" />
                             </svg>
@@ -117,45 +183,39 @@
                     </li>
                     <!-- Menu Item Animals -->
 
+
                 </ul>
             </div>
+            <!-- Menu Item Auth Pages -->
+            <div class="fixed bottom-0 mb-6 w-60">
+                <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+                    href="#" x-on:click.prevent="selected = (selected === 'AuthPages' ? '':'AuthPages')"
+                    :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'AuthPages')}">
+                    <svg class="fill-current" width="18" height="19" viewBox="0 0 18 19" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_130_9814)">
+                            <path
+                                d="M12.7127 0.55835H9.53457C8.80332 0.55835 8.18457 1.1771 8.18457 1.90835V3.84897C8.18457 4.18647 8.46582 4.46772 8.80332 4.46772C9.14082 4.46772 9.45019 4.18647 9.45019 3.84897V1.88022C9.45019 1.82397 9.47832 1.79585 9.53457 1.79585H12.7127C13.3877 1.79585 13.9221 2.33022 13.9221 3.00522V15.0709C13.9221 15.7459 13.3877 16.2802 12.7127 16.2802H9.53457C9.47832 16.2802 9.45019 16.2521 9.45019 16.1959V14.2552C9.45019 13.9177 9.16894 13.6365 8.80332 13.6365C8.43769 13.6365 8.18457 13.9177 8.18457 14.2552V16.1959C8.18457 16.9271 8.80332 17.5459 9.53457 17.5459H12.7127C14.0908 17.5459 15.1877 16.4209 15.1877 15.0709V3.03335C15.1877 1.65522 14.0627 0.55835 12.7127 0.55835Z"
+                                fill="" />
+                            <path
+                                d="M10.4346 8.60205L7.62207 5.7333C7.36895 5.48018 6.97519 5.48018 6.72207 5.7333C6.46895 5.98643 6.46895 6.38018 6.72207 6.6333L8.46582 8.40518H3.45957C3.12207 8.40518 2.84082 8.68643 2.84082 9.02393C2.84082 9.36143 3.12207 9.64268 3.45957 9.64268H8.49395L6.72207 11.4427C6.46895 11.6958 6.46895 12.0896 6.72207 12.3427C6.83457 12.4552 7.00332 12.5114 7.17207 12.5114C7.34082 12.5114 7.50957 12.4552 7.62207 12.3145L10.4346 9.4458C10.6877 9.24893 10.6877 8.85518 10.4346 8.60205Z"
+                                fill="" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_130_9814">
+                                <rect width="18" height="18" fill="white" transform="translate(0 0.052124)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
 
-            <!-- Others Group -->
-            <div>
-                <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">OTHERS</h3>
-
-                <ul class="mb-6 flex flex-col gap-1.5" <!-- Menu Item Auth Pages -->
-                    <li>
-                        <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                            href="#" x-on:click.prevent="selected = (selected === 'AuthPages' ? '':'AuthPages')"
-                            :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'AuthPages')}">
-                            <svg class="fill-current" width="18" height="19" viewBox="0 0 18 19" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_130_9814)">
-                                    <path
-                                        d="M12.7127 0.55835H9.53457C8.80332 0.55835 8.18457 1.1771 8.18457 1.90835V3.84897C8.18457 4.18647 8.46582 4.46772 8.80332 4.46772C9.14082 4.46772 9.45019 4.18647 9.45019 3.84897V1.88022C9.45019 1.82397 9.47832 1.79585 9.53457 1.79585H12.7127C13.3877 1.79585 13.9221 2.33022 13.9221 3.00522V15.0709C13.9221 15.7459 13.3877 16.2802 12.7127 16.2802H9.53457C9.47832 16.2802 9.45019 16.2521 9.45019 16.1959V14.2552C9.45019 13.9177 9.16894 13.6365 8.80332 13.6365C8.43769 13.6365 8.18457 13.9177 8.18457 14.2552V16.1959C8.18457 16.9271 8.80332 17.5459 9.53457 17.5459H12.7127C14.0908 17.5459 15.1877 16.4209 15.1877 15.0709V3.03335C15.1877 1.65522 14.0627 0.55835 12.7127 0.55835Z"
-                                        fill="" />
-                                    <path
-                                        d="M10.4346 8.60205L7.62207 5.7333C7.36895 5.48018 6.97519 5.48018 6.72207 5.7333C6.46895 5.98643 6.46895 6.38018 6.72207 6.6333L8.46582 8.40518H3.45957C3.12207 8.40518 2.84082 8.68643 2.84082 9.02393C2.84082 9.36143 3.12207 9.64268 3.45957 9.64268H8.49395L6.72207 11.4427C6.46895 11.6958 6.46895 12.0896 6.72207 12.3427C6.83457 12.4552 7.00332 12.5114 7.17207 12.5114C7.34082 12.5114 7.50957 12.4552 7.62207 12.3145L10.4346 9.4458C10.6877 9.24893 10.6877 8.85518 10.4346 8.60205Z"
-                                        fill="" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_130_9814">
-                                        <rect width="18" height="18" fill="white" transform="translate(0 0.052124)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-
-                            Log out
+                    Log out
 
 
-                        </a>
+                </a>
 
 
-                    </li>
-                    <!-- Menu Item Auth Pages -->
-                </ul>
             </div>
+            <!-- Menu Item Auth Pages -->
         </nav>
         <!-- Sidebar Menu -->
 

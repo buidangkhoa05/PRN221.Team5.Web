@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace PRN221.Team5.Web.Pages.Dashboard
 {
-    public class ManageNew : PageModel
+    public class ManageCages : PageModel
     {
-        private readonly ILogger<ManageNew> _logger;
+        private readonly ILogger<ManageCages> _logger;
 
-        public ManageNew(ILogger<ManageNew> logger)
+        public ManageCages(ILogger<ManageCages> logger)
         {
             _logger = logger;
         }

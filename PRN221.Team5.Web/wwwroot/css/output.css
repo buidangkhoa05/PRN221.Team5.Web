@@ -729,6 +729,10 @@ select {
   right: 3px !important;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -972,6 +976,13 @@ select {
   -webkit-line-clamp: 2;
 }
 
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .block {
   display: block;
 }
@@ -1137,6 +1148,10 @@ select {
   width: 1.5rem;
 }
 
+.w-60 {
+  width: 15rem;
+}
+
 .w-62\.5 {
   width: 15.625rem;
 }
@@ -1172,6 +1187,10 @@ select {
 
 .min-w-\[150px\] {
   min-width: 150px;
+}
+
+.min-w-\[200px\] {
+  min-width: 200px;
 }
 
 .min-w-\[220px\] {
@@ -1907,6 +1926,11 @@ select {
   text-transform: uppercase;
 }
 
+.\!text-white {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(28 36 52 / var(--tw-text-opacity));
@@ -2236,6 +2260,11 @@ table.dataTable tr.selected {
 .hover\:text-primary:hover {
   --tw-text-opacity: 1;
   color: rgb(60 80 224 / var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:shadow-card:hover {
