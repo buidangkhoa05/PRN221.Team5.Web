@@ -5,14 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace PRN221.Team5.Web.Pages.Dashboard
 {
-    public class ManageNew : PageModel
+    public class ManageNews : PageModel
     {
-        private readonly ILogger<ManageNew> _logger;
+        private readonly ILogger<ManageNews> _logger;
 
-        public ManageNew(ILogger<ManageNew> logger)
+        public ManageNews(ILogger<ManageNews> logger)
         {
             _logger = logger;
         }
@@ -22,7 +23,7 @@ namespace PRN221.Team5.Web.Pages.Dashboard
             Approved,
             Rejected
         }
-        public class New
+        public class Post
         {
             public string Title { get; set; }
             public string Description { get; set; }
@@ -30,62 +31,83 @@ namespace PRN221.Team5.Web.Pages.Dashboard
             public string UpdateDate { get; set; }
             public string CreateBy { get; set; }
             public string UpdateBy { get; set; }
+            public Status Status { get; set; }
+        }
 
-            public string Status { get; set; }
+        public class Account
+        {
+            public string Username { get; set; }
+            public string FullName { get; set; }
+            public string Role { get; set; }
         }
 
         [BindProperty]
-        public List<New> News { get; set; } = new List<New>();
+        public List<Post> News { get; set; } = new List<Post>();
+
+
         [BindProperty]
-        public Dictionary<Status, string> Statuses { get; } = new Dictionary<Status, string>
+        public Post NewPost { get; set; } = new Post();
+
+        [BindProperty]
+        public Account Creator { get; set; } = new Account
         {
-            { Status.Pending, "Pending" },
-            { Status.Approved, "Approved" },
-            { Status.Rejected, "Rejected" }
+            Username = "nguyena",
+            FullName = "Nguyen Van A",
+            Role = "Staff"
         };
 
         public void OnGet()
         {
-            var news = new List<New>{
-                new New{
-                    Title = "New 1",
-                    Description = "Description 1 lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    CreateDate = "2021-05-01",
-                    UpdateDate = "2021-05-01",
-                    CreateBy = "Nguyen Van A",
-                    UpdateBy = "Nguyen Van A",
-                    Status = "Pending"
-                },
-                new New{
-                    Title = "New 2",
-                    Description = "Description 2 Description 1 lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    CreateDate = "2021-05-01",
-                    UpdateDate = "2021-05-01",
-                    CreateBy = "Nguyen Van B",
-                    UpdateBy = "Nguyen Van B",
-                    Status = "Approved"
-                },
-                new New{
-                    Title = "New 3",
-                    Description = "Description 3 Description 1 lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    CreateDate = "2021-05-01",
-                    UpdateDate = "2021-05-01",
-                    CreateBy = "Nguyen Van C",
-                    UpdateBy = "Nguyen Van C",
-                    Status = "Pending"
-                },
-                new New{
-                    Title = "New 4",
-                    Description = "Description 4 Description 1 lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    CreateDate = "2021-05-01",
-                    UpdateDate = "2021-05-01",
-                    CreateBy = "Nguyen Van D",
-                    UpdateBy = "Nguyen Van D",
-                    Status = "Rejected"
-                },
+            var sessionData = HttpContext.Session.GetString("SessionNews");
+            if (!string.IsNullOrEmpty(sessionData))
+            {
+                News = JsonConvert.DeserializeObject<List<Post>>(sessionData);
+            }
+        }
 
-        };
-            News = news;
+        public IActionResult OnPost()
+        {
+            // Create a new post and add it to the list
+            var newPost = new Post
+            {
+                Title = NewPost.Title,
+                Description = NewPost.Description,
+                CreateDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                UpdateDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                CreateBy = "Nguyen Van A",
+                UpdateBy = "Nguyen Van A",
+                Status = Status.Pending
+            };
+
+            Console.WriteLine(newPost.CreateBy);
+
+            var sessionData = HttpContext.Session.GetString("SessionNews");
+
+            // Check if there are existing posts
+            if (!string.IsNullOrEmpty(sessionData))
+            {
+                // Deserialize the existing posts
+                var existingPosts = JsonConvert.DeserializeObject<List<Post>>(sessionData);
+
+                // Append the new post to the existing list
+                existingPosts.Add(newPost);
+
+                // Serialize the updated list and save it to the session
+                sessionData = JsonConvert.SerializeObject(existingPosts);
+                HttpContext.Session.SetString("SessionNews", sessionData);
+            }
+            else
+            {
+                // If there are no existing posts, create a new list with the new post
+                var newPosts = new List<Post> { newPost };
+                sessionData = JsonConvert.SerializeObject(newPosts);
+                HttpContext.Session.SetString("SessionNews", sessionData);
+            }
+
+            // Redirect back to the same page
+            return RedirectToPage("/Dashboard/ManageNews");
         }
     }
+
+
 }
