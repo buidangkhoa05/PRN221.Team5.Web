@@ -4,7 +4,7 @@ namespace Team5.Application.Repository
     public interface IGenericRepository<T> : IDisposable where T : BaseEntity, new()
     {
         Task<int> SaveChangesAsync();
-
+        Task<IEnumerable<T>> GetAllAsync();
         Task<Guid> CreateAsync(T entity, bool isSaveChange = false);
         Task<IEnumerable<Guid>> CreateAsync(IEnumerable<T> entities, bool isSaveChange = false);
         /// <summary>

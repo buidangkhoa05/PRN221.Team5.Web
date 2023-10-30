@@ -11,6 +11,10 @@ namespace Team5.Infrastructure.Repository
             dbContext = context;
             dbSet = context.Set<T>();
         }
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await dbSet.AsNoTracking().ToListAsync();
+        }
 
         #region Create
         /// <summary>
