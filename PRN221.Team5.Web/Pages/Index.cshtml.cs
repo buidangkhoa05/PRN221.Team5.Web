@@ -2,12 +2,21 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PRN221.Team5.Domain.Entity;
+using Team5.Application.Repository;
+using Team5.Domain.Common;
 
 namespace PRN221.Team5.Web.Pages
 {
     [Authorize(Roles = nameof(Role.Administrator))]
     public class IndexModel : PageModel
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public IndexModel(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public class Animal
         {
             public string Id { get; set; }
@@ -25,14 +34,14 @@ namespace PRN221.Team5.Web.Pages
             public string CreatedDate { get; set; }
         }
 
-        public class Post {
-            public string Id { get; set; }
-            public string Title { get; set; }
-            public string Content { get; set; }
-            public string CreatedDate { get; set; }
-            public string CreatedBy { get; set; }
-            public string Status { get; set; }
-        }
+        //public class Post {
+        //    public string Id { get; set; }
+        //    public string Title { get; set; }
+        //    public string Content { get; set; }
+        //    public string CreatedDate { get; set; }
+        //    public string CreatedBy { get; set; }
+        //    public string Status { get; set; }
+        //}
 
         [BindProperty]
         public List<Animal> Animals { get; set; } = new List<Animal>();
@@ -41,9 +50,9 @@ namespace PRN221.Team5.Web.Pages
         public List<Account> Accounts { get; set; } = new List<Account>();
 
         [BindProperty]
-        public List<Post> Posts { get; set; } = new List<Post>();
+        public List<ZooNews> News { get; set; } = new List<ZooNews>();
 
-        public void OnGet()
+        public async void OnGetAsync()
         {
             var animals = new List<Animal>
             {
@@ -187,92 +196,96 @@ namespace PRN221.Team5.Web.Pages
 
 
 
-            var posts = new List<Post>
+            //var posts = new List<Post>
+            //{
+            //    new Post
+            //    {
+            //        Id = "1",
+            //        Title = "Dog",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "2",
+            //        Title = "Cat",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "3",
+            //        Title = "Chicken",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "4",
+            //        Title = "Duck",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "5",
+            //        Title = "Pig",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "6",
+            //        Title = "Cow",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "7",
+            //        Title = "Goat",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "8",
+            //        Title = "Sheep",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    },
+            //    new Post
+            //    {
+            //        Id = "9",
+            //        Title = "Horse",
+            //        Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin",
+            //        Status = "Approved"
+            //    }
+            //};
+
+            News = await _unitOfWork.ZooNews.GetWithPagination(new QueryHelper<ZooNews>()
             {
-                new Post
-                {
-                    Id = "1",
-                    Title = "Dog",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "2",
-                    Title = "Cat",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "3",
-                    Title = "Chicken",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "4",
-                    Title = "Duck",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "5",
-                    Title = "Pig",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "6",
-                    Title = "Cow",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "7",
-                    Title = "Goat",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "8",
-                    Title = "Sheep",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                },
-                new Post
-                {
-                    Id = "9",
-                    Title = "Horse",
-                    Content = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, veritatis impedit iure non velit mollitia incidunt voluptates nihil, enim voluptate ipsum aperiam veniam repellat itaque nulla, nam quo temporibus accusamus.",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin",
-                    Status = "Approved"
-                }
-            };
-            
-            Posts = posts;
+                PaginationParams = new PaginationParameters()
+            });
+
         }
     }
 }

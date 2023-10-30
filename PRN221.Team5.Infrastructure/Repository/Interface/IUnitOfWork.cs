@@ -16,8 +16,8 @@ namespace Team5.Application.Repository
         Task RolebackTransactionAsync();
 
         #region Repository
-        public IGenericRepository<Account> Account { get; }
-
+        IGenericRepository<Account> Account { get; }
+        IGenericRepository<ZooNews> ZooNews { get; }
         #endregion Repository
     }
 }
