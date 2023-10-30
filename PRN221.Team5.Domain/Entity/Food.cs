@@ -17,6 +17,6 @@ namespace PRN221.Team5.Domain.Entity
         [MinLength(5)]
         public string Name { get; set; }
 
-        public virtual ICollection<Meal> Meals { get; set; }
+        public virtual ICollection<Meal_Food> Meal_Foods { get; set; }
     }
 }

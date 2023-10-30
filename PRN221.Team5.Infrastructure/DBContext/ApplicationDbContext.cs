@@ -113,12 +113,17 @@ namespace Team5.Infrastructure.DBContext
                .HasForeignKey(z => z.AnimalId)
                .OnDelete(DeleteBehavior.NoAction);
 
-            //config for FoodTye - Food one-to-many relationship
+            //config for Mea - Food many-to-many relationship
             modelBuilder.Entity<Food>()
-               .HasMany(a => a.Meals)
+               .HasMany(a => a.Meal_Foods)
                .WithOne(z => z.Food)
                .HasForeignKey(z => z.FoodId)
                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Meal>()
+              .HasMany(a => a.Meal_Foods)
+              .WithOne(z => z.Meal)
+              .HasForeignKey(z => z.MealId)
+              .OnDelete(DeleteBehavior.NoAction);
 
             //config for Meal - Animal one-to-many relationship
             modelBuilder.Entity<Meal>()

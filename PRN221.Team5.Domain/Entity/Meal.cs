@@ -11,10 +11,6 @@ namespace PRN221.Team5.Domain.Entity
     public class Meal : BaseEntity
     {
         [Required]
-        public Guid FoodId { get; set; }
-        public virtual Food Food { get; set; }
-
-        [Required]
         [MinLength(5)]
         public string Name { get; set; }
 
@@ -28,5 +24,7 @@ namespace PRN221.Team5.Domain.Entity
         public float FoodFrequency { get; set; }
 
         public virtual ICollection<Meal_Animal> Meal_Animals{ get; set; }
+
+        public virtual ICollection<Meal_Food> Meal_Foods { get; set; }
     }
 }
