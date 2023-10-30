@@ -1,6 +1,5 @@
-<div
-  class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-  <div class="flex flex-row justify-between">
+<div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+    <div class="flex flex-row justify-between">
 
         <h4 class="mb-6 text-xl font-bold text-black dark:text-white">
             New posts last 30 days
@@ -10,49 +9,55 @@
         </a>
     </div>
 
-  <table id="top_posts_month" class="w-full table-auto">
-    <thead>
-      <tr class="bg-gray-2 text-left dark:bg-meta-4">
-        <th class="py-4 px-4 font-medium text-black dark:text-white xl:pl-11 no-sort">
-          Title
-        </th>
-        <th class=" py-4 px-4 font-medium text-black dark:text-white xl:pl-11 no-sort">
-          Description
-        </th>
-        <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white ">
-          Create date
-        </th>
-        <th class=" py-4 px-4 font-medium text-black dark:text-white no-sort">
-          Status
-        </th>
-        
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var post in Model.Posts)
-      {
-        <tr>
-          <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-            <h5 class="font-medium text-black dark:text-white">@post.Title</h5>
-          </td>
-          <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-            <p class="text-black dark:text-white line-clamp-2">
-              @post.Content
-            </p>
-          </td>
-          <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-            <p class="text-black dark:text-white">@post.CreatedDate</p>
-          </td>
-          <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-            <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium text-success">
-              @post.Status
-            </p>
-          </td>
-          
-        </tr>
-      }
-    </tbody>
-  </table>
+    <table id="top_posts_month" class="w-full table-auto">
+        <thead>
+            <tr class="bg-gray-2 text-left dark:bg-meta-4">
+                <th class="py-4 px-4 font-medium text-black dark:text-white xl:pl-11 no-sort">
+                    Title
+                </th>
+                <th class=" py-4 px-4 font-medium text-black dark:text-white xl:pl-11 no-sort">
+                    Description
+                </th>
+                <th class=" py-4 px-4 font-medium text-black dark:text-white xl:pl-11 no-sort">
+                    Content
+                </th>
+                <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white ">
+                    Create date
+                </th>
+               @*  <th class=" py-4 px-4 font-medium text-black dark:text-white no-sort">
+                    Status
+                </th> *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model.News)
+            {
+                <tr>
+                    <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                        <h5 class="font-medium text-black dark:text-white">@post.Title</h5>
+                    </td>
+                    <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                        <p class="text-black dark:text-white line-clamp-2">
+                            @post.Description
+                        </p>
+                    </td>
+                    <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                        <p class="text-black dark:text-white line-clamp-2">
+                            @post.Content
+                        </p>
+                    </td>
+                    <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                        <p class="text-black dark:text-white">@post.CreatedDate</p>
+                    </td>
+                    @* <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                        <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium text-success">
+                            @post.Status
+                        </p>
+                    </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 
