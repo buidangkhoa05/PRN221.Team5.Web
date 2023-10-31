@@ -1,18 +1,17 @@
 @model PRN221.Team5.Web.Pages.Dashboard.ManageNews
-<!-- Add New Modal -->
+<!-- Edit New Modal -->
 	<dialog
-		class="modal overflow-x-hidden overflow-y-auto md:inset-0  h-modal sm:h-full bg-graydark/30"
-		id="add_new_modal">
-		<div class=" modal-box mx-auto my-10 justify-center relative w-full h-full max-w-2xl px-4 md:h-auto">
+		class="modal overflow-x-hidden overflow-y-auto md:inset-0 min-w-full h-modal sm:min-h-full bg-graydark/30"
+		id="edit_post_modal">
+		<div class="modal-box mx-auto my-10 justify-center relative w-full h-full max-w-2xl px-4 md:h-auto">
 			<!-- Modal content -->
-			<div x-on:click.outside="add = false" class="relative bg-white rounded-lg shadow dark:bg-graydark/80 ">
+			<div class="relative bg-white rounded-lg shadow dark:bg-graydark/80 ">
 				<!-- Modal header -->
 				<div
 					class="flex items-start justify-between p-5 border-b border-gray rounded-t dark:border-graydark/60">
-					<h3 class="text-xl font-semibold dark:text-white">Add New Post</h3>
-					<button type="button" x-on:click="add = false"
-						class="text-graydark/500 bg-transparent hover:bg-gray hover:text-graydark rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-graydark/60 dark:hover:text-white"
-						data-modal-toggle="add-new-modal">
+					<h3 class="text-xl font-semibold dark:text-white">Edit Post</h3>
+					<button type="button" onclick="document.getElementById('edit_post_modal').close()"
+						class="text-graydark/500 bg-transparent hover:bg-gray hover:text-graydark rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-graydark/60 dark:hover:text-white">
 						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd"
 								d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
