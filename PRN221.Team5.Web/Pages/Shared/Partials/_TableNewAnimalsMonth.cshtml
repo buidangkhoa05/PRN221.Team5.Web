@@ -11,54 +11,56 @@
 
     <table id="top_animals_month" class="w-full table-auto" data-page-length="5">
 
-        <thead class="flex flex-col">
-            <tr class="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
-                <th class="p-5 flex items-center justify-center">
-                    <h5 class="text-sm font-medium uppercase xsm:text-base">Animal ID</h5>
-                </th>
-                <th class="text-center p-5 flex items-center justify-center">
-                    <h5 class="text-sm font-medium uppercase xsm:text-base">Name</h5>
-                </th>
-                <th class="text-center p-5 flex items-center justify-center">
-                    <h5 class="text-sm font-medium uppercase xsm:text-base">Specie</h5>
-                </th>
-                <th class="min-w-[150px] hidden text-center sm:flex p-5 items-center justify-center">
-                    <h5 class="text-sm font-medium uppercase xsm:text-base">
-                        Created Date
-                    </h5>
-                </th>
-                <th class="hidden text-center sm:flex p-5 items-center justify-center">
-                    <h5 class="text-sm font-medium uppercase xsm:text-base">
-                        Created By
-                    </h5>
-                </th>
-            </tr>
-        </thead>
-        <tbody class="flex flex-col">
-            @foreach (var animal in Model.Animals)
-            {
-                <tr class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5">
-                    <td class="flex items-center gap-3 p-5 justify-center">
-                        <p class="hidden font-medium text-black dark:text-white sm:block text-center">
-                            @animal.Id
-                        </p>
-                    </td>
-                    <td class="flex items-center justify-center p-5">
-                        <p class="font-medium text-black dark:text-white">@animal.Name</p>
-                    </td>
-                    <td class="flex items-center justify-center p-5">
-                        <p class="font-medium text-meta-3">@animal.Specie.Name</p>
-                    </td>
-                    <td class="hidden items-center justify-center sm:flex p-5">
-                        <p class="font-medium text-black dark:text-white">
-                            @animal.CreatedDate
-                        </p>
-                    </td>
-                    <td class="hidden items-center justify-center sm:flex p-5">
-                        <p class="font-medium text-meta-5">@animal.CreatedBy</p>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <thead class="flex flex-col">
+      <tr class="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+        <th class="p-5 flex items-center justify-center">
+          <h5 class="text-sm font-medium xsm:text-base">Animal ID</h5>
+        </th>
+        <th class="text-center p-5 flex items-center justify-center">
+          <h5 class="text-sm font-medium  xsm:text-base">Name</h5>
+        </th>
+        <th class="text-center p-5 flex items-center justify-center">
+          <h5 class="text-sm font-medium  xsm:text-base">Specie</h5>
+        </th>
+        <th class="text-center p-5 flex items-center justify-center">
+          <h5 class="text-sm font-medium  xsm:text-base">
+            Created Date
+          </h5>
+        </th>
+        <th class=" text-center p-5 flex items-center justify-center">
+          <h5 class="text-sm font-medium  xsm:text-base">
+            Created By
+          </h5>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="flex flex-col">
+      @foreach (var animal in Model.Animals)
+      {
+        <tr class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5">
+          <td class="flex items-center gap-3 p-5 justify-center">
+            <p class="hidden font-medium text-black dark:text-white sm:block text-center">
+              @animal.Id
+            </p>
+          </td>
+          <td class="flex items-center justify-center p-5">
+            <p class="font-medium text-black dark:text-white">@animal.Name</p>
+          </td>
+          <td class="flex items-center justify-center p-5">
+            <p class="font-medium text-meta-3">@animal.Specie</p>
+          </td>
+          <td class="hidden items-center justify-center sm:flex p-5">
+            <p class="font-medium text-black dark:text-white">
+              @animal.CreatedDate
+            </p>
+          </td>
+
+          <td class="hidden items-center justify-center sm:flex p-5">
+            <p class="font-medium text-meta-5">@animal.CreatedBy</p>
+          </td>
+        </tr>
+
+      }
+    </tbody>
+  </table>
 </div>

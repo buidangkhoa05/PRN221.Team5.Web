@@ -1,0 +1,104 @@
+@model PRN221.Team5.Web.Pages.Dashboard.ManageCages
+<!-- Add Cage Modal -->
+<dialog class="modal overflow-x-hidden overflow-y-auto md:inset-0 min-w-full h-modal sm:min-h-full bg-graydark/30"
+    id="add_cage_modal">
+    <div class=" modal-box mx-auto my-10 justify-center relative w-full h-full max-w-2xl px-4 md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-graydark/80 ">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-5 border-b border-gray rounded-t dark:border-graydark/60">
+                <h3 class="text-xl font-semibold dark:text-white">Add New Cage</h3>
+                <button type="button" onclick="document.getElementById('add_cage_modal').close()"
+                    class="text-graydark/500 bg-transparent hover:bg-gray hover:text-graydark rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-graydark/60 dark:hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6 modal-action">
+                <form method="post">
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="full-name"
+                                class="block mb-2 text-sm font-medium text-graydark dark:text-white">Creator</label>
+                            <div class="relative pointer-events-none">
+                                <input type="text" value="Hahaha" readonly
+                                    class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
+                            </div>
+                        </div>
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="created-date"
+                                class="block mb-2 text-sm font-medium text-graydark dark:text-white">Created
+                                Date</label>
+                            <div class="relative pointer-events-none">
+                                <input type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                    class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
+                            </div>
+                        </div>
+
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="creator-role"
+                                class="block mb-2 text-sm font-medium text-graydark dark:text-white">Role</label>
+                            <div class="relative pointer-events-none">
+                                <input type="text" value="Admin" readonly
+                                    class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
+                            </div>
+                        </div>
+                        <div class="col-span-4 sm:col-span-2">
+                            <label class="block mb-2 text-sm font-medium text-graydark dark:text-white">Capacity</label>
+                            <input type="number" id="capacity"
+                                class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                                placeholder="Enter number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+                        </div>
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="section"
+                                class="block mb-2 text-sm font-medium text-graydark dark:text-white">Section</label>
+                            <select id="section"
+                                class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+
+                                <option value="Section1">Section1</option>
+                                <option value="Section2">Section2</option>
+                                <option value="Section3">Section3</option>
+
+
+                            </select>
+                        </div>
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="status"
+                                class="block mb-2 text-sm font-medium text-graydark dark:text-white">Status</label>
+                            <select id="status"
+                                class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+
+                                <option value="status1">status1</option>
+                                <option value="status2">status2</option>
+                                <option value="status3">status3</option>
+
+
+                            </select>
+                        </div>
+
+                        @* <div class="col-span-12 sm:col-span-6">
+                            <label class="mb-3 block font-medium text-sm text-black dark:text-white">
+                                Description
+                            </label>
+                            <textarea rows="6" placeholder="Default textarea" required
+                                class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"></textarea>
+                        </div> *@
+                    </div>
+                    <div class="items-center flex justify-center rounded-b dark:border-graydark/60 my-4">
+                        <button type="submit"
+                            class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
+
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                <!-- Modal footer -->
+
+            </div>
+        </div>
+    </div>
+</dialog>

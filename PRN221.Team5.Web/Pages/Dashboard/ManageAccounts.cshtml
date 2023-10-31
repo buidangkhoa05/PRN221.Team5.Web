@@ -9,7 +9,6 @@
     'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']],
     'responsive': true,
     'ordering': false,
-    'scrollX': true,
 })">
 
     <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
@@ -56,62 +55,84 @@
                 </h3>
                 <div class="flex flex-row gap-2">
 
-                    <button x-on:click="add = true"
-                            class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"
-                                 width="18" fill="#fff" height="18">
-                                <path d="M17,12c0,.553-.448,1-1,1h-3v3c0,.553-.448,1-1,1s-1-.447-1-1v-3h-3c-.552,0-1-.447-1-1s.448-1,1-1h3v-3c0-.553,.448-1,1-1s1,.447,1,1v3h3c.552,0,1,.447,1,1Zm7-7v14c0,2.757-2.243,5-5,5H5c-2.757,0-5-2.243-5-5V5C0,2.243,2.243,0,5,0h14c2.757,0,5,2.243,5,5Zm-2,0c0-1.654-1.346-3-3-3H5c-1.654,0-3,1.346-3,3v14c0,1.654,1.346,3,3,3h14c1.654,0,3-1.346,3-3V5Z" />
-                            </svg>
+					<button id="add-account-btn" onclick="add_account_modal.showModal()"
+						class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"
+								width="18" fill="#fff" height="18">
+								<path
+									d="M17,12c0,.553-.448,1-1,1h-3v3c0,.553-.448,1-1,1s-1-.447-1-1v-3h-3c-.552,0-1-.447-1-1s.448-1,1-1h3v-3c0-.553,.448-1,1-1s1,.447,1,1v3h3c.552,0,1,.447,1,1Zm7-7v14c0,2.757-2.243,5-5,5H5c-2.757,0-5-2.243-5-5V5C0,2.243,2.243,0,5,0h14c2.757,0,5,2.243,5,5Zm-2,0c0-1.654-1.346-3-3-3H5c-1.654,0-3,1.346-3,3v14c0,1.654,1.346,3,3,3h14c1.654,0,3-1.346,3-3V5Z" />
+							</svg>
 
-                        </span>
-                        Add New
-                    </button>
-                    <button x-on:click="edit = true" id="edit-account-btn"
-                            class="disabled:bg-graydark/20 disabled:text-graydark/30 rounded-xl inline-flex items-center justify-center gap-2.5 bg-graydark/40 h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="18"
-                                 height="18" class="fill-current">
-                                <path d="M18.656.93,6.464,13.122A4.966,4.966,0,0,0,5,16.657V18a1,1,0,0,0,1,1H7.343a4.966,4.966,0,0,0,3.535-1.464L23.07,5.344a3.125,3.125,0,0,0,0-4.414A3.194,3.194,0,0,0,18.656.93Zm3,3L9.464,16.122A3.02,3.02,0,0,1,7.343,17H7v-.343a3.02,3.02,0,0,1,.878-2.121L20.07,2.344a1.148,1.148,0,0,1,1.586,0A1.123,1.123,0,0,1,21.656,3.93Z" />
-                                <path d="M23,8.979a1,1,0,0,0-1,1V15H18a3,3,0,0,0-3,3v4H5a3,3,0,0,1-3-3V5A3,3,0,0,1,5,2h9.042a1,1,0,0,0,0-2H5A5.006,5.006,0,0,0,0,5V19a5.006,5.006,0,0,0,5,5H16.343a4.968,4.968,0,0,0,3.536-1.464l2.656-2.658A4.968,4.968,0,0,0,24,16.343V9.979A1,1,0,0,0,23,8.979ZM18.465,21.122a2.975,2.975,0,0,1-1.465.8V18a1,1,0,0,1,1-1h3.925a3.016,3.016,0,0,1-.8,1.464Z" />
-                            </svg>
-
-
-                        </span>
-                        Edit
-                    </button>
+						</span>
+						Add New
+					</button>
+					<button  id="edit-account-btn" onclick="edit_account_modal.showModal()"
+						class="disabled:bg-graydark/20 disabled:text-graydark/30 rounded-xl inline-flex items-center justify-center gap-2.5 bg-graydark/40 h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="18"
+								height="18" class="fill-current">
+								<path
+									d="M18.656.93,6.464,13.122A4.966,4.966,0,0,0,5,16.657V18a1,1,0,0,0,1,1H7.343a4.966,4.966,0,0,0,3.535-1.464L23.07,5.344a3.125,3.125,0,0,0,0-4.414A3.194,3.194,0,0,0,18.656.93Zm3,3L9.464,16.122A3.02,3.02,0,0,1,7.343,17H7v-.343a3.02,3.02,0,0,1,.878-2.121L20.07,2.344a1.148,1.148,0,0,1,1.586,0A1.123,1.123,0,0,1,21.656,3.93Z" />
+								<path
+									d="M23,8.979a1,1,0,0,0-1,1V15H18a3,3,0,0,0-3,3v4H5a3,3,0,0,1-3-3V5A3,3,0,0,1,5,2h9.042a1,1,0,0,0,0-2H5A5.006,5.006,0,0,0,0,5V19a5.006,5.006,0,0,0,5,5H16.343a4.968,4.968,0,0,0,3.536-1.464l2.656-2.658A4.968,4.968,0,0,0,24,16.343V9.979A1,1,0,0,0,23,8.979ZM18.465,21.122a2.975,2.975,0,0,1-1.465.8V18a1,1,0,0,1,1-1h3.925a3.016,3.016,0,0,1-.8,1.464Z" />
+							</svg>
 
 
-                </div>
-            </div>
+						</span>
+						Edit
+					</button>
+					<button  id="remove-account-btn" onclick="remove_account_modal.showModal()"
+						class="disabled:bg-graydark/20 disabled:text-graydark/30 rounded-xl inline-flex items-center justify-center gap-2.5 bg-danger/20 h-fit py-3 px-6 text-center text-sm font-medium text-danger hover:bg-opacity-90 ">
+						<span>
+							<svg class="fill-current" xmlns="http://www.w3.org/2000/svg" id="Outline"
+								viewBox="0 0 24 24" width="18" height="18">
+								<path
+									d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z" />
+								<path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z" />
+								<path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z" />
+							</svg>
 
-            <table id="table_accounts" class="w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-2 text-left dark:bg-meta-4">
-                        <th class="font-medium text-black dark:text-white xl:pl-11">
-                            Name
-                        </th>
-                        <th class=" font-medium text-black dark:text-white xl:pl-11">
-                            Position
-                        </th>
-                        <th class="min-w-[150px] font-medium text-black dark:text-white text-center">
-                            Phone number
-                        </th>
-                        <th class=" font-medium text-black dark:text-white">
-                            Birthday
-                        </th>
-                        <th class="min-w-[150px] font-medium text-black dark:text-white text-center">
-                            Create date
-                        </th>
-                        <th class="min-w-[150px] font-medium text-black dark:text-white text-center">
-                            Create by
-                        </th>
-                        <th class="min-w-[150px] font-medium text-black dark:text-white text-center">
-                            Update date
-                        </th>
-                        <th class="min-w-[150px] font-medium text-black dark:text-white text-center">
-                            Update by
-                        </th>
+
+
+						</span>
+						Remove
+					</button>
+
+				</div>
+			</div>
+
+			<table id="table_accounts" class="w-full table-auto">
+				<thead>
+					<tr class="bg-gray-2 text-left dark:bg-meta-4">
+						<th class="font-medium text-black dark:text-white xl:pl-11">
+
+							Name
+						</th>
+						<th class=" font-medium text-black dark:text-white xl:pl-11">
+							Position
+						</th>
+						<th class="font-medium text-black dark:text-white text-center">
+							Phone number
+						</th>
+						<th class=" font-medium text-black dark:text-white">
+							Age
+						</th>
+						<th class=" font-medium text-black dark:text-white">
+							Status
+						</th>
+						<th class="font-medium text-black dark:text-white text-center">
+							Create date
+						</th>
+						<th class="font-medium text-black dark:text-white text-center">
+							Create by
+						</th>
+						<th class="font-medium text-black dark:text-white text-center">
+							Update date
+						</th>
+						<th class="font-medium text-black dark:text-white text-center">
+							Update by
+						</th>
 
                     </tr>
                 </thead>
@@ -167,348 +188,56 @@
 
     </div>
 
-    <!-- Add User Modal -->
-    <div x-show="add"
-         class="fixed left-0  z-999999 items-center justify-center block overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full bg-graydark/30"
-         id="add-user-modal">
-        <div class="mx-auto my-10 justify-center relative w-full h-full max-w-2xl px-4 md:h-auto">
-            <!-- Modal content -->
-            <div x-on:click.outside="add = false" class="relative bg-white rounded-lg shadow dark:bg-graydark/80 ">
-                <!-- Modal header -->
-                <div class="flex items-start justify-between p-5 border-b border-gray rounded-t dark:border-graydark/60">
-                    <h3 class="text-xl font-semibold dark:text-white">Add new user</h3>
-                    <button type="button" x-on:click="add = false"
-                            class="text-graydark/500 bg-transparent hover:bg-gray-200 hover:text-graydark rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-graydark/60 dark:hover:text-white"
-                            data-modal-toggle="add-user-modal">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <form method="post">
-                        <div class="grid grid-cols-6 gap-6">
-                            <div class="col-span-8 sm:col-span-4">
-                                <label for="full-name"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Full Name
-                                </label>
-                                <input asp-for="CreateAccount.Fullname" type="text" name="full-name" id="full-name"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="Bonnie" required />
-                                <span asp-validation-for="CreateAccount.Fullname" class="text-danger"></span>
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="email" class="block mb-2 text-sm font-medium text-graydark dark:text-white">Email</label>
-                                <input asp-for="CreateAccount.Email" type="email" name="email" value="bonnie@flowbite.com" id="email"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="example@company.com" required />
-                                <span asp-validation-for="CreateAccount.Email" class="text-danger"></span>
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="position"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Position</label>
-                                <select asp-for="CreateAccount.Role" asp-items="Html.GetEnumSelectList<Role>()" id="role" name="Role"
-                                        class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                    @* @foreach (var role in Model.Roles)
-                                    {
-                                    <option value="@role.Key">@role.Value</option>
-                                    } *@
-                                    <option value="">-- Select Animal Type --</option>
-                                </select>
-                                <span asp-validation-for="CreateAccount.Role" class="text-danger"></span>
-                            </div>
-                            <div class="col-span-8 sm:col-span-4">
-                                <label for="phone"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Phone</label>
-                                <div class="flex flex-row gap-2">
-                                    <div class="w-fit font-bold shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                        +84
-                                    </div>
-                                    <input asp-for="CreateAccount.PhoneNumber" type="number" name="phone" id="phone"
-                                           class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                           placeholder="123456789" required />
-                                    <span asp-validation-for="CreateAccount.PhoneNumber" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-span-4 sm:col-span-2">
-                                <label for="age"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Birthday</label>
-
-                                <input asp-for="CreateAccount.DateOfBirth" type="date" name="age" id="age"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       required />
-                                <span asp-validation-for="CreateAccount.DateOfBirth" class="text-danger"></span>
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="current-password"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Password
-                                </label>
-                                <input asp-for="CreateAccount.Password" type="password" name="current-password" value="••••••••" id="current-password"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="••••••••" required />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="new-password"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Confirm
-                                    Password
-                                </label>
-                                <input asp-for="CreateAccount.ConfirmPassword" type="password" name="new-password" value="••••••••" id="new-password"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="••••••••" required />
-                            </div>
-                            @* <div class="col-span-6">
-                            <label for="biography"
-                            class="block mb-2 text-sm font-medium text-graydark dark:text-white">Biography</label>
-                            <textarea id="biography" rows="4"
-                            class="block p-2.5 w-full text-sm text-graydark bg-gray rounded-lg border border-gray
-                            focus:ring-primary focus:border-primary dark:bg-graydark/60 dark:border-graydark/80
-                            dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                            placeholder="👨‍💻Full-stack web developer. Open-source contributor.">👨‍💻Full-stack web
-                            developer. Open-source contributor.</textarea>
-                            </div> *@
-                        </div>
-                        <div class="items-center flex justify-center rounded-b dark:border-graydark/60 my-4">
-                            <button type="submit"
-                                    class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
-                                Save all
-                            </button>
-                        </div>
-                    </form>
-                    <!-- Modal footer -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Edit User Modal -->
-    <div x-show="edit"
-         class="fixed left-0  z-999999 items-center justify-center block overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full bg-graydark/30"
-         id="edit-user-modal">
-        <div class="mx-auto my-10 justify-center relative w-full h-full max-w-2xl px-4 md:h-auto">
-            <!-- Modal content -->
-            <div x-on:click.outside="edit = false" class="relative bg-white rounded-lg shadow dark:bg-graydark/80 ">
-                <!-- Modal header -->
-                <div class="flex items-start justify-between p-5 border-b border-gray rounded-t dark:border-graydark/60">
-                    <h3 class="text-xl font-semibold dark:text-white">Edit user</h3>
-                    <button type="button" x-on:click="edit = false"
-                            class="text-graydark/500 bg-transparent hover:bg-gray-200 hover:text-graydark rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-graydark/60 dark:hover:text-white"
-                            data-modal-toggle="edit-user-modal">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <form action="#">
-                        <div class="grid grid-cols-6 gap-6">
-                            <div class="col-span-8 sm:col-span-4">
-                                <label for="full-name"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Full
-                                    Name
-                                </label>
-                                <input type="text" name="full-name" value="Bonnie" id="full-name"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="Bonnie" required />
-                            </div>
-                            <div class="col-span-4 sm:col-span-2">
-                                <label for="status"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Status</label>
-                                <select id="status"
-                                        class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                    @foreach (var status in Model.Statuses)
-                                    {
-                                        <option value="@status.Key">@status.Value</option>
-                                    }
-
-                                </select>
-                            </div>
-
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="email"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Email</label>
-                                <input type="email" name="email" value="bonnie@flowbite.com" id="email"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="example@company.com" required />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="position"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Position</label>
-                                <select id="role"
-                                        class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                    @foreach (var role in Model.Roles)
-                                    {
-                                        <option value="@role.Key">@role.Value</option>
-                                    }
-
-                                </select>
-                            </div>
-                            <div class="col-span-8 sm:col-span-4">
-                                <label for="phone"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Phone</label>
-                                <div class="flex flex-row gap-2">
-                                    <div class="w-fit font-bold shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                        +84
-                                    </div>
-                                    <input type="number" name="phone" id="phone"
-                                           class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                           placeholder="123456789" required />
-                                </div>
-                            </div>
-                            <div class="col-span-4 sm:col-span-2">
-                                <label for="age"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">Birthday</label>
-
-                                <input type="date" name="age" id="age"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       required />
-
-                            </div>
-
-                            <div class="col-span-4 sm:col-span-2">
-                                <label for="created-date"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Created
-                                    date
-                                </label>
-
-                                <input type="date" name="created-date" id="created-date"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       required />
-
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="created-by"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Created
-                                    by
-                                </label>
-                                <select id="created-by"
-                                        class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                    @foreach (var role in Model.Roles)
-                                    {
-                                        <option value="@role.Key">@role.Value</option>
-                                    }
-
-                                </select>
-                            </div>
-                            <div class="col-span-4 sm:col-span-2">
-                                <label for="updated-date"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Updated
-                                    date
-                                </label>
-
-                                <input type="date" name="updated-date" id="updated-date"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       required />
-
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="updated-by"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Updated
-                                    by
-                                </label>
-                                <select id="updated-by"
-                                        class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                    @foreach (var role in Model.Roles)
-                                    {
-                                        <option value="@role.Key">@role.Value</option>
-                                    }
-
-                                </select>
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="current-password"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    Current
-                                    Password
-                                </label>
-                                <input type="password" name="current-password" value="••••••••" id="current-password"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="••••••••" required />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="new-password"
-                                       class="block mb-2 text-sm font-medium text-graydark dark:text-white">
-                                    New
-                                    Password
-                                </label>
-                                <input type="password" name="new-password" value="••••••••" id="new-password"
-                                       class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                       placeholder="••••••••" required />
-                            </div>
-                            @* <div class="col-span-6">
-                            <label for="biography"
-                            class="block mb-2 text-sm font-medium text-graydark dark:text-white">Biography</label>
-                            <textarea id="biography" rows="4"
-                            class="block p-2.5 w-full text-sm text-graydark bg-gray rounded-lg border border-gray
-                            focus:ring-primary focus:border-primary dark:bg-graydark/60 dark:border-graydark/80
-                            dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                            placeholder="👨‍💻Full-stack web developer. Open-source contributor.">👨‍💻Full-stack web
-                            developer. Open-source contributor.</textarea>
-                            </div> *@
-                        </div>
-                    </form>
-                    <!-- Modal footer -->
-                    <div class="items-center flex justify-center rounded-b dark:border-graydark/60">
-                        <button type="submit"
-                                class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
-
-                            Save all
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Add User Modal -->
+	@await Html.PartialAsync("../Shared/Partials/Modal/Accounts/_ModalAddAccount.cshtml")
+	<!-- Edit User Modal -->
+	@await Html.PartialAsync("../Shared/Partials/Modal/Accounts/_ModalEditAccount.cshtml")
+	<!-- Delete User Modal -->
+	@await Html.PartialAsync("../Shared/Partials/Modal/Accounts/_ModalRemoveAccount.cshtml")
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Get the DataTable instance
-        const table = dataTable;
-        let selectedRow = null; // Store the selected row
+	document.addEventListener('DOMContentLoaded', function () {
+		// Get the DataTable instance
+		const table = dataTable;
+		let selectedRow = null; // Store the selected row
+		let rowData = null;
 
-        table.on('click', 'tbody tr', function () {
-            const row = $(this);
+		table.on('click', 'tbody tr', function () {
+			const row = $(this);
+			console.log(table.row(this).data());
 
             if (selectedRow !== null) {
                 selectedRow.removeClass('selected');
             }
 
 
-            if (!row.hasClass('selected')) {
-                row.addClass('selected');
-                selectedRow = row; // Update the selected row
-            } else {
-                selectedRow = null; // Deselect the current row
-            }
-            updateEditButtonState();
-        });
+			if (!row.hasClass('selected')) {
+				row.addClass('selected');
+				selectedRow = row; // Update the selected row
+			} else {
+				selectedRow = null; // Deselect the current row
+			}
+			updateButtonState();
+		});
 
 
-        function updateEditButtonState() {
-            const editButton = document.getElementById('edit-account-btn');
-            if (selectedRow !== null) {
-                editButton.removeAttribute('disabled'); // Enable the button
-            } else {
-                editButton.setAttribute('disabled', 'disabled'); // Disable the button
-            }
-        }
+		function updateButtonState() {
+			const editButton = document.getElementById('edit-account-btn');
+			const deleteButton = document.getElementById('remove-account-btn');
 
-        // Initially, set the button state based on the selectedRow
-        updateEditButtonState();
+			if (selectedRow !== null) {
+				editButton.removeAttribute('disabled'); // Enable the button
+				deleteButton.removeAttribute('disabled')
+			} else {
+				editButton.setAttribute('disabled', 'disabled'); // Disable the button
+				deleteButton.setAttribute('disabled', 'disabled'); // Disable the button
+			}
+		}
 
 
-    });
+
+		// Initially, set the button state based on the selectedRow
+		updateButtonState();
+	});
+
 </script>

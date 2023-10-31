@@ -97,29 +97,39 @@
                 "columnDefs": [
                     { "orderable": false, "targets": 'no-sort' }
                 ],
-                "scrollX": true,
+
             });
 
         });
 
+        window.addEventListener('click', function (e) {
+            document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+                if (!dropdown.contains(e.target)) {
+                    // Click was outside the dropdown, close it
+                    dropdown.open = false;
+                }
+            });
+        });
+
+        const dropdownSummary = document.getElementById("dropdownHeader");
+        const svgArrow = document.querySelector("#dropdownHeader svg");
+
+        dropdownSummary.addEventListener("click", function () {
+            // Toggle the rotation angle based on the presence of 'rotate-180' class
+            const isOpen = svgArrow.classList.toggle("rotate-180");
+
+            // Optionally, you can add logic to handle dropdown open/close behavior here
+            if (isOpen) {
+                // Dropdown is open, add your logic here
+            } else {
+                // Dropdown is closed, add your logic here
+            }
+        });
+
+
+
     </script>
 
-    @* <script>
-    $(document).ready(function () {
-    // Add a click event handler to the "haha" button
-    $("#viewBlogDetailModal").click(function () {
-    // Show the modal when the button is clicked
-    $("#blogDetailModal").removeClass("hidden");
-    });
-
-    // Add a click event handler to close the modal
-    $("#blogDetailModal").click(function (e) {
-    if ($(e.target).is("#blogDetailModal")) {
-    $("#blogDetailModal").addClass("hidden");
-    }
-    });
-    });
-    </script> *@
 
     <script type="module" src="~/js/site.js" asp-append-version="true"></script>
     <script type="module" src="~/js/index.js" asp-append-version="true"></script>
