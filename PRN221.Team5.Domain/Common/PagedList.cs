@@ -43,8 +43,7 @@ namespace Team5.Domain.Common
             var items = await queryList
                                 .Skip((pageNumber - 1) * pageSize)
                                 .Take(pageSize)
-                                .ToListAsync()
-                                .ConfigureAwait(false);
+                                .ToListAsync();
 
             this.TotalCount = items.Count();
             this.PageSize = pageSize;
@@ -54,7 +53,7 @@ namespace Team5.Domain.Common
             this.AddRange(items);
         }
 
-        public async Task LoadData(IQueryable<T> queryList, PaginationParameters paginationParams)
+        public async Task LoadData(IQueryable<T> queryList, PagingParameters paginationParams)
         {
             if (paginationParams == null)
             {

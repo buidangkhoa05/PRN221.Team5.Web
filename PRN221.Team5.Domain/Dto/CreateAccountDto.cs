@@ -1,15 +1,16 @@
-﻿using System;
+﻿using PRN221.Team5.Domain.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team5.Domain.Entity;
 
-namespace PRN221.Team5.Domain.Entity
+namespace PRN221.Team5.Domain.Dto
 {
-    public class Account : BaseEntity
+    public class CreateAccountDto
     {
+
         [Required]
         public string Username { get; set; }
 
@@ -17,6 +18,11 @@ namespace PRN221.Team5.Domain.Entity
         [MaxLength(20)]
         [Required]
         public string Password { get; set; }
+
+        [MinLength(5)]
+        [MaxLength(20)]
+        [Required]
+        public string ConfirmPassword { get; set; }
 
         [Required]
         public string Fullname { get; set; }
@@ -32,17 +38,5 @@ namespace PRN221.Team5.Domain.Entity
 
         [Required]
         public Role Role { get; set; }
-
-        public virtual TraineerProfile TraineerProfile { get; set; }
-
-        public virtual ICollection<ZooNews> ZooNews { get; set; }
-    }
-
-    public enum Role
-    {
-        Guest = 100,
-        ZooTrainer = 101,
-        Staff = 102,
-        Administrator = 103
     }
 }

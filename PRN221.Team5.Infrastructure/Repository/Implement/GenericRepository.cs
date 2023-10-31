@@ -1,5 +1,7 @@
 ﻿
 
+using PRN221.Team5.Application.Common;
+
 namespace Team5.Infrastructure.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity, new()
@@ -24,7 +26,7 @@ namespace Team5.Infrastructure.Repository
 
             if (isSaveChange)
             {
-                await SaveChangesAsync().ConfigureAwait(false);
+                await SaveChangesAsync();
             }
             return entity.Id;
         }
@@ -41,7 +43,7 @@ namespace Team5.Infrastructure.Repository
 
             if (isSaveChange)
             {
-                await SaveChangesAsync().ConfigureAwait(false);
+                await SaveChangesAsync();
             }
             return values.Select(e => e.Id);
         }
@@ -68,7 +70,7 @@ namespace Team5.Infrastructure.Repository
 
             return await dbSet.Where(predicate)
                                 .ExecuteDeleteAsync()
-                                .ConfigureAwait(false);
+                                ;
         }
         /// <summary>
         /// UpdateAsync IsDeleted to true by condition predicate without SaveChanges action
@@ -90,7 +92,7 @@ namespace Team5.Infrastructure.Repository
 
             return await dbSet.Where(predicate)
                                 .ExecuteUpdateAsync(setter => setter.SetProperty(e => e.IsDeleted, true))
-                                .ConfigureAwait(false);
+                                ;
         }
         #endregion Delete
 
@@ -159,77 +161,29 @@ namespace Team5.Infrastructure.Repository
 
         #region Retrieve
         /// <summary>
-        /// Get an entity is active by id and match orther condition predicate, this function is AsNoTracking 
+        /// Get first entity by predicate, this function is AsNoTracking
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="predicate">can null</param>
-        /// <param name="includes"></param>
+        /// <param name="predicate"></param>
         /// <returns></returns>
-        public async Task<T?> GetById(Guid id, Expression<Func<T, T>> selector, Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes)
+        public async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
-            Expression<Func<T, bool>> isNotDeleteCondition = p => p.IsDeleted == false && p.Id == id;
-
-            if (predicate == null)
-            {
-                predicate = isNotDeleteCondition;
-            }
-            else
-            {
-                predicate = PredicateBuilder.And(isNotDeleteCondition, predicate);
-            }
-
-            if (includes == null)
-            {
-                return await dbSet.AsNoTracking().Where(predicate).SingleOrDefaultAsync();
-            }
-            else
-            {
-                var query = dbSet.AsNoTracking().Where(predicate);
-                return await query
-                            .Includes(includes)
-                            .Select(selector)
-                            .SingleOrDefaultAsync();
-            }
+            return await dbSet.AsQueryable().AsNoTracking().FirstOrDefaultAsync(predicate);
         }
 
         /// <summary>
-        /// Get all entities are active and match condition predicate, this function is AsNoTracking
+        /// Check entity exist in database by condition predicate
         /// </summary>
         /// <param name="predicate"></param>
-        /// <param name="includes"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> GetWithCondition(Expression<Func<T, T>> selector, Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes)
+        public async Task<bool> IsExist(Expression<Func<T, bool>> predicate)
         {
-            Expression<Func<T, bool>> isNotDeleteCondition = p => p.IsDeleted == false;
+            var entity = await dbSet.AsQueryable().AsNoTracking()
+                                    .Where(predicate)
+                                    .Select(t => t.Id)
+                                    .FirstOrDefaultAsync();
 
-            if (predicate == null)
-            {
-                predicate = isNotDeleteCondition;
-            }
-            else
-            {
-                predicate = PredicateBuilder.And(isNotDeleteCondition, predicate);
-            }
-
-            if (includes == null)
-            {
-                return await dbSet.AsNoTracking().Where(predicate).ToListAsync();
-            }
-            else
-            {
-                var query = dbSet.AsNoTracking().Where(predicate);
-
-                return query.Includes(includes)
-                            .Select(selector);
-            }
+            return entity != null;
         }
-
-        // get first or default
-        public Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
-        {
-            return dbSet.AsQueryable().AsNoTracking().FirstOrDefaultAsync(predicate);
-        }
-
         #endregion Retrieve
 
         /// <summary>
@@ -243,7 +197,7 @@ namespace Team5.Infrastructure.Repository
 
         #region Retrieve Version 2.0
         /// <summary>
-        /// Get entity by id and other conditions
+        /// GetAll entity by id and other conditions
         /// </summary>
         /// <param name="id"></param>
         /// <param name="query"></param>
@@ -256,10 +210,10 @@ namespace Team5.Infrastructure.Repository
             }
             var query = dbSet.ApplyConditions(queryHelper, id, isAsNoTracking);
 
-            return await query.SingleOrDefaultAsync().ConfigureAwait(false);
+            return await query.SingleOrDefaultAsync();
         }
         /// <summary>
-        /// Get entity by id and other conditions
+        /// GetAll entity by id and other conditions
         /// 
         /// This function will return mapping dto object map from entity
         /// </summary>
@@ -274,10 +228,45 @@ namespace Team5.Infrastructure.Repository
             }
             var query = dbSet.ApplyConditions(queryHelper, id, isAsNoTracking);
 
-            return await query.SingleOrDefaultAsync().ConfigureAwait(false);
+            return await query.SingleOrDefaultAsync();
         }
         /// <summary>
-        /// Get all entities are active and match condition predicate, this function is AsNoTracking
+        /// Get an entity is active and match condition predicate
+        /// </summary>
+        /// <param name="queryHelper"></param>
+        /// <param name="isAsNoTracking"></param>
+        /// <returns></returns>
+        public async Task<T?> GetFirstOrDefault(QueryHelper<T> queryHelper, bool isAsNoTracking = true)
+        {
+            if (queryHelper == null)
+            {
+                queryHelper = new QueryHelper<T>();
+            }
+
+            var query = dbSet.ApplyConditions(queryHelper, isAsNoTracking: isAsNoTracking);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        /// <summary>
+        /// Get an entity has mapping dto object is active and match condition predicate
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="queryHelper"></param>
+        /// <param name="isAsNoTracking"></param>
+        /// <returns></returns>
+        public async Task<TResult?> GetFirstOrDefault<TResult>(QueryHelper<T, TResult> queryHelper, bool isAsNoTracking = true) where TResult : class
+        {
+            if (queryHelper == null)
+            {
+                queryHelper = new QueryHelper<T, TResult>();
+            }
+
+            var query = dbSet.ApplyConditions(queryHelper, isAsNoTracking: isAsNoTracking);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        /// <summary>
+        /// GetAll all entities are active and match condition predicate, this function is AsNoTracking
         /// </summary>
         /// <param name="queryHelper"></param>
         /// <returns></returns>
@@ -289,10 +278,10 @@ namespace Team5.Infrastructure.Repository
             }
             var query = dbSet.ApplyConditions(queryHelper, isAsNoTracking: isAsNoTracking);
 
-            return await query.ToListAsync().ConfigureAwait(false);
+            return await query.ToListAsync();
         }
         /// <summary>
-        /// Get all entities are active and match condition predicate, this function is AsNoTracking
+        /// GetAll all entities are active and match condition predicate, this function is AsNoTracking
         /// 
         /// This function will return list of mapping dto object map from list of entity
         /// </summary>
@@ -306,10 +295,10 @@ namespace Team5.Infrastructure.Repository
             }
             var query = dbSet.ApplyConditions(queryHelper, isAsNoTracking: isAsNoTracking);
 
-            return await query.ToListAsync().ConfigureAwait(false);
+            return await query.ToListAsync();
         }
         /// <summary>
-        /// Get all entities are active and match condition predicate, this function is AsNoTracking
+        /// GetAll all entities are active and match condition predicate, this function is AsNoTracking
         /// </summary>
         /// <param name="queryHelper"></param>
         /// <returns>
@@ -325,12 +314,12 @@ namespace Team5.Infrastructure.Repository
 
             var query = dbSet.ApplyConditions(queryHelper, isAsNoTracking: isAsNoTracking);
 
-            await pagedList.LoadData(query, queryHelper.PaginationParams).ConfigureAwait(false);
+            await pagedList.LoadData(query, queryHelper.PagingParams);
 
             return pagedList;
         }
         /// <summary>
-        /// Get all entities are active and match condition predicate, this function is AsNoTracking
+        /// GetAll all entities are active and match condition predicate, this function is AsNoTracking
         /// 
         /// This function will return PagedList of mapping dto object map from list of entity
         /// </summary>
@@ -353,8 +342,7 @@ namespace Team5.Infrastructure.Repository
 
             var query = dbSet.ApplyConditions(queryHelper, isAsNoTracking: isAsNoTracking);
 
-            await pagedList.LoadData(query, queryHelper.PaginationParams).ConfigureAwait(false);
-
+            await pagedList.LoadData(query, queryHelper.PagingParams);
             return pagedList;
         }
         #endregion Retrieve Version 2.0

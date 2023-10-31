@@ -29,7 +29,6 @@
 
             @foreach (var account in Model.Accounts)
             {
-
                 <tr class="flex items-center hover:bg-gray-3 dark:hover:bg-meta-4">
                     <td class="relative h-12 w-12 rounded-full">
                         <img asp-append-version="true" src="~/images/user/user-03.png" alt="User" />
@@ -38,7 +37,7 @@
                     <td class="flex flex-1 items-center justify-between">
                         <div class="flex flex-col items-start justify-center">
                             <h5 class="font-medium text-black dark:text-white line-clamp-1">
-                                @account.Name
+                                @account.Username
                             </h5>
                             <p class="text-xs font-medium text-black dark:text-white">
                                 Create:
@@ -48,7 +47,7 @@
 
                     </td>
                     <td class="text-sm font-medium text-primary dark:text-white text-end">
-                        @account.Role
+                        @account.Role.ToString()
                     </td>
                 </tr>
 

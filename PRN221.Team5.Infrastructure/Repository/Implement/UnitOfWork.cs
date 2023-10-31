@@ -48,6 +48,19 @@ namespace Team5.Infrastructure.Repository
                 return _zooNews;
             }
         }
+
+        private IGenericRepository<Animal> _animal;
+        public IGenericRepository<Animal> Animal
+        {
+            get
+            {
+                if (_animal == null)
+                {
+                    _animal = new GenericRepository<Animal>(_dbContext);
+                }
+                return _animal;
+            }
+        }
         #endregion Repository
 
 

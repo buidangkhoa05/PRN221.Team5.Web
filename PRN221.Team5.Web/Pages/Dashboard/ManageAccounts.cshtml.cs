@@ -6,56 +6,36 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using PRN221.Team5.Domain.Dto;
+using PRN221.Team5.Domain.Entity;
+using Team5.Application.Repository;
+using Team5.Domain.Common;
+using Team5.Infrastructure.Repository;
 
 namespace PRN221.Team5.Web.Pages.Dashboard
 {
     public class ManageAccount : PageModel
     {
         private readonly ILogger<ManageAccount> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ManageAccount(ILogger<ManageAccount> logger)
+        public ManageAccount(ILogger<ManageAccount> logger, IUnitOfWork unitOfWork)
         {
-            _logger = logger;
+            _unitOfWork = unitOfWork;
         }
-        public enum Role
-        {
-            Admin,
-            Staff,
-            ZooTrainer
-        }
-
-        public class Account
-        {
-            public string Username { get; set; }
-            public string Fullname { get; set; }
-            public string Email { get; set; }
-            public string Phone { get; set; }
-            public string Role { get; set; }
-
-            public string Age { get; set; }
-
-            public string Status { get; set; }
-
-            public string CreateDate { get; set; }
-
-            public string UpdateDate { get; set; }
-
-            public string CreateBy { get; set; }
-            public string UpdateBy { get; set; }
-        }
-
-
 
         [BindProperty]
         public List<Account> Accounts { get; set; } = new List<Account>();
+
         [BindProperty]
         public Dictionary<Role, string> Roles { get; } = new Dictionary<Role, string>
         {
-            { Role.Admin, "Admin" },
+            { Role.Administrator, "Admin" },
             { Role.Staff, "Staff" },
             { Role.ZooTrainer, "Zoo Trainer" }
 
         };
+
         [BindProperty]
         public Dictionary<string, string> Statuses { get; } = new Dictionary<string, string>
         {
@@ -63,44 +43,23 @@ namespace PRN221.Team5.Web.Pages.Dashboard
             { "Inactive", "Inactive" },
         };
 
+        [BindProperty]
+        public CreateAccountDto CreateAccount { get; set; } = new CreateAccountDto();
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            var accounts = new List<Account>{
-                new Account
-                {
-                    Username = "nguyenvana",
-                    Fullname = "Nguyen Van A",
-                    Email = "vana222@gmail.com",
-                    Phone = "0123456789",
-                    Role = Roles[Role.Staff],
-                    Age = "20",
-                    Status = "Active",
-                    CreateDate = "2021-01-01",
-                    UpdateDate = "2021-01-01",
-                    CreateBy = "admin",
-                    UpdateBy = "admin"
-                },
-                new Account {
-                    Username = "nguyenvanb",
-                    Fullname = "Nguyen Van B",
-                    Email = "vanb333@gmail.com",
-                    Phone = "0123456789",
-                    Role = Roles[Role.ZooTrainer],
-                    Age = "40",
-                    Status = "Active",
-                    CreateDate = "2021-01-01",
-                    UpdateDate = "2022-01-01",
-                    CreateBy = "admin",
-                    UpdateBy = "admin"
-                },
-            };
 
-            Accounts = accounts;
-        }
+            Accounts = await _unitOfWork.Account.GetWithPagination(new QueryHelper<Account>()
+            {
+                PagingParams = new PagingParameters()
+            });
 
-        public async Task<IActionResult> OnPost(){
-            return Page();;
+            return Page();
         }
     }
+
+    //public async Task<IActionResult> OnPostAsync()
+    //{
+    //   return PageBase();
+    //}
 }

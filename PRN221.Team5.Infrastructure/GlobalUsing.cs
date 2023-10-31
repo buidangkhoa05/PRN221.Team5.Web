@@ -14,7 +14,7 @@ global using Microsoft.EntityFrameworkCore.Storage;
 global using Team5.Infrastructure.DBContext;
 global using Team5.Application.Repository;
 
-global using Team5.Infrastructure.Common;
+//global using Team5.Infrastructure.Common;
 global using Team5.Domain.Common;
 global using Team5.Domain.Entity;
 

@@ -5,3 +5,34 @@ Command to create migration and update database
 	Add-Migration [NameForNewMigration]
 
 	Update-Migration [NameOfMigrationUpdate]
+
+
+
+-- New script in master.
+-- Author: Khoa
+-- CreatedDate: Oct 30, 2023
+-- UpdatedDate: 5:39:16 PM
+-- Description: 
+
+
+--Insert Account
+INSERT INTO ZooManagement.dbo.Accounts (Id,Username,Password,Age,PhoneNumber,[Role],CreatedDate,UpdatedDate,CreatedBy,UpdatedBy,IsDeleted) 
+VALUES
+(N'2AE8AB59-F77B-4C67-B640-1065BF650908',N'admin',N'admin',N'0',N'00000000000',103,'2023-10-10 23:55:04.3566667','2023-10-10 23:55:04.3566667',N'dfek0',N'dfek0',0);
+
+--Insert ZooManagement
+INSERT INTO ZooManagement.dbo.ZooNews
+(Id, Title, Description, Content, ImageLink, OwnerId, CreatedDate, UpdatedDate, CreatedBy, UpdatedBy, IsDeleted)
+VALUES
+('4759faf0-da76-4205-92ad-ce9c35944f46', 'Title 1', 'Description 1', 'Content 1', 'ImageLink 1', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 1', 'User 1', 0),
+('25ef3b13-5f7e-4295-b0d8-900e67ddc463', 'Title 2', 'Description 2', 'Content 2', 'ImageLink 2', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 2', 'User 2', 0),
+('3eec44b5-242d-4fa6-a877-8999941c33b6', 'Title 3', 'Description 3', 'Content 3', 'ImageLink 3', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 3', 'User 3', 0),
+('122b661f-da74-4566-9af0-abb02e0969a7', 'Title 4', 'Description 4', 'Content 4', 'ImageLink 4', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 4', 'User 4', 0),
+('c6b98713-7935-4b55-932e-cb3e3f640af2', 'Title 5', 'Description 5', 'Content 5', 'ImageLink 5', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 5', 'User 5', 0),
+('f182c4e8-e249-4237-bfce-d59aecd9e4a3', 'Title 6', 'Description 6', 'Content 6', 'ImageLink 6', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 6', 'User 6', 0),
+('2451000e-4663-48a7-8429-5ddfd1c1c6ee', 'Title 7', 'Description 7', 'Content 7', 'ImageLink 7', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 7', 'User 7', 0),
+('8fbb0572-1ea2-439f-80e9-f68023ce5577', 'Title 8', 'Description 8', 'Content 8', 'ImageLink 8', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 8', 'User 8', 0),
+('cf670935-dd1a-4683-b6fc-35278161e0ab', 'Title 9', 'Description 9', 'Content 9', 'ImageLink 9', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 9', 'User 9', 0),
+('507f7982-b06c-462d-9e9c-255577938c22', 'Title 10', 'Description 10', 'Content 10', 'ImageLink 10', '2AE8AB59-F77B-4C67-B640-1065BF650908', GETDATE(), GETDATE(), 'User 10', 'User 10', 0);
+
+

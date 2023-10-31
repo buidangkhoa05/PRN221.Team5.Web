@@ -1,9 +1,10 @@
-﻿using Team5.Domain.Entity;
+﻿using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team5.Domain.Common;
+using Team5.Domain.Entity;
 
 namespace Team5.Domain.Common
 {
@@ -16,7 +17,7 @@ namespace Team5.Domain.Common
         /// <summary>
         /// Helper for pagination - LIMIT, OFFSET command
         /// </summary>
-        public PaginationParameters? PaginationParams { get; set; } = null;
+        public PagingParameters? PagingParams { get; set; } = null;
         /// <summary>
         /// Helper for filter entity with condition - WHERE command
         /// </summary>
@@ -24,7 +25,11 @@ namespace Team5.Domain.Common
         /// <summary>
         /// Helper for include entity - JOIN command
         /// </summary>
-        public Expression<Func<T, object>>[]? Includes { get; set; } = null;
+        //public Expression<Func<T, object>>[]? Includes { get; set; } = null;
+        /// <summary>
+        /// Helper for include entity - JOIN command
+        /// </summary>
+        public Func<IQueryable<T>, IIncludableQueryable<T, object?>> Include = null;
         /// <summary>
         /// Helper for select field from entity - SELECT command
         /// </summary>
@@ -33,6 +38,10 @@ namespace Team5.Domain.Common
         /// Helper for select field from entity - SELECT command
         /// </summary>
         public string[] SelectedFields { get; set; } = null!;
+        /// <summary>
+        /// Helper for select field from entity - Order By command 
+        /// </summary>
+        public string[]? OrderByFields { get; set; } = null;
     }
     /// <summary>
     /// QueryHelper<TSource, TResult> TSource is an entity, TResult is a dto object

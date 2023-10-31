@@ -18,6 +18,7 @@ namespace Team5.Application.Repository
         #region Repository
         IGenericRepository<Account> Account { get; }
         IGenericRepository<ZooNews> ZooNews { get; }
+        IGenericRepository<Animal> Animal { get; }
         #endregion Repository
     }
 }

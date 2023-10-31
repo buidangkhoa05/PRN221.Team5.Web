@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using PRN221.Team5.Domain.Entity;
 using Team5.Application.Repository;
 using Team5.Domain.Common;
@@ -17,22 +18,23 @@ namespace PRN221.Team5.Web.Pages
             _unitOfWork = unitOfWork;
         }
 
-        public class Animal
-        {
-            public string Id { get; set; }
-            public string Name { get; set; }
-            public string Specie { get; set; }
-            public string CreatedDate { get; set; }
-            public string CreatedBy { get; set; }
-        }
+        #region Moock object
+        //public class Animal
+        //{
+        //    public string Id { get; set; }
+        //    public string Name { get; set; }
+        //    public string Specie { get; set; }
+        //    public string CreatedDate { get; set; }
+        //    public string CreatedBy { get; set; }
+        //}
 
-        public class Account
-        {
-            public string UserName { get; set; }
-            public string Name { get; set; }
-            public string Role { get; set; }
-            public string CreatedDate { get; set; }
-        }
+        //public class Account
+        //{
+        //    public string UserName { get; set; }
+        //    public string Name { get; set; }
+        //    public string Role { get; set; }
+        //    public string CreatedDate { get; set; }
+        //}
 
         //public class Post {
         //    public string Id { get; set; }
@@ -43,156 +45,161 @@ namespace PRN221.Team5.Web.Pages
         //    public string Status { get; set; }
         //}
 
+        #endregion Moock object
+
         [BindProperty]
-        public List<Animal> Animals { get; set; } = new List<Animal>();
+        public List<Animal> Animals { get; set; }
 
         [BindProperty]
         public List<Account> Accounts { get; set; } = new List<Account>();
 
         [BindProperty]
-        public List<ZooNews> News { get; set; } = new List<ZooNews>();
+        public List<ZooNews> News { get; set; }
 
-        public async void OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            var animals = new List<Animal>
-            {
-                new Animal
-                {
-                    Id = "1",
-                    Name = "Dog",
-                    Specie = "Mammal",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "2",
-                    Name = "Cat",
-                    Specie = "Mammal",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "3",
-                    Name = "Chicken",
-                    Specie = "Bird",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "4",
-                    Name = "Duck",
-                    Specie = "Bird",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "5",
-                    Name = "Pig",
-                    Specie = "Mammal",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "6",
-                    Name = "Cow",
-                    Specie = "Mammal",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "7",
-                    Name = "Goat",
-                    Specie = "Mammal",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "8",
-                    Name = "Sheep",
-                    Specie = "Mammal",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                },
-                new Animal
-                {
-                    Id = "9",
-                    Name = "Horse",
-                    Specie = "Mammal",
-                    CreatedDate = "2021-09-01",
-                    CreatedBy = "Admin"
-                }
-            };
+            #region Moock data 
+            //var animals = new List<Animal>
+            //{
+            //    new Animal
+            //    {
+            //        Id = "1",
+            //        Name = "Dog",
+            //        Specie = "Mammal",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "2",
+            //        Name = "Cat",
+            //        Specie = "Mammal",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "3",
+            //        Name = "Chicken",
+            //        Specie = "Bird",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "4",
+            //        Name = "Duck",
+            //        Specie = "Bird",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "5",
+            //        Name = "Pig",
+            //        Specie = "Mammal",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "6",
+            //        Name = "Cow",
+            //        Specie = "Mammal",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "7",
+            //        Name = "Goat",
+            //        Specie = "Mammal",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "8",
+            //        Name = "Sheep",
+            //        Specie = "Mammal",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    },
+            //    new Animal
+            //    {
+            //        Id = "9",
+            //        Name = "Horse",
+            //        Specie = "Mammal",
+            //        CreatedDate = "2021-09-01",
+            //        CreatedBy = "Admin"
+            //    }
+            //};
 
-            Animals = animals;
+            //Animals = animals;
 
-            var accounts = new List<Account>
-            {
-                new Account
-                {
-                    UserName = "minhngoc",
-                    Name = "Vu Minh Ngoc",
-                    CreatedDate = "2021-09-01",
-                    Role = "Staff",
-                },
-                new Account
-                {
-                    UserName = "thiennhi",
-                    Name = "Pham Thien Nhi",
-                    CreatedDate = "2021-09-01",
-                    Role = "Zoo Trainer",
-                },
-                new Account
-                {
-                    UserName = "thanhthao",
-                    Name = "Nguyen Thi Thanh Thao",
-                    CreatedDate = "2021-09-01",
-                    Role = "Zoo Trainer",
-                },
-                new Account
-                {
-                    UserName = "thienminh",
-                    Name = "Cao Thien Minh",
-                    CreatedDate = "2021-09-01",
-                    Role = "Zoo Trainer",
-                },
-                new Account
-                {
-                    UserName = "ngochung",
-                    Name = "Tran Ngoc Hung",
-                    CreatedDate = "2021-09-01",
-                    Role = "Zoo Trainer",
-                },
-                new Account
-                {
-                    UserName = "Chi Cong",
-                    Name = "Dinh Chi Cong",
-                    CreatedDate = "2021-09-01",
-                    Role = "Staff",
-                },
-                new Account
-                {
-                    UserName = "Chi Cong",
-                    Name = "Dinh Chi Cong",
-                    CreatedDate = "2021-09-01",
-                    Role = "Staff",
-                },
-                new Account
-                {
-                    UserName = "Chi Cong",
-                    Name = "Dinh Chi Cong",
-                    CreatedDate = "2021-09-01",
-                    Role = "Staff",
-                },
-            };
 
-            Accounts = accounts;
+
+            //var accounts = new List<Account>
+            //{
+            //    new Account
+            //    {
+            //        UserName = "minhngoc",
+            //        Name = "Vu Minh Ngoc",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Staff",
+            //    },
+            //    new Account
+            //    {
+            //        UserName = "thiennhi",
+            //        Name = "Pham Thien Nhi",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Zoo Trainer",
+            //    },
+            //    new Account
+            //    {
+            //        UserName = "thanhthao",
+            //        Name = "Nguyen Thi Thanh Thao",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Zoo Trainer",
+            //    },
+            //    new Account
+            //    {
+            //        UserName = "thienminh",
+            //        Name = "Cao Thien Minh",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Zoo Trainer",
+            //    },
+            //    new Account
+            //    {
+            //        UserName = "ngochung",
+            //        Name = "Tran Ngoc Hung",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Zoo Trainer",
+            //    },
+            //    new Account
+            //    {
+            //        UserName = "Chi Cong",
+            //        Name = "Dinh Chi Cong",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Staff",
+            //    },
+            //    new Account
+            //    {
+            //        UserName = "Chi Cong",
+            //        Name = "Dinh Chi Cong",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Staff",
+            //    },
+            //    new Account
+            //    {
+            //        UserName = "Chi Cong",
+            //        Name = "Dinh Chi Cong",
+            //        CreatedDate = "2021-09-01",
+            //        Role = "Staff",
+            //    },
+            //};
+
+            //Accounts = accounts;
 
 
 
@@ -281,11 +288,33 @@ namespace PRN221.Team5.Web.Pages
             //    }
             //};
 
-            News = await _unitOfWork.ZooNews.GetWithPagination(new QueryHelper<ZooNews>()
+            #endregion Moock data
+
+            Animals = await _unitOfWork.Animal.GetWithPagination(new QueryHelper<Animal>()
             {
-                PaginationParams = new PaginationParameters()
+                PagingParams = new PagingParameters(),
+                OrderByFields = new List<string>
+                {
+                    $"{nameof(Animal.CreatedDate)}:asc"
+                }.ToArray(),
+                Include = q => q.Include(a => a.Specie)
             });
 
+            News = await _unitOfWork.ZooNews.GetWithPagination(new QueryHelper<ZooNews>()
+            {
+                PagingParams = new PagingParameters()
+            });
+
+            Accounts = await _unitOfWork.Account.GetWithPagination(new QueryHelper<Account>()
+            {
+                PagingParams = new PagingParameters(),
+                OrderByFields = new List<string>
+                {
+                    $"{nameof(Account.CreatedDate)}:asc"
+                }.ToArray(),
+            });
+
+            return Page();
         }
     }
 }
