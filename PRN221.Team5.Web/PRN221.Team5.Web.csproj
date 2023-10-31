@@ -22,9 +22,9 @@
 	</ItemGroup>
 
 
-	<Target Name="Tailwind" BeforeTargets="Build">
+	<!--<Target Name="Tailwind" BeforeTargets="Build">
 		<Exec Command="npm run css:build" />
-	</Target>
+	</Target>-->
 
 
 	<ItemGroup>
