@@ -6,35 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageZooSection
 {
     public class EditModel : PageModel
     {
-        //private readonly Domain1.ZooManagementContext _context;
-
-        //public EditModel(Domain1.ZooManagementContext context)
-        //{
-        //    _context = context;
-        //}
+        private readonly IUnitOfWork _unitOfWork;
+        public EditModel(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         [BindProperty]
         public ZooSection ZooSection { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            //if (id == null || _context.ZooSections == null)
-            //{
-            //    return NotFound();
-            //}
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
 
-            //var zoosection =  await _context.ZooSections.FirstOrDefaultAsync(m => m.Id == id);
-            //if (zoosection == null)
-            //{
-            //    return NotFound();
-            //}
-            //ZooSection = zoosection;
+            var zoosection = await _unitOfWork.ZooSection.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (zoosection == null)
+            {
+                return NotFound();
+            }
+            ZooSection = zoosection;
             return Page();
         }
 
@@ -42,32 +42,11 @@ namespace Team5.Web.Pages.ManageZooSection
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
-            //_context.Attach(ZooSection).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!ZooSectionExists(ZooSection.Id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            ZooSection.UpdatedDate = DateTime.Now;
+            await _unitOfWork.ZooSection.UpdateAsync(ZooSection, true);
 
             return RedirectToPage("./Index");
         }
-
         private bool ZooSectionExists(Guid id)
         {
           //return (_context.ZooSections?.Any(e => e.Id == id)).GetValueOrDefault();
@@ -75,3 +54,6 @@ namespace Team5.Web.Pages.ManageZooSection
         }
     }
 }
+
+
+
