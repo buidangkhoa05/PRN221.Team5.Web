@@ -29,7 +29,7 @@ namespace Team5.Web.Pages.ManageFood
                 return NotFound();
             }
 
-            var food = await _foodService.GetFirtOrDefault(id ?? Guid.Empty);
+            var food = await _foodService.GetFirstOrDefault(id ?? Guid.Empty);
 
             if (food == null)
             {
@@ -42,22 +42,36 @@ namespace Team5.Web.Pages.ManageFood
             return Page();
         }
 
+        public string ErrorMessage { get; set; } = null;
+
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            //if (id == null || _context.Foods == null)
-            //{
-            //    return NotFound();
-            //}
-            //var food = await _context.Foods.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            //if (food != null)
-            //{
-            //    Food = food;
-            //    _context.Foods.Remove(Food);
-            //    await _context.SaveChangesAsync();
-            //}
+            var food = await _foodService.GetFirstOrDefault(id ?? Guid.Empty);
 
-            return RedirectToPage("./Index");
+            if (food != null)
+            {
+                Food = food;
+                var isDeleteSuccess = await _foodService.Delete(id ?? Guid.Empty);
+                if (isDeleteSuccess)
+                {
+                    return RedirectToPage("./Index");
+                }
+                else
+                {
+                    ErrorMessage = "Delete fail";
+                    return Page();
+                }
+            }
+            else
+            {
+                ErrorMessage = "Food not found";
+                return Page();
+            }
         }
     }
 }

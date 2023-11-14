@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace PRN221.Team5.Application.Service.Interface
 {
-    public class AuthService : IAuthService
+    public class AccountService : IAccountService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public AuthService(IUnitOfWork unitOfWork)
+        public AccountService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -36,6 +36,25 @@ namespace PRN221.Team5.Application.Service.Interface
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public async Task<PagedList<Account>> GetAll(PagingParameters pagingParam)
+        {
+            try
+            {
+                var queryHelper = new QueryHelper<Account>()
+                {
+                    PagingParams = pagingParam
+                };
+
+                var  accounts = await _unitOfWork.Account.GetWithPagination(queryHelper);
+
+                return accounts;
+            }
+            catch (Exception)
+            {
+                return new PagedList<Account>();
             }
         }
     }

@@ -20,35 +20,14 @@
                 <span asp-validation-for="Food.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Food.CreatedDate" class="control-label"></label>
-                <input asp-for="Food.CreatedDate" class="form-control" />
-                <span asp-validation-for="Food.CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Food.UpdatedDate" class="control-label"></label>
-                <input asp-for="Food.UpdatedDate" class="form-control" />
-                <span asp-validation-for="Food.UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Food.CreatedBy" class="control-label"></label>
-                <input asp-for="Food.CreatedBy" class="form-control" />
-                <span asp-validation-for="Food.CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Food.UpdatedBy" class="control-label"></label>
-                <input asp-for="Food.UpdatedBy" class="form-control" />
-                <span asp-validation-for="Food.UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Food.IsDeleted" /> @Html.DisplayNameFor(model => model.Food.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
                 <label asp-for="Food.Type" class="control-label"></label>
                 <input asp-for="Food.Type" class="form-control" />
                 <span asp-validation-for="Food.Type" class="text-danger"></span>
             </div>
+            @if(!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <h3 class="alert alert-danger" role="alert">@Model.ErrorMessage</h3>
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

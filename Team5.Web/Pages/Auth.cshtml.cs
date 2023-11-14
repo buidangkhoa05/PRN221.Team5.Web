@@ -11,9 +11,9 @@ namespace Team5.Web.Pages
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly IAuthService _authService;
+        private readonly IAccountService _authService;
 
-        public LoginModel(IAuthService authService)
+        public LoginModel(IAccountService authService)
         {
             _authService = authService;
         }

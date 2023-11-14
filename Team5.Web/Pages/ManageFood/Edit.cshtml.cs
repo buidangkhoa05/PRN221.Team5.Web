@@ -6,72 +6,60 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PRN221.Team5.Application.Service.Implement;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageFood
 {
     public class EditModel : PageModel
     {
-        private readonly DbContext _context;
+        private readonly IFoodService _foodService;
 
-        public EditModel()
+        public EditModel(IFoodService foodService)
         {
-            //_context = context;
+            _foodService = foodService;
         }
 
         [BindProperty]
         public Food Food { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            //if (id == null || _context.Foods == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var food =  await _context.Foods.FirstOrDefaultAsync(m => m.Id == id);
-            //if (food == null)
-            //{
-            //    return NotFound();
-            //}
-            //Food = food;
+            var food = await _foodService.GetFirstOrDefault(id);
+            if (food == null)
+            {
+                return NotFound();
+            }
+            Food = food;
             return Page();
         }
+
+        public string ErrorMessage { get; set; } = null;
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Food).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var isSuccess = await _foodService.Update(Food);
+                if (!isSuccess)
+                {
+                    ErrorMessage = "Update failed";
+                    return Page();
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FoodExists(Food.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
             return RedirectToPage("./Index");
         }
 
-        private bool FoodExists(Guid id)
-        {
-            //return (_context.Foods?.Any(e => e.Id == id)).GetValueOrDefault();
-            return true;
-        }
+        //private bool FoodExists(Guid id)
+        //{
+        //    //return (_context.Foods?.Any(e => e.Id == id)).GetValueOrDefault();
+        //    return true;
+        //}
     }
 }

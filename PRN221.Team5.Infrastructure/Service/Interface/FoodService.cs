@@ -47,7 +47,7 @@ namespace PRN221.Team5.Application.Service.Interface
             }
         }
 
-        public async Task<Food> GetFirtOrDefault(Guid id)
+        public async Task<Food> GetFirstOrDefault(Guid id)
         {
             try
             {
@@ -57,6 +57,33 @@ namespace PRN221.Team5.Application.Service.Interface
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public async Task<bool> Delete(Guid id)
+        {
+            try
+            {
+                var result = await _unitOfWork.Food.DeleteAsync(t => t.Id == id);
+
+                return result > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> Update(Food food)
+        {
+            try
+            {
+                var result = await _unitOfWork.Food.UpdateAsync(food, isSaveChange: true);
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

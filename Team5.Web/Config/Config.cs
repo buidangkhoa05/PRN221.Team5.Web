@@ -22,7 +22,7 @@ namespace Team5.Web.Config
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAnimalService, AnimalService>();
             services.AddScoped<ICageService, CageService>();
             services.AddScoped<ITrainerService, TrainerService>();

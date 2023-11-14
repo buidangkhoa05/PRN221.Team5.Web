@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace PRN221.Team5.Application.Service.Implement
 {
-    public interface IAuthService
+    public interface IAccountService
     {
         public Task<Account?> Login(string username, string password);
+        Task<PagedList<Account>> GetAll(PagingParameters pagingParam);
     }
 }

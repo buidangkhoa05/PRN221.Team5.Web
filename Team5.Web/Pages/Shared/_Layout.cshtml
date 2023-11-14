@@ -18,21 +18,39 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @* <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageAccount/Index">Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageAnimal/Index">Animal</a>
                         </li>
-                    </ul> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageAnimalSpec/Index">Animal Specie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageCage/Index">Cage</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageFood/Index">Food</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageTraineerProfile/Index">Traineer Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageZooNews/Index">Zoo News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ManageZooSection/Index">ZooSection</a>
+                        </li>
+                    </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <h1>Welcome: <b>@User.Identity.Name</b></h1>
                         <form method="post" asp-page="/auth" asp-page-handler="logout">
                             <button type="submit" class="btn">Logout</button>
                         </form>
-                    } 
+                    }
                 </div>
             </div>
         </nav>

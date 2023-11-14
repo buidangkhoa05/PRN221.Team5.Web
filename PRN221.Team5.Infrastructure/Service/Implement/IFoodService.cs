@@ -11,6 +11,8 @@ namespace PRN221.Team5.Application.Service.Implement
     {
         Task<PagedList<Food>> GetAll(PagingParameters pagingParam);
         Task Create(Food food);
-        Task<Food> GetFirtOrDefault(Guid id);
+        Task<Food> GetFirstOrDefault(Guid id);
+        Task<bool> Delete(Guid id);
+        Task<bool> Update(Food food);
     }
 }

@@ -19,43 +19,16 @@
             @Html.DisplayFor(model => model.Food.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Food.CreatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Food.CreatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Food.UpdatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Food.UpdatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Food.CreatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Food.CreatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Food.UpdatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Food.UpdatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Food.IsDeleted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Food.IsDeleted)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Food.Type)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Food.Type)
         </dd>
     </dl>
-    
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <h3 class="alert alert-danger" role="alert">@Model.ErrorMessage</h3>
+    }
     <form method="post">
         <input type="hidden" asp-for="Food.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
