@@ -14,31 +14,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AnimalSpecy[0].Name)
+                @Html.DisplayNameFor(model => model.AnimalSpecie[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnimalSpecy[0].Description)
+                @Html.DisplayNameFor(model => model.AnimalSpecie[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnimalSpecy[0].CreatedDate)
+                @Html.DisplayNameFor(model => model.AnimalSpecie[0].CreatedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnimalSpecy[0].UpdatedDate)
+                @Html.DisplayNameFor(model => model.AnimalSpecie[0].UpdatedDate)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.AnimalSpecie[0].CreatedBy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnimalSpecy[0].CreatedBy)
+                @Html.DisplayNameFor(model => model.AnimalSpecie[0].UpdatedBy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnimalSpecy[0].UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AnimalSpecy[0].IsDeleted)
-            </th>
+                @Html.DisplayNameFor(model => model.AnimalSpecie[0].IsDeleted)
+            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.AnimalSpecy) {
+@foreach (var item in Model.AnimalSpecie) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -52,7 +52,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedDate)
             </td>
-            <td>
+          @*  <td>
                 @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
             <td>
@@ -60,7 +60,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
+            </td>*@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
@@ -70,3 +70,27 @@
 }
     </tbody>
 </table>
+
+
+@* Paging *@
+<div class="btn-group">
+    @if (Model.HasPreviousPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
+    }
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.PageIndex)
+        {
+            <a class="btn btn-outline-dark disabled">@i</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
+        }
+    }
+    @if (Model.HasNextPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
+    }
+</div>

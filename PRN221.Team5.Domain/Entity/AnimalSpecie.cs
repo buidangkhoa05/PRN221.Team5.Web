@@ -11,7 +11,7 @@ namespace PRN221.Team5.Domain.Entity
     public class AnimalSpecie : BaseEntity
     {
         [Required]
-        [MinLength(5)]
+        [MinLength(1)]
         public string Name { get; set; }
         public string Description { get; set; }
 
