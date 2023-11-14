@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PRN221.Team5.Application.Service.Implement;
 using PRN221.Team5.Domain.Entity;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using Team5.Application.Repository;
@@ -14,16 +16,21 @@ namespace PRN221.Team5.Web.Pages.Auth
     [AllowAnonymous]
     public class LogInModel : PageModel
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IAuthService _authService;
 
         [BindProperty]
+        [Required]
+        [MinLength(5)]
         public string Username { get; set; }
-        [BindProperty]
-        public string Password { get; set; }
         
-        public LogInModel(IUnitOfWork unitOfWork)
+        [BindProperty]
+        [Required]
+        [MinLength(5)]
+        public string Password { get; set; }
+
+        public LogInModel(IAuthService authService)
         {
-            _unitOfWork = unitOfWork;
+            _authService = authService;
         }
 
         public void OnGet()
@@ -35,14 +42,8 @@ namespace PRN221.Team5.Web.Pages.Auth
         {
             try
             {
-                var queryHelper = new QueryHelper<Account>()
-                {
-                    Filter = x => x.Username == Username && x.Password == Password,
-                };
-
-                var user = (await _unitOfWork.Account.Get(queryHelper)).FirstOrDefault();
-
-                if (user == null)
+                var account = await _authService.Login(Username, Password);
+                if (account == null)
                 {
                     ModelState.AddModelError("invalid", "Username or password is incorrect");
                     return Page();
@@ -50,20 +51,18 @@ namespace PRN221.Team5.Web.Pages.Auth
                 else
                 {
                     var claims = new List<Claim>()
-                {
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Role, user.Role.ToString()),
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-                };
+                    {
+                        new Claim(ClaimTypes.Name, account.Username),
+                        new Claim(ClaimTypes.Role, account.Role.ToString()),
+                        new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())
+                    };
+
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
                     await HttpContext.SignInAsync(principal);
                 }
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception) {}
 
             return Page();
         }

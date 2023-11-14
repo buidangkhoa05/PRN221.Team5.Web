@@ -7,6 +7,8 @@ using Team5.Infrastructure.Repository;
 using PRN221.Team5.Domain.Entity;
 using Microsoft.AspNetCore.Identity;
 using System;
+using PRN221.Team5.Application.Service.Implement;
+using PRN221.Team5.Application.Service.Interface;
 
 namespace PRN221.Team5.Web.Configuration
 {
@@ -20,6 +22,8 @@ namespace PRN221.Team5.Web.Configuration
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+
+            services.AddScoped<IAuthService, AuthService>();
         }
 
 
