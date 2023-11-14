@@ -1,4 +1,5 @@
-﻿using PRN221.Team5.Domain.Entity;
+﻿using PRN221.Team5.Application.Service.Interface;
+using PRN221.Team5.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +86,19 @@ namespace Team5.Infrastructure.Repository
                     _cage = new GenericRepository<Cage>(_dbContext);
                 }
                 return _cage;
+            }
+        }
+
+        private IGenericRepository<TraineerProfile> _trainerProfile;
+        public IGenericRepository<TraineerProfile> TrainerProfile
+        {
+            get
+            {
+                if (_trainerProfile == null)
+                {
+                    _trainerProfile = new GenericRepository<TraineerProfile>(_dbContext);
+                }
+                return _trainerProfile;
             }
         }
 

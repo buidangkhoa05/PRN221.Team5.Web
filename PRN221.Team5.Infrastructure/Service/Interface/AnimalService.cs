@@ -23,7 +23,16 @@ namespace PRN221.Team5.Application.Service.Interface
             {
                 var queryHelper = new QueryHelper<Animal>()
                 {
-                    PagingParams = pagingParam
+                    PagingParams = pagingParam,
+                    OrderByFields = new string[]
+                    {
+                        "CreatedDate:desc"
+                    },
+
+                    Include = t => t.Include(a => a.Specie)
+                                    .Include(a => a.AnimalTrainings)
+                                        .ThenInclude(a => a.Trainer)
+                                            .ThenInclude(a => a.Account)
                 };
 
                 var animals = await _unitOfWork.Animal.GetWithPagination(queryHelper);

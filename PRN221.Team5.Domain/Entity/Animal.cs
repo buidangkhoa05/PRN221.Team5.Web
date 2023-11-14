@@ -26,7 +26,7 @@ namespace PRN221.Team5.Domain.Entity
         public float Age { get; set; }
         public Gender Gender { get; set; }
         public bool IsHerd { get; set; } //is herd animal
-
+        public DateTime Dob { get; set; } = DateTime.Now.AddYears(-1);
         [Required]
         public Guid SpecieId { get; set; }
         public virtual AnimalSpecie Specie { get; set; }

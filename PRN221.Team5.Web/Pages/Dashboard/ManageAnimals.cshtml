@@ -103,14 +103,11 @@
                             ID
                         </th>
                         <th class="font-medium text-black dark:text-white xl:pl-11">
-
                             Animal name
                         </th>
                         <th class="font-medium text-black dark:text-white xl:pl-11">
-
                             Species
                         </th>
-
                         <th class=" font-medium text-black dark:text-white">
                             Cage ID
                         </th>
@@ -123,118 +120,122 @@
                         <th class=" font-medium text-black dark:text-white">
                             Height
                         </th>
-                        <th class=" font-medium text-black dark:text-white">
-                            Size
-                        </th>
+                        @*   <th class=" font-medium text-black dark:text-white">
+                        Size
+                        </th> *@
                         <th class=" font-medium text-black dark:text-white">
                             Age
                         </th>
                         <th class=" font-medium text-black dark:text-white">
                             Is Herd
                         </th>
-
-
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr class="hover:bg-gray-3 dark:hover:bg-meta-4">
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1">
-                                animal id
-                            </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1">
-                                Animal name
-                            </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1 px-2">
-                                Species
-                            </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1 px-2">
-                                Cage ID
-                            </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1 px-2">
-                                Weight
-                            </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1 px-2">
-                                Height
-                            </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1 px-2">
-                                Size
-                            </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <p class="text-black dark:text-white line-clamp-1 px-2">
-                                Age
-                            </p>
-                        </td>
-
-
-                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                            <p class="line-clamp-1 inline-flex text-center rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium text-success">
-                                yess
-                            </p>
-                        </td>
-                    </tr>
-
-
+                    @if (Model.Animals is not null)
+                    {
+                        @foreach (var animal in Model.Animals)
+                        {
+                            <tr class="hover:bg-gray-3 dark:hover:bg-meta-4">
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1">
+                                        @animal.Id
+                                    </p>
+                                </td>
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1">
+                                        @animal.Name
+                                    </p>
+                                </td>
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1 px-2">
+                                        @animal.Specie.Name
+                                    </p>
+                                </td>
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1 px-2">
+                                        @(animal.AnimalTrainings?.FirstOrDefault(t => t.IsTraining == true)?.Trainer?.Account?.Fullname ?? "");
+                                    </p>
+                                </td>
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1 px-2">
+                                        @(animal.Cage_Animals?.Where(t => t.ToDate == null)?.First()?.CageId ?? Guid.Empty);
+                                    </p>
+                                </td>
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1 px-2">
+                                        @animal.Weight
+                                    </p>
+                                </td>
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1 px-2">
+                                        @animal.Height
+                                    </p>
+                                </td>
+                                @*  <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                        <p class="text-black dark:text-white line-clamp-1 px-2">
+                        @animal.Size
+                        </p>
+                        </td> *@
+                                <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p class="text-black dark:text-white line-clamp-1 px-2">
+                                        @animal.Age
+                                    </p>
+                                </td>
+                                <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                                    <p class="line-clamp-1 inline-flex text-center rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium text-success">
+                                        @(animal.IsHerd == true ? "Yes" : "No")
+                                    </p>
+                                </td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
-            <nav class="paging_simple_numbers" aria-label="Page navigation example">
-                <ul class="inline-flex -space-x-px text-sm">
-                    @if (Model.Animals.HasPrevious)
-                    {
-                        <li>
-                            <a asp-page="Index" asp-route-pageindex="@(Model.Animals.CurrentPage - 1)" class="paginate_button">
-                                Previous
-                            </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a href="#" class="disable paginate_button flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                Previous
-                            </a>
-                        </li>
-                    }
-                    @for (int i = 1; i <= Model.Animals.TotalPages; i++)
-                    {
-                        @if (i == Model.Animals.CurrentPage)
-                        {
-                            <li>
-                                @*  <a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">@i</a> *@
-                                <a class="disabled paginate_button" asp-page="Index" asp-route-pageindex="@i">@i</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a class="paginate_button" asp-page="Index" asp-route-pageindex="@i">@i</a>
-                            </li>
-                        }
-                    }
-                    @if (Model.Animals.HasNext)
-                    {
-                        <li>
-                            <a class="paginate_button" asp-page="Index" asp-route-pageindex="@(Model.Animals.CurrentPage + 1)">
-                                Next
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </nav>
+            @*    <nav class="paging_simple_numbers" aria-label="Page navigation example">
+            <ul class="inline-flex -space-x-px text-sm">
+            @if (Model.Animals.HasPrevious)
+            {
+            <li>
+            <a asp-page="Index" asp-route-pageindex="@(Model.Animals.CurrentPage - 1)" class="paginate_button">
+            Previous
+            </a>
+            </li>
+            }
+            else
+            {
+            <li>
+            <a href="#" class="disable paginate_button flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            Previous
+            </a>
+            </li>
+            }
+            @for (int i = 1; i <= Model.Animals.TotalPages; i++)
+            {
+            @if (i == Model.Animals.CurrentPage)
+            {
+            <li>
+
+            <a class="disabled paginate_button" asp-page="Index" asp-route-pageindex="@i">@i</a>
+            </li>
+            }
+            else
+            {
+            <li>
+            <a class="paginate_button" asp-page="Index" asp-route-pageindex="@i">@i</a>
+            </li>
+            }
+            }
+            @if (Model.Animals.HasNext)
+            {
+            <li>
+            <a class="paginate_button" asp-page="Index" asp-route-pageindex="@(Model.Animals.CurrentPage + 1)">
+            Next
+            </a>
+            </li>
+            }
+            </ul>
+            </nav> *@
         </div>
 
     </div>
