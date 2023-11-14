@@ -17,6 +17,7 @@ namespace Team5.Infrastructure.DBContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(GetConnectionString());
+            // optionsBuilder.UseSqlServer("Server=localhost;Database=ZooManagement;User Id=sa;Password=.mNhithien;TrustServerCertificate=true;");
             base.OnConfiguring(optionsBuilder);
         }
 

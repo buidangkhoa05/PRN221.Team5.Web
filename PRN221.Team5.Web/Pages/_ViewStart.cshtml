@@ -7,6 +7,9 @@
     {
         Layout = "~/Pages/Shared/Views/_SignUpLayout.cshtml";
     }
+    else if (Context.Request.Path == "/News"){
+        Layout = "~/Pages/Shared/Views/_NewsLayout.cshtml";
+    }
     else
     {
         Layout = "~/Pages/Shared/Views/_Layout.cshtml";
