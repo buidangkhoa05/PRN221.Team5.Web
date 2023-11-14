@@ -48,8 +48,16 @@ namespace Team5.Web.Pages.ManageZooSection
             {
                 return NotFound();
             }
-            Expression<Func<ZooSection, bool>> filter = x => x.Id == id;
-            await _unitOfWork.ZooSection.DeleteAsync(filter);
+            try
+            {
+
+                Expression<Func<ZooSection, bool>> filter = x => x.Id == id;
+                await _unitOfWork.ZooSection.DeleteAsync(filter);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToPage("./CanNot", new { id, saveChangesError = true });
+            }
 
             return RedirectToPage("./Index");
         }

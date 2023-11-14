@@ -35,14 +35,28 @@ namespace Team5.Web.Pages.ManageZooSection
                 return NotFound();
             }
             ZooSection = zoosection;
+            var optionsList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "Available" },
+                new SelectListItem { Value = "1", Text = "Unavailabe" },
+            };
+            ViewData["status"] = new SelectList(optionsList, "Value", "Text");
             return Page();
         }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             ZooSection.UpdatedDate = DateTime.Now;
+
+            Cage? cage = await _unitOfWork.Cage.GetFirstOrDefaultAsync(x => x.ZooSectionId == ZooSection.Id);
+            if (cage != null && ZooSection.ZooSectionStatus == ZooSectionStatus.Unavailable)
+            {
+                ModelState.AddModelError("ZooSection.ZooSectionStatus",
+                    "This section is already used by cage.");
+                return await OnGetAsync(ZooSection.Id);
+            }
+
             await _unitOfWork.ZooSection.UpdateAsync(ZooSection, true);
 
             return RedirectToPage("./Index");

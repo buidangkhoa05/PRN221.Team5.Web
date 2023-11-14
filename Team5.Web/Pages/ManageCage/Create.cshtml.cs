@@ -25,6 +25,14 @@ namespace Team5.Web.Pages.ManageCage
             var ZooSection = (await _unitOfWork.ZooSection.Get()).ToList();
             ViewData["AnimalSpecie"] = new SelectList(AnimalSpecies, "Id", "Name");
             ViewData["ZooSection"] = new SelectList(ZooSection, "Id", "Name");
+
+            var optionsList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "Available" },
+                new SelectListItem { Value = "1", Text = "Unavailabe" },
+            };
+            ViewData["status"] = new SelectList(optionsList, "Value", "Text");
+
             return Page();
         }
 
@@ -65,9 +73,10 @@ namespace Team5.Web.Pages.ManageCage
                 Guid isSuccess = await _unitOfWork.Cage.CreateAsync(new Cage
                 {
                     NumberCage = Cage.NumberCage,
-
+                    Capacity = Cage.Capacity,
                     ZooSectionId = Cage.ZooSectionId,
                     AnimalSpecieId = Cage.AnimalSpecieId,
+                    Status = Cage.Status,
                     CreatedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,
                 }, true);

@@ -1,0 +1,14 @@
+﻿@page
+@model Team5.Web.Pages.ManageCage.CanNotModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Unsuccessful</h1>
+<h2 class="text-danger">
+    This Cage is already used.
+</h2>
+<button><a asp-page="/ManageCage/Index">Back to List</a></button>

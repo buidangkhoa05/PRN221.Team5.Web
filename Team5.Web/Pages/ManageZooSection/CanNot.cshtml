@@ -1,0 +1,15 @@
+﻿@page
+@model Team5.Web.Pages.ManageZooSection.CanNotModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Unsuccessful</h1>
+<h2 class="text-danger">
+    @*can't delete this section because there are cages in this section .*@
+    This section is already used by cage.
+</h2>
+<button><a asp-page="/ManageZooSection/Index">Back to List</a></button>

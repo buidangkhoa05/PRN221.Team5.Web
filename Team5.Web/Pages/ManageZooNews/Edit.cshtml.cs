@@ -6,73 +6,54 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageZooNews
 {
     public class EditModel : PageModel
     {
-        //private readonly Domain1.ZooManagementContext _context;
-
-        //public EditModel(Domain1.ZooManagementContext context)
-        //{
-        //    _context = context;
-        //}
+        private readonly IUnitOfWork _unitOfWork;
+        public EditModel(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         [BindProperty]
         public ZooNews ZooNews { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-           // if (id == null || _context.ZooNews == null)
-           // {
-           //     return NotFound();
-           // }
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
 
-           // var zoonews =  await _context.ZooNews.FirstOrDefaultAsync(m => m.Id == id);
-           // if (zoonews == null)
-           // {
-           //     return NotFound();
-           // }
-           // ZooNews = zoonews;
-           //ViewData["OwnerId"] = new SelectList(_context.Accounts, "Id", "Email");
+            var item = await _unitOfWork.ZooNews.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            ZooNews = item;
+            var AnimalSpecies = (await _unitOfWork.AnimalSpecie.Get()).ToList();
+            var ZooSection = (await _unitOfWork.ZooSection.Get()).ToList();
+            ViewData["AnimalSpecieId"] = new SelectList(AnimalSpecies, "Id", "Name");
+            ViewData["ZooSectionId"] = new SelectList(ZooSection, "Id", "Name");
             return Page();
         }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            //_context.Attach(ZooNews).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!ZooNewsExists(ZooNews.Id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            ZooNews.UpdatedDate = DateTime.Now;
+            await _unitOfWork.ZooNews.UpdateAsync(ZooNews, true);
 
             return RedirectToPage("./Index");
         }
-
         private bool ZooNewsExists(Guid id)
         {
-            //return (_context.ZooNews?.Any(e => e.Id == id)).GetValueOrDefault();
-            return true;
+            //return (_context.ZooNewss?.Any(e => e.Id == id)).GetValueOrDefault();
+            return false;
         }
     }
 }

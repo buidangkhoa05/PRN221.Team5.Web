@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Team5.Application.Repository;
+using Team5.Domain.Common;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageCage
@@ -37,7 +38,12 @@ namespace Team5.Web.Pages.ManageCage
             }
             else
             {
-                Cage = item;
+                var itemWithInclude = (await _unitOfWork.Cage.Get(new QueryHelper<Cage>()
+                {
+                    Filter = t => t.Id == id,
+                    Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
+                })).ToList();
+                Cage = itemWithInclude[0];
             }
             return Page();
         }
@@ -48,8 +54,16 @@ namespace Team5.Web.Pages.ManageCage
             {
                 return NotFound();
             }
+            try
+            {
+
             Expression<Func<Cage, bool>> filter = x => x.Id == id;
             await _unitOfWork.Cage.DeleteAsync(filter);
+            }
+            catch
+            {
+                return RedirectToPage("./CanNot");
+            }
 
             return RedirectToPage("./Index");
         }

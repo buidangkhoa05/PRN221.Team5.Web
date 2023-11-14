@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Team5.Application.Repository;
 using Team5.Domain.Common;
 using Team5.Infrastructure.Repository;
@@ -22,6 +23,17 @@ namespace Team5.Web.Pages.ManageZooSection
 		{
 			_unitOfWork = unitOfWork;
 		}
+
+        public IActionResult OnGet()
+        {
+            var optionsList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "Available" },
+                new SelectListItem { Value = "1", Text = "Unavailabe" },
+            };
+            ViewData["status"] = new SelectList(optionsList, "Value", "Text");
+            return Page();
+        }
 
         [BindProperty]
         public ZooSection ZooSection { get; set; } = default!;

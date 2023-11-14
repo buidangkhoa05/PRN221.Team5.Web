@@ -5,37 +5,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageZooNews
 {
     public class DetailsModel : PageModel
     {
-        //private readonly Domain1.ZooManagementContext _context;
-
-        //public DetailsModel(Domain1.ZooManagementContext context)
-        //{
-        //    _context = context;
-        //}
-
-      public ZooNews ZooNews { get; set; } = default!; 
-
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        private readonly IUnitOfWork _unitOfWork;
+        public DetailsModel(IUnitOfWork unitOfWork)
         {
-            //if (id == null || _context.ZooNews == null)
-            //{
-            //    return NotFound();
-            //}
+            _unitOfWork = unitOfWork;
+        }
 
-            //var zoonews = await _context.ZooNews.FirstOrDefaultAsync(m => m.Id == id);
-            //if (zoonews == null)
-            //{
-            //    return NotFound();
-            //}
-            //else 
-            //{
-            //    ZooNews = zoonews;
-            //}
+        public ZooNews ZooNews { get; set; } = default!;
+
+        public async Task<IActionResult> OnGetAsync(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
+
+            var item = await _unitOfWork.ZooNews.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                ZooNews = item;
+            }
             return Page();
         }
     }
