@@ -14,17 +14,17 @@ namespace PRN221.Team5.Domain.Entity
         [MinLength(5)]
         public string Title { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = "Description";
 
         [Required]
         [MinLength(10)]
         public string Content { get; set; }
 
-        public string ImageLink { get; set; }
+        public string ImageLink { get; set; } = "image";
 
-        public Guid OwnerId { get; set; }
+        public Guid OwnerId { get; set; } = Guid.Parse("2ae8ab59-f77b-4c67-b640-1065bf650908");
 
-        public virtual Account Owner { get; set; }
+        public virtual Account? Owner { get; set; }
 
     }
 }
