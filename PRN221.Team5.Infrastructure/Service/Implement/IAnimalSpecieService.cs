@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace PRN221.Team5.Application.Service.Implement
 {
-    public interface IAnimalService
+    public interface IAnimalSpecieService
     {
-        Task<PagedList<Animal>> GetAll(PagingParameters pagingParam);
-        Task<Guid> Create(Animal animal);
+        Task<List<AnimalSpecie>> GetAll();
     }
 }

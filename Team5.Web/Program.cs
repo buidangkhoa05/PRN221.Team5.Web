@@ -1,4 +1,8 @@
+using Autofac.Core;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using Team5.Web.Config;
 
 namespace Team5.Web
@@ -10,7 +14,20 @@ namespace Team5.Web
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Authen", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                });
+            });
+
+            builder.Services.AddRazorPages(options =>
+            {
+                //options.Conventions.AuthorizePage("/Index", "Authen");
+                //options.Conventions.AuthorizeFolder("/", "Authen");
+                //options.Conventions.AuthorizeFolder("/ManageAnimal", "Authen");
+            });
 
             builder.Services.AddSession(options =>
             {
@@ -23,7 +40,7 @@ namespace Team5.Web
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
 
-                options.LoginPath = "/Auth/Login";
+                options.LoginPath = "/Auth";
                 options.AccessDeniedPath = "/Auth/AccessDenied";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 options.SlidingExpiration = true;
@@ -31,6 +48,13 @@ namespace Team5.Web
             });
 
             //builder.Services.AddDbContext();
+            //builder.Services.AddMvc(options =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder()
+            //        .RequireAuthenticatedUser()
+            //        .Build();
+            //    options.Filters.Add(new AuthorizeFilter(policy));
+            //});
 
             builder.Services.AddServices();
 

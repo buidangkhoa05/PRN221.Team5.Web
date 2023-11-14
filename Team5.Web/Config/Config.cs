@@ -26,6 +26,9 @@ namespace Team5.Web.Config
             services.AddScoped<IAnimalService, AnimalService>();
             services.AddScoped<ICageService, CageService>();
             services.AddScoped<ITrainerService, TrainerService>();
+            services.AddScoped<IAnimalSpecieService, AnimalSpecieService>();
+            services.AddScoped<IFoodService, FoodService>();
+
         }
 
 

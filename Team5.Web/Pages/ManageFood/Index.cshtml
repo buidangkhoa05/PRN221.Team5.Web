@@ -14,36 +14,37 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Food[0].Name)
+                @Html.DisplayNameFor(model => model.Foods[0].Name)
+            </th>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.Foods[0].CreatedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Food[0].CreatedDate)
+                @Html.DisplayNameFor(model => model.Foods[0].UpdatedDate)
+            </th> *@
+            @* <th>
+                @Html.DisplayNameFor(model => model.Foods[0].CreatedBy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Food[0].UpdatedDate)
-            </th>
+                @Html.DisplayNameFor(model => model.Foods[0].UpdatedBy)
+            </th> *@
+            @* <th>
+                @Html.DisplayNameFor(model => model.Foods[0].IsDeleted)
+            </th> *@
             <th>
-                @Html.DisplayNameFor(model => model.Food[0].CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Food[0].UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Food[0].IsDeleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Food[0].Type)
+                @Html.DisplayNameFor(model => model.Foods[0].Type)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Food) {
+        @foreach (var item in Model.Foods)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+           @*  <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
@@ -54,10 +55,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
-            <td>
+            </td> *@
+            @* <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
@@ -70,3 +71,24 @@
 }
     </tbody>
 </table>
+<div class="btn-group">
+    @if (Model.Foods.HasPrevious)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.Foods.CurrentPage - 1)">Previous</a>
+    }
+    @for (int i = 1; i <= Model.Foods.TotalPages; i++)
+    {
+        if (i == Model.Foods.CurrentPage)
+        {
+            <a class="btn btn-outline-dark disabled">@i</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
+        }
+    }
+    @if (Model.Foods.HasNext)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.Foods.CurrentPage + 1)">Next</a>
+    }
+</div>

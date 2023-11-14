@@ -5,17 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PRN221.Team5.Application.Service.Implement;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageFood
 {
     public class CreateModel : PageModel
     {
-        private readonly DbContext _context;
+        private readonly IFoodService _foodService;
 
-        public CreateModel()
+        public CreateModel(IFoodService foodService)
         {
-            //_context = context;
+            _foodService = foodService;
         }
 
         public IActionResult OnGet()
@@ -30,13 +31,7 @@ namespace Team5.Web.Pages.ManageFood
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          //if (!ModelState.IsValid || _context.Foods == null || Food == null)
-          //  {
-          //      return Page();
-          //  }
-
-          //  _context.Foods.Add(Food);
-          //  await _context.SaveChangesAsync();
+            var createResult = _foodService.Create(Food);
 
             return RedirectToPage("./Index");
         }

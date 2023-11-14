@@ -22,6 +22,8 @@ namespace Team5.Application.Repository
         IGenericRepository<ZooSection> ZooSection { get; }
         IGenericRepository<Cage> Cage { get; }
         IGenericRepository<TraineerProfile> TrainerProfile { get; }
+        IGenericRepository<AnimalSpecie> AnimalSpecie { get; }
+        IGenericRepository<Food> Food { get; }
         #endregion Repository
     }
 }

@@ -17,7 +17,7 @@ namespace PRN221.Team5.Application.Service.Interface
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PagedList<Animal>?> GetAll(PagingParameters pagingParam)
+        public async Task<PagedList<Animal>> GetAll(PagingParameters pagingParam)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace PRN221.Team5.Application.Service.Interface
 
                 var animals = await _unitOfWork.Animal.GetWithPagination(queryHelper);
 
-                return animals;
+                return animals ?? new PagedList<Animal>();
             }
             catch (Exception)
             {
