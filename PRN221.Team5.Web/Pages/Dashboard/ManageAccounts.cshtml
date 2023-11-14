@@ -2,58 +2,61 @@
 @using PRN221.Team5.Domain.Entity;
 @model PRN221.Team5.Web.Pages.Dashboard.ManageAccount
 @{
-    ViewData["Title"] = "Manage Account";
+	ViewData["Title"] = "Manage Account";
 }
 
-<div x-data="{'add':false, 'edit': false }" x-init="dataTable = $('#table_accounts').DataTable({
+
+
+<div x-data="{'add':false, 'edit': false, 'remove': false }" x-init="dataTable = $('#table_accounts').DataTable({
     'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']],
     'responsive': true,
     'ordering': false,
 })">
 
-    <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+	<div class="mx-auto p-4 md:p-6 2xl:p-10">
+		<div
+			class="bg-white block sm:flex items-center justify-between lg:mt-1.5 dark:bg-graydark/80 dark:border-graydark/60">
+			<nav class="flex mb-5" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+					<li class="inline-flex items-center">
+						<a href="#"
+							class="inline-flex items-center text-graydark/60 hover:text-primary-600 dark:text-gray dark:hover:text-white">
+							<svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+								</path>
+							</svg>
+							Dashboard
+						</a>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray" fill="currentColor" viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd"
+									d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+									clip-rule="evenodd"></path>
+							</svg>
+							<a href="#"
+								class="ml-1 text-graydark/60 hover:text-primary-600 md:ml-2 dark:text-gray dark:hover:text-white">Accounts</a>
+						</div>
+					</li>
 
-        <div class="bg-white block sm:flex items-center justify-between lg:mt-1.5 dark:bg-graydark/80 dark:border-graydark/60">
-
-            <nav class="flex mb-5" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-                    <li class="inline-flex items-center">
-                        <a href="#"
-                           class="inline-flex items-center text-graydark/60 hover:text-primary-600 dark:text-gray dark:hover:text-white">
-                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-                                </path>
-                            </svg>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-gray" fill="currentColor" viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                            <a href="#"
-                               class="ml-1 text-graydark/60 hover:text-primary-600 md:ml-2 dark:text-gray dark:hover:text-white">Accounts</a>
-                        </div>
-                    </li>
-
-                </ol>
-            </nav>
+				</ol>
+			</nav>
 
 
-        </div>
+		</div>
 
-        <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+		<div
+			class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
 
-            <div class="flex w-full justify-between my-4">
-                <h3 class="mb-6 text-xl font-bold text-black dark:text-white">
-                    All Accounts
-                </h3>
-                <div class="flex flex-row gap-2">
+			<div class="flex w-full justify-between my-4">
+				<h3 class="mb-6 text-xl font-bold text-black dark:text-white">
+					All Accounts
+				</h3>
+				<div class="flex flex-row gap-2">
 
 					<button id="add-account-btn" onclick="add_account_modal.showModal()"
 						class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
@@ -67,7 +70,7 @@
 						</span>
 						Add New
 					</button>
-					<button  id="edit-account-btn" onclick="edit_account_modal.showModal()"
+					<button  id="edit-account-btn"  onclick="edit_account_modal.showModal()"
 						class="disabled:bg-graydark/20 disabled:text-graydark/30 rounded-xl inline-flex items-center justify-center gap-2.5 bg-graydark/40 h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
 						<span>
 							<svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="18"
@@ -92,12 +95,10 @@
 								<path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z" />
 								<path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z" />
 							</svg>
-
-
-
 						</span>
 						Remove
 					</button>
+
 
 				</div>
 			</div>
@@ -106,94 +107,70 @@
 				<thead>
 					<tr class="bg-gray-2 text-left dark:bg-meta-4">
 						<th class="font-medium text-black dark:text-white xl:pl-11">
+							Full Name
+						</th>
+						<th class="max-w-[200px] font-medium text-black dark:text-white xl:pl-11">
+							Email
+						</th>
 
-							Name
+						<th class=" font-medium text-black dark:text-white">
+							Role
 						</th>
-						<th class=" font-medium text-black dark:text-white xl:pl-11">
-							Position
+						<th class=" font-medium text-black dark:text-white text-center">
+							Date of birth
 						</th>
-						<th class="font-medium text-black dark:text-white text-center">
+						<th class=" font-medium text-black dark:text-white text-center">
 							Phone number
 						</th>
-						<th class=" font-medium text-black dark:text-white">
-							Age
-						</th>
-						<th class=" font-medium text-black dark:text-white">
-							Status
-						</th>
-						<th class="font-medium text-black dark:text-white text-center">
-							Create date
-						</th>
-						<th class="font-medium text-black dark:text-white text-center">
-							Create by
-						</th>
-						<th class="font-medium text-black dark:text-white text-center">
-							Update date
-						</th>
-						<th class="font-medium text-black dark:text-white text-center">
-							Update by
-						</th>
+						
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var account in Model.Accounts)
-                    {
-                        <tr class="hover:bg-gray-3 dark:hover:bg-meta-4">
-                            <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                                <div class="flex items-center gap-2">
-                                    <div class="relative h-12 w-12 rounded-full">
-                                        <img asp-append-version="true" src="~/images/user/user-03.png" alt="User" />
-                                    </div>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var acc in Model.Accounts)
+					{
+						<tr x-data="{ postStatus: '{{ post.Status }}' }" class="hover:bg-gray-3 dark:hover:bg-meta-4">
+							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+								<p class="text-black dark:text-white line-clamp-1 text-center ">
+									@acc.Fullname
+								</p>
+							</td>
+							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+								<p class="text-black dark:text-white line-clamp-3 text-left ">
+									@acc.Email
+								</p>
+							</td>
+							<td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+								<p class="text-black dark:text-white line-clamp-3 text-left ">
+									@acc.Role
+								</p>
+							</td>
 
-                                    <div class="flex flex-col items-start justify-center ">
-                                        <h5 class="font-medium text-black dark:text-white line-clamp-1 ">
-                                            @account.Fullname
-                                        </h5>
-                                        <p class="text-xs font-medium text-black dark:text-white">
-                                            @account.Email
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                                <p class="text-black dark:text-white line-clamp-1 text-center ">
-                                    @account.Role
-                                </p>
-                            </td>
-                            <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark ">
-                                <p class="text-black dark:text-white text-center line-clamp-1">@account.PhoneNumber</p>
-                            </td>
-                            <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                <p class="text-black dark:text-white text-center line-clamp-1">@account.DateOfBirth</p>
-                            </td>
-                            <td class=" border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                <p class="line-clamp-1 text-black dark:text-white text-center">@account.CreatedDate</p>
-                            </td>
-                            <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                <p class="line-clamp-1 text-black dark:text-white text-center">@account.CreatedBy</p>
-                            </td>
-                            <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                <p class="line-clamp-1 text-black dark:text-white text-center">@account.UpdatedDate</p>
-                            </td>
-                            <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                <p class="line-clamp-1 text-black dark:text-white text-center">@account.UpdatedBy</p>
-                            </td>
+							<td class=" border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+								<p class="line-clamp-1 text-black dark:text-white text-left ">@acc.DateOfBirth</p>
+							</td>
+							<td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+								<p class="line-clamp-1 text-black dark:text-white text-left ">@acc.PhoneNumber</p>
+							</td>
+						
 
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+						</tr>
+					}
 
-    </div>
+				</tbody>
+			</table>
+		</div>
 
-	<!-- Add User Modal -->
+	</div>
+	<!-- Add New Modal -->
 	@await Html.PartialAsync("../Shared/Partials/Modal/Accounts/_ModalAddAccount.cshtml")
-	<!-- Edit User Modal -->
+	
+	<!-- Edit New Modal -->
 	@await Html.PartialAsync("../Shared/Partials/Modal/Accounts/_ModalEditAccount.cshtml")
-	<!-- Delete User Modal -->
+
+	<!-- Remove New Modal -->
 	@await Html.PartialAsync("../Shared/Partials/Modal/Accounts/_ModalRemoveAccount.cshtml")
+
 </div>
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
@@ -206,9 +183,9 @@
 			const row = $(this);
 			console.log(table.row(this).data());
 
-            if (selectedRow !== null) {
-                selectedRow.removeClass('selected');
-            }
+			if (selectedRow !== null) {
+				selectedRow.removeClass('selected');
+			}
 
 
 			if (!row.hasClass('selected')) {
