@@ -98,7 +98,6 @@ namespace PRN221.Team5.Web.Pages.Dashboard
             }
             catch
             {
-                return Page();
             }
 
 

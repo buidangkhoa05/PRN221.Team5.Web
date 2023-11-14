@@ -102,6 +102,19 @@ namespace Team5.Infrastructure.Repository
             }
         }
 
+        private IGenericRepository<AnimalSpecie> _animalSpecie;
+        public IGenericRepository<AnimalSpecie> AnimalSpecie
+        {
+            get
+            {
+                if (_animalSpecie == null)
+                {
+                    _animalSpecie = new GenericRepository<AnimalSpecie>(_dbContext);
+                }
+                return _animalSpecie;
+            }
+        }
+
         #endregion Repository
 
 

@@ -21,7 +21,14 @@ namespace PRN221.Team5.Application.Service.Interface
         {
             try
             {
-                var cages = await _unitOfWork.Cage.Get(new QueryHelper<Cage>());
+                var cages = await _unitOfWork.Cage.Get(new QueryHelper<Cage>()
+                {
+                    OrderByFields = new List<string>
+                    {
+                        $"{nameof(Cage.UpdatedDate)}:desc"
+                    }.ToArray(),
+                    Include = t => t.Include(a => a.ZooSection).Include(a => a.AnimalSpecie)
+                });
                 return cages.ToList();
             }
             catch (Exception)

@@ -56,27 +56,15 @@
                         <div class="col-span-4 sm:col-span-2">
                             <label for="section"
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Section</label>
-                            <select id="section"
-                                class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-
-                                <option value="Section1">Section1</option>
-                                <option value="Section2">Section2</option>
-                                <option value="Section3">Section3</option>
-
-
+                            <select asp-items="ViewBag.Sections" id="status"
+                                    class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
                             </select>
                         </div>
                         <div class="col-span-4 sm:col-span-2">
                             <label for="status"
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Status</label>
-                            <select id="status"
-                                class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-
-                                <option value="status1">status1</option>
-                                <option value="status2">status2</option>
-                                <option value="status3">status3</option>
-
-
+                            <select asp-items="ViewBag.AnimalSpecie" id="status"
+                                    class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
                             </select>
                         </div>
 
@@ -91,7 +79,6 @@
                     <div class="items-center flex justify-center rounded-b dark:border-graydark/60 my-4">
                         <button type="submit"
                             class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
-
                             Submit
                         </button>
                     </div>

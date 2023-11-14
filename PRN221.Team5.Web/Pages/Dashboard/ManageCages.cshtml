@@ -104,65 +104,93 @@
 				</div>
 			</div>
 
-			<table id="table_cages" class="w-full table-auto">
+			<table id="table_cages" class="w-full table-fixed">
 				<thead>
 					<tr class="bg-gray-2 text-left dark:bg-meta-4">
-						<th class="font-medium text-black dark:text-white xl:pl-11">
-
+						<th class="w-0 font-medium text-black dark:text-white xl:pl-11 collapse">
 							ID
 						</th>
-						<th class="font-medium text-black dark:text-white xl:pl-11">
-
-							Section
+@* 						<th class="font-medium text-black dark:text-white xl:pl-11">
+							#
+						</th>
+ *@						<th class="font-medium text-black dark:text-white xl:pl-11">
+							Number Cage
 						</th>
 						<th class="font-medium text-black dark:text-white xl:pl-11">
-
-							Total animal
+							Capacity
 						</th>
 						<th class="font-medium text-black dark:text-white xl:pl-11">
-
-							Capity
+							Status
 						</th>
 						
 						<th class=" font-medium text-black dark:text-white">
-							Status
+							Zoo Section
+						</th>
+						<th class=" font-medium text-black dark:text-white">
+							Animal Species
+						</th>
+						<th class=" font-medium text-black dark:text-white">
+							Created Date
+						</th>
+						<th class=" font-medium text-black dark:text-white">
+							Updated Date
 						</th>
 						
 
 					</tr>
 				</thead>
 				<tbody>
-					
+					@foreach (var newItem in Model.Cages.Select((value, i) => new { i, value })) {
 						<tr class="hover:bg-gray-3 dark:hover:bg-meta-4">
-							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+							<td class="w-0 collapse border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
 								<p class="text-black dark:text-white line-clamp-1">
-									Cage id
+									@newItem.value.Id
 								</p>
 							</td>
-							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+@* 							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
 								<p class="text-black dark:text-white line-clamp-1">
-									section name
+									@newItem.i
+								</p>
+							</td>
+ *@							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+								<p class="text-black dark:text-white line-clamp-1">
+									@newItem.value.NumberCage
 								</p>
 							</td>
 							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
 								<p class="text-black dark:text-white line-clamp-1 px-2">
-									10
+									@newItem.value.Capacity
 								</p>
 							</td>
-							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-								<p class="text-black dark:text-white line-clamp-1 px-2">
-									20
-								</p>
-							</td>
-							
 							<td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
 								<p
 									class="line-clamp-1 inline-flex text-center rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium text-success">
-									cage.Status
+									@newItem.value.Status
+								</p>
+							</td>
+							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+								<p class="text-black dark:text-white line-clamp-1 px-2">
+									@newItem.value.ZooSection.Name
+								</p>
+							</td>
+							
+							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+								<p class="text-black dark:text-white line-clamp-1 px-2">
+									@newItem.value.AnimalSpecie.Name
+								</p>
+							</td>
+							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+								<p class="text-black dark:text-white line-clamp-1 px-2">
+									@newItem.value.CreatedDate
+								</p>
+							</td>
+							<td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+								<p class="text-black dark:text-white line-clamp-1 px-2">
+									@newItem.value.UpdatedDate
 								</p>
 							</td>
 						</tr>
-					
+					}
 
 				</tbody>
 			</table>
