@@ -1,0 +1,108 @@
+﻿@page
+@model Team5.Web.Pages.ManageAnimal.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].IsHerd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Specie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Animal) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsHerd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specie.Description)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

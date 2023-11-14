@@ -10,5 +10,6 @@ namespace PRN221.Team5.Application.Service.Implement
     public interface IAnimalService
     {
         Task<PagedList<Animal>?> GetAll(PagingParameters pagingParam);
+        Task<Guid> Create(Animal animal);
     }
 }

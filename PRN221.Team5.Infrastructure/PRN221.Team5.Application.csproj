@@ -23,11 +23,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\PRN221.Team5.Domain\PRN221.Team5.Domain.csproj" />
+	  <Folder Include="Configuration\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Configuration\" />
+	  <ProjectReference Include="..\PRN221.Team5.Domain\PRN221.Team5.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -32,4 +32,10 @@
 		<UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <Folder Include="Pages\Dashboard2\ManageAnimal\" />
+	  <Folder Include="Pages\Dashboard\AnimalPage\" />
+	</ItemGroup>
+
 </Project>

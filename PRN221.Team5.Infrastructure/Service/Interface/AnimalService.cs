@@ -44,5 +44,20 @@ namespace PRN221.Team5.Application.Service.Interface
                 return null;
             }
         }
+
+        public async Task<Guid> Create(Animal animal)
+        {
+            try
+            {
+                animal.CreatedBy = "System";
+
+                var result = await _unitOfWork.Animal.CreateAsync(animal, isSaveChange: true);
+                return result;
+            }
+            catch (Exception)
+            {
+                return Guid.Empty;
+            }
+        }
     }
 }

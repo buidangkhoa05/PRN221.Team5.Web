@@ -1,0 +1,80 @@
+﻿@page
+@model Team5.Web.Pages.ManageZooNews.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ZooNews</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ZooNews.Id" />
+            <div class="form-group">
+                <label asp-for="ZooNews.Title" class="control-label"></label>
+                <input asp-for="ZooNews.Title" class="form-control" />
+                <span asp-validation-for="ZooNews.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.Description" class="control-label"></label>
+                <input asp-for="ZooNews.Description" class="form-control" />
+                <span asp-validation-for="ZooNews.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.Content" class="control-label"></label>
+                <input asp-for="ZooNews.Content" class="form-control" />
+                <span asp-validation-for="ZooNews.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.ImageLink" class="control-label"></label>
+                <input asp-for="ZooNews.ImageLink" class="form-control" />
+                <span asp-validation-for="ZooNews.ImageLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.OwnerId" class="control-label"></label>
+                <select asp-for="ZooNews.OwnerId" class="form-control" asp-items="ViewBag.OwnerId"></select>
+                <span asp-validation-for="ZooNews.OwnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.CreatedDate" class="control-label"></label>
+                <input asp-for="ZooNews.CreatedDate" class="form-control" />
+                <span asp-validation-for="ZooNews.CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.UpdatedDate" class="control-label"></label>
+                <input asp-for="ZooNews.UpdatedDate" class="form-control" />
+                <span asp-validation-for="ZooNews.UpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.CreatedBy" class="control-label"></label>
+                <input asp-for="ZooNews.CreatedBy" class="form-control" />
+                <span asp-validation-for="ZooNews.CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZooNews.UpdatedBy" class="control-label"></label>
+                <input asp-for="ZooNews.UpdatedBy" class="form-control" />
+                <span asp-validation-for="ZooNews.UpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ZooNews.IsDeleted" /> @Html.DisplayNameFor(model => model.ZooNews.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

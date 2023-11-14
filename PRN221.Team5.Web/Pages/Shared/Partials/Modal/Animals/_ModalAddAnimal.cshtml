@@ -19,13 +19,13 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6 modal-action">
-                <form method="post">
+                <form method="post" asp-page-handler="create">
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
                             <label for="full-name"
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Creator</label>
                             <div class="relative pointer-events-none">
-                                <input type="text" value="Hahaha" readonly
+                                <input type="text" value="@Model.User.Identity.Name" readonly
                                     class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
                             </div>
                         </div>
@@ -39,14 +39,14 @@
                             </div>
                         </div>
 
-                        <div class="col-span-2 sm:col-span-1">
+                        @* <div class="col-span-2 sm:col-span-1">
                             <label for="creator-role"
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Role</label>
                             <div class="relative pointer-events-none">
-                                <input type="text" value="Admin" readonly
+                                <input type="text" value="@Model.User.Ge" readonly
                                     class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
                             </div>
-                        </div>
+                        </div> *@
                         <div class="col-span-12 sm:col-span-6">
                             <label class="block mb-2 text-base font-semibold text-graydark dark:text-white">Animal
                                 information</label>
@@ -54,23 +54,24 @@
                                 <div class="col-span-8 sm:col-span-4">
                                     <label class="block mb-2 text-sm font-medium text-graydark dark:text-white">Animal
                                         Name</label>
-                                    <input type="text" id="animal_name"
+                                    <input asp-for="@Model.CreateAnimal.Name" type="text" id="animal_name"
                                         class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                                         placeholder="Enter name" required />
+                                    <span asp-validation-for="@Model.CreateAnimal.Name" class="text-danger"></span>
                                 </div>
                                 <div class="col-span-4 sm:col-span-2">
                                     <label
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Weight</label>
                                     <div class="flex flex-row gap-1">
-
-                                        <input type="number" id="capacity"
+                                        <input asp-for="@Model.CreateAnimal.Weight" type="number" id=""
                                             class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+                                        <span asp-validation-for="@Model.CreateAnimal.Weight" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-span-4 sm:col-span-2">
                                     <label for="cage"
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Cage</label>
-                                    <select asp-items="ViewBag.Cages" id="cage"
+                                    <select asp-for="@Model.CageId" asp-items="ViewBag.Cages" id="cage"
                                         class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
                                     </select>
                                 </div>
@@ -78,7 +79,7 @@
                                     <label for="trainer"
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Assign
                                         Trainer</label>
-                                    <select asp-items="ViewBag.Trainers" id="status"
+                                    <select asp-for="@Model.TrainerId" asp-items="ViewBag.Trainers" id="status"
                                         class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
                                     </select>
                                 </div>

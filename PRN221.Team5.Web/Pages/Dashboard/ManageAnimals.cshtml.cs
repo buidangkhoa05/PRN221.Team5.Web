@@ -29,12 +29,10 @@ namespace PRN221.Team5.Web.Pages.Dashboard
         }
 
         [BindProperty]
-        public PagedList<Animal> Animals { get; set; }
+        public Guid SelectedId { get; set; }
 
         [BindProperty]
-        public Animal CreateAnimal { get; set; }
-
-        [BindProperty] Cage_Animal CreateCageAnimal { get; set; }
+        public PagedList<Animal> Animals { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int pageIndex = 1)
         {
@@ -49,11 +47,52 @@ namespace PRN221.Team5.Web.Pages.Dashboard
                 ViewData["Cages"] = new SelectList(await _cageService.GetAll(), "Id", "NumberCage");
                 ViewData["Trainers"] = new SelectList(await _trainerService.GetAll(), "AccountId", "AccountId");
             }
-            catch (Exception)
+            catch (Exception)   
             {
             }
 
             return Page();
+        }
+
+
+        [BindProperty]
+        public Animal CreateAnimal { get; set; }
+
+        [BindProperty]
+        public Guid CageId { get; set; }
+
+        [BindProperty]
+        public Guid TrainerId { get; set; }
+        public async Task<IActionResult> OnPostCreateAsync()
+        {
+            try
+            {
+                CreateAnimal.Cage_Animals = new List<Cage_Animal>()
+                {
+                    new Cage_Animal()
+                    {
+                        CageId = CageId,
+                        AnimalId = CreateAnimal.Id
+                    }
+                };
+
+                CreateAnimal.AnimalTrainings = new List<AnimalTraining>()
+                {
+                    new AnimalTraining()
+                    {
+                        StartDate = DateTime.Now,
+                        TrainerId = TrainerId,
+                        AnimalId = CreateAnimal.Id
+                    }
+                };
+
+                var createResult = await _animalService.Create(CreateAnimal);
+                return RedirectToPage("ManageAnimals");
+            }
+            catch (Exception)
+            {
+                return Page();
+            }
         }
     }
 }

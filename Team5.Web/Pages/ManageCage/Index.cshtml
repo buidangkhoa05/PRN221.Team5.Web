@@ -1,0 +1,90 @@
+﻿@page
+@model Team5.Web.Pages.ManageCage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].NumberCage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].AnimalSpecie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].ZooSection)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Cage) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberCage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnimalSpecie.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZooSection.Description)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

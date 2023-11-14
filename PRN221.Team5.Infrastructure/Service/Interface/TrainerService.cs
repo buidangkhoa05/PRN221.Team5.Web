@@ -20,13 +20,17 @@ namespace PRN221.Team5.Application.Service.Interface
         {
             try
             {
-                var trainers = await _unitOfWork.TrainerProfile.Get(new QueryHelper<TraineerProfile>());
-                return trainers.ToList();
-            }
+                var trainers = await _unitOfWork.TrainerProfile.Get(new QueryHelper<TraineerProfile>()
+                {
+                    Include = source => source.Include(t => t.Account),
+                });
+
+            return trainers.ToList();
+        }
             catch (Exception)
             {
                 return null;
             }
-        }
+}
     }
 }

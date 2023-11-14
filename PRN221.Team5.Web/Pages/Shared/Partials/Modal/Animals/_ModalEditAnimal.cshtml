@@ -25,7 +25,7 @@
                             <label for="full-name"
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Creator</label>
                             <div class="relative pointer-events-none">
-                                <input type="text" value="Hahaha" readonly
+                                <input type="text" value="@Model.User.Identity.Name" readonly
                                     class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
                             </div>
                         </div>
@@ -39,14 +39,14 @@
                             </div>
                         </div>
 
-                        <div class="col-span-2 sm:col-span-1">
+                        @* <div class="col-span-2 sm:col-span-1">
                             <label for="creator-role"
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Role</label>
                             <div class="relative pointer-events-none">
                                 <input type="text" value="Admin" readonly
                                     class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
                             </div>
-                        </div>
+                        </div> *@
                         <div class="col-span-4 sm:col-span-2">
                             <label class="block mb-2 text-sm font-medium text-graydark dark:text-white">Capacity</label>
                             <input type="number" id="capacity" value="20"
@@ -58,11 +58,9 @@
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Section</label>
                             <select id="section"
                                 class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-
                                 <option value="Section1">Section1</option>
                                 <option value="Section2">Section2</option>
                                 <option value="Section3">Section3</option>
-
 
                             </select>
                         </div>

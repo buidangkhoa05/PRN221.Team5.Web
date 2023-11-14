@@ -1,0 +1,65 @@
+﻿@page
+@model Team5.Web.Pages.ManageFood.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Food</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Food.Id" />
+            <div class="form-group">
+                <label asp-for="Food.Name" class="control-label"></label>
+                <input asp-for="Food.Name" class="form-control" />
+                <span asp-validation-for="Food.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Food.CreatedDate" class="control-label"></label>
+                <input asp-for="Food.CreatedDate" class="form-control" />
+                <span asp-validation-for="Food.CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Food.UpdatedDate" class="control-label"></label>
+                <input asp-for="Food.UpdatedDate" class="form-control" />
+                <span asp-validation-for="Food.UpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Food.CreatedBy" class="control-label"></label>
+                <input asp-for="Food.CreatedBy" class="form-control" />
+                <span asp-validation-for="Food.CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Food.UpdatedBy" class="control-label"></label>
+                <input asp-for="Food.UpdatedBy" class="form-control" />
+                <span asp-validation-for="Food.UpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Food.IsDeleted" /> @Html.DisplayNameFor(model => model.Food.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Food.Type" class="control-label"></label>
+                <input asp-for="Food.Type" class="form-control" />
+                <span asp-validation-for="Food.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
