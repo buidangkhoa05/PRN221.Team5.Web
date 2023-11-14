@@ -22,13 +22,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cage[0].Status)
             </th>
+ <th>
+                @Html.DisplayNameFor(model => model.Cage[0].AnimalSpecie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].ZooSection)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cage[0].CreatedDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cage[0].UpdatedDate)
             </th>
-            <th>
+@*             <th>
                 @Html.DisplayNameFor(model => model.Cage[0].CreatedBy)
             </th>
             <th>
@@ -37,12 +43,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cage[0].IsDeleted)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].AnimalSpecie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].ZooSection)
-            </th>
+ *@            
             <th></th>
         </tr>
     </thead>
@@ -58,13 +59,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
+ <td>
+                @Html.DisplayFor(modelItem => item.AnimalSpecie.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZooSection.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedDate)
             </td>
-            <td>
+@*             <td>
                 @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
             <td>
@@ -73,12 +80,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnimalSpecie.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZooSection.Description)
-            </td>
+ *@            
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
@@ -88,3 +90,26 @@
 }
     </tbody>
 </table>
+
+@* Paging *@
+<div class="btn-group">
+    @if (Model.HasPreviousPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
+    }
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.PageIndex)
+        {
+            <a class="btn btn-outline-dark disabled">@i</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
+        }
+    }
+    @if (Model.HasNextPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
+    }
+</div>

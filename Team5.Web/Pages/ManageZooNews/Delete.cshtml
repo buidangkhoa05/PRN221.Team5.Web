@@ -18,24 +18,19 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ZooNews.Title)
         </dd>
-        <dt class="col-sm-2">
+@*        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ZooNews.Description)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ZooNews.Description)
         </dd>
-        <dt class="col-sm-2">
+*@        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ZooNews.Content)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ZooNews.Content)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooNews.ImageLink)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooNews.ImageLink)
-        </dd>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ZooNews.CreatedDate)
         </dt>
@@ -48,6 +43,13 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ZooNews.UpdatedDate)
         </dd>
+       @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ZooNews.ImageLink)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ZooNews.ImageLink)
+        </dd>
+      
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ZooNews.CreatedBy)
         </dt>
@@ -71,7 +73,7 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ZooNews.Owner.Email)
-        </dd>
+        </dd>*@
     </dl>
     
     <form method="post">

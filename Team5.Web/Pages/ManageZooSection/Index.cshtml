@@ -28,7 +28,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ZooSection[0].UpdatedDate)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.ZooSection[0].CreatedBy)
             </th>
             <th>
@@ -36,7 +36,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ZooSection[0].IsDeleted)
-            </th>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -58,7 +58,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedDate)
             </td>
-            <td>
+@*             <td>
                 @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
             <td>
@@ -67,7 +67,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
-            <td>
+ *@            <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -76,3 +76,26 @@
 }
     </tbody>
 </table>
+
+@* Paging *@
+<div class="btn-group">
+    @if (Model.HasPreviousPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
+    }
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.PageIndex)
+        {
+            <a class="btn btn-outline-dark disabled">@i</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
+        }
+    }
+    @if (Model.HasNextPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
+    }
+</div>

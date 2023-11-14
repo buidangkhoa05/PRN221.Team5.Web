@@ -7,52 +7,52 @@
 
 <h1>Create</h1>
 
-<h4>AnimalSpecy</h4>
+<h4>AnimalSpecie</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @* <div class="form-group">
+                <label asp-for="AnimalSpecie.Id" class="control-label"></label>
+                <input asp-for="AnimalSpecie.Id" class="form-control" />
+                <span asp-validation-for="AnimalSpecie.Id" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
-                <label asp-for="AnimalSpecy.Id" class="control-label"></label>
-                <input asp-for="AnimalSpecy.Id" class="form-control" />
-                <span asp-validation-for="AnimalSpecy.Id" class="text-danger"></span>
+                <label asp-for="AnimalSpecie.Name" class="control-label"></label>
+                <input asp-for="AnimalSpecie.Name" class="form-control" />
+                <span asp-validation-for="AnimalSpecie.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AnimalSpecy.Name" class="control-label"></label>
-                <input asp-for="AnimalSpecy.Name" class="form-control" />
-                <span asp-validation-for="AnimalSpecy.Name" class="text-danger"></span>
+                <label asp-for="AnimalSpecie.Description" class="control-label"></label>
+                <input asp-for="AnimalSpecie.Description" class="form-control" />
+                <span asp-validation-for="AnimalSpecie.Description" class="text-danger"></span>
+            </div>
+         @*   <div class="form-group">
+                <label asp-for="AnimalSpecie.CreatedDate" class="control-label"></label>
+                <input asp-for="AnimalSpecie.CreatedDate" class="form-control" />
+                <span asp-validation-for="AnimalSpecie.CreatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AnimalSpecy.Description" class="control-label"></label>
-                <input asp-for="AnimalSpecy.Description" class="form-control" />
-                <span asp-validation-for="AnimalSpecy.Description" class="text-danger"></span>
+                <label asp-for="AnimalSpecie.UpdatedDate" class="control-label"></label>
+                <input asp-for="AnimalSpecie.UpdatedDate" class="form-control" />
+                <span asp-validation-for="AnimalSpecie.UpdatedDate" class="text-danger"></span>
+            </div>*@
+         @*   <div class="form-group">
+                <label asp-for="AnimalSpecie.CreatedBy" class="control-label"></label>
+                <input asp-for="AnimalSpecie.CreatedBy" class="form-control" />
+                <span asp-validation-for="AnimalSpecie.CreatedBy" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AnimalSpecy.CreatedDate" class="control-label"></label>
-                <input asp-for="AnimalSpecy.CreatedDate" class="form-control" />
-                <span asp-validation-for="AnimalSpecy.CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnimalSpecy.UpdatedDate" class="control-label"></label>
-                <input asp-for="AnimalSpecy.UpdatedDate" class="form-control" />
-                <span asp-validation-for="AnimalSpecy.UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnimalSpecy.CreatedBy" class="control-label"></label>
-                <input asp-for="AnimalSpecy.CreatedBy" class="form-control" />
-                <span asp-validation-for="AnimalSpecy.CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnimalSpecy.UpdatedBy" class="control-label"></label>
-                <input asp-for="AnimalSpecy.UpdatedBy" class="form-control" />
-                <span asp-validation-for="AnimalSpecy.UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
+                <label asp-for="AnimalSpecie.UpdatedBy" class="control-label"></label>
+                <input asp-for="AnimalSpecie.UpdatedBy" class="form-control" />
+                <span asp-validation-for="AnimalSpecie.UpdatedBy" class="text-danger"></span>
+            </div>*@
+    @*        <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="AnimalSpecy.IsDeleted" /> @Html.DisplayNameFor(model => model.AnimalSpecy.IsDeleted)
+                    <input class="form-check-input" asp-for="AnimalSpecie.IsDeleted" /> @Html.DisplayNameFor(model => model.AnimalSpecie.IsDeleted)
                 </label>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
