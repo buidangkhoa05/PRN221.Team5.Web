@@ -51,32 +51,50 @@
                             <label class="block mb-2 text-base font-semibold text-graydark dark:text-white">Animal
                                 information</label>
                             <div class="grid grid-cols-6 p-3 bg-slate-50 gap-3 rounded-xl">
-                                <div class="col-span-8 sm:col-span-4">
+                                <div class="col-span-7 sm:col-span-3">
                                     <label class="block mb-2 text-sm font-medium text-graydark dark:text-white">Animal
                                         Name</label>
                                     <input type="text" id="animal_name"
                                         class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                                         placeholder="Enter name" required />
                                 </div>
-                                <div class="col-span-4 sm:col-span-2">
+                                <div class="col-span-3 sm:col-span-2">
                                     <label
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Weight</label>
                                     <div class="flex flex-row gap-1">
 
-                                        <input type="number" id="capacity"
+                                        <input type="number" id="weight"
                                             class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                            
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
-                                        <select id="unit"
-                                            class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                            <option value="gram">gram</option>
-                                            <option value="kilogram">kilogram</option>
-                                            <option value="tons">tons</option>
-                                        </select>
+
                                     </div>
                                 </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label
+                                        class="block mb-2 text-sm font-medium text-graydark dark:text-white">Height</label>
+                                    <div class="flex flex-row gap-1">
 
+                                        <input type="number" id="height"
+                                            class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+
+                                    </div>
+                                </div>
                                 <div class="col-span-4 sm:col-span-2">
+                                    <label for="dob"
+                                        class="block mb-2 text-sm font-medium text-graydark dark:text-white">Date of Birth 
+                                        </label>
+                                    <div class="relative">
+                                        <input type="date" 
+                                            class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
+                                    </div>
+                                </div>
+                                <div class="col-span-12 sm:col-span-6 mt-4 mb-2">
+                                    <p class="block text-sm font-medium text-graydark dark:text-white">Training
+                                        Infomation</p>
+
+                                </div>
+                                <div class="col-span-6 sm:col-span-3">
                                     <label for="cage"
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Cage</label>
                                     <select id="cage"
@@ -86,7 +104,7 @@
                                         <option value="Cage3">Cage3</option>
                                     </select>
                                 </div>
-                                <div class="col-span-4 sm:col-span-2">
+                                <div class="col-span-6 sm:col-span-3">
                                     <label for="trainer"
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Assign
                                         Trainer</label>
@@ -97,21 +115,48 @@
                                         <option value="trainer3">trainer3</option>
                                     </select>
                                 </div>
+                                <div class="col-span-12 sm:col-span-6 mt-4 mb-2">
+                                    <p class="block text-sm font-medium text-graydark dark:text-white">Food Infomation
+                                    </p>
+
+                                </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="food"
+                                        class="block mb-2 text-sm font-medium text-graydark dark:text-white">Food</label>
+                                    <select id="cage"
+                                        class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+                                        <option value="Food1">Food1</option>
+                                        <option value="Food2">Food2</option>
+                                        <option value="Food3">Food3</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-3 sm:col-span-2">
+                                    <label
+                                        class="block mb-2 text-sm font-medium text-graydark dark:text-white">Quantity</label>
+                                    <div class="flex flex-row gap-1">
+
+                                        <input type="number" id="quantity"
+                                            class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-span-3 sm:col-span-1">
+                                    <label
+                                        class="block mb-2 text-sm font-medium text-graydark dark:text-white">Frequently</label>
+                                    <div class="flex flex-row gap-1">
+
+                                        <input type="number" id="frequently"
+                                            class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+
+                                    </div>
+                                </div>
+
+
+
                             </div>
                         </div>
-
-
-
-                        @* <div class="col-span-12 sm:col-span-6">
-                        <label class="mb-3 block font-medium text-sm text-black dark:text-white">
-                        Description
-                        </label>
-                        <textarea rows="6" placeholder="Default textarea" required
-                        class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg
-                        focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60
-                        dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary
-                        dark:focus:border-primary"></textarea>
-                        </div> *@
                     </div>
                     <div class="items-center flex justify-center rounded-b dark:border-graydark/60 my-4">
                         <button type="submit"
