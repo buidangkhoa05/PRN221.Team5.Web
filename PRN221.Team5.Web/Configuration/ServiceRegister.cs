@@ -24,6 +24,7 @@ namespace PRN221.Team5.Web.Configuration
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAnimalService, AnimalService>();
         }
 
 

@@ -48,7 +48,7 @@ namespace Team5.Domain.Common
             this.TotalCount = items.Count();
             this.PageSize = pageSize;
             this.CurrentPage = pageNumber;
-            this.TotalPages = (int)Math.Ceiling(items.Count() / (double)pageSize);
+            this.TotalPages = (int)Math.Ceiling(queryList.Count() / (double) pageSize);
 
             this.AddRange(items);
         }
