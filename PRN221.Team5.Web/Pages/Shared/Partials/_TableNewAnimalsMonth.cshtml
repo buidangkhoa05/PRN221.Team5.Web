@@ -2,7 +2,7 @@
     <div class="flex flex-row justify-between">
 
         <h4 class="mb-6 text-xl font-bold text-black dark:text-white">
-            New animals during the last 30 days
+            Animals 
         </h4>
         <a asp-page="/Dashboard/ManageAnimals" class="mb-6 text-base font-bold text-primary underline dark:text-white">
             View all
@@ -47,19 +47,21 @@
             <p class="font-medium text-black dark:text-white">@animal.Name</p>
           </td>
           <td class="flex items-center justify-center p-5">
-            <p class="font-medium text-meta-3">@animal.Specie.Name</p>
+            <p class="font-medium text-meta-3">
+              @animal.Specie.Name
+            </p>
           </td>
           <td class="hidden items-center justify-center sm:flex p-5">
             <p class="font-medium text-black dark:text-white">
               @animal.CreatedDate
             </p>
           </td>
-
           <td class="hidden items-center justify-center sm:flex p-5">
-            <p class="font-medium text-meta-5">@animal.CreatedBy</p>
+            <p class="font-medium text-meta-5">
+              @animal.CreatedBy
+            </p>
           </td>
         </tr>
-
       }
     </tbody>
   </table>

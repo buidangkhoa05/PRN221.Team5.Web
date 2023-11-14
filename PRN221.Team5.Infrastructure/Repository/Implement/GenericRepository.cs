@@ -73,8 +73,7 @@ namespace Team5.Infrastructure.Repository
             }
 
             return await dbSet.Where(predicate)
-                                .ExecuteDeleteAsync()
-                                ;
+                                .ExecuteDeleteAsync();
         }
         /// <summary>
         /// UpdateAsync IsDeleted to true by condition predicate without SaveChanges action
