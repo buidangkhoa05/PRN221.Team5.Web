@@ -79,7 +79,7 @@
                             Id
                         </th>
                         <th class="w-[30px] font-medium text-black dark:text-white text-center">
-                            Id
+                            #
                         </th>
                         <th class="w-[200px] font-medium text-black dark:text-white xl:pl-11">
                             Title
@@ -182,7 +182,7 @@
 
             if (selectedRow !== null) {
                 editButton.removeAttribute('disabled'); // Enable the button
-                viewDetailButton.removeAttribute('disabled')
+                // viewDetailButton.removeAttribute('disabled')
                 deleteButton.removeAttribute('disabled')
             } else {
                 editButton.setAttribute('disabled', 'disabled'); // Disable the button

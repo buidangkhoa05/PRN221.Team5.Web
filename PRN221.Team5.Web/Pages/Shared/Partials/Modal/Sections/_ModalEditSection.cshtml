@@ -10,7 +10,7 @@
 				<!-- Modal header -->
 				<div
 					class="flex items-start justify-between p-5 border-b border-gray rounded-t dark:border-graydark/60">
-					<h3 class="text-xl font-semibold dark:text-white">Edit Section</h3>
+					<h3 class="text-xl font-semibold dark:text-white" id="edit-i">Edit Section</h3>
 					<button type="button" onclick="document.getElementById('edit_section_modal').close()"
 						class="text-graydark/500 bg-transparent hover:bg-gray hover:text-graydark rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-graydark/60 dark:hover:text-white">
 						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -22,50 +22,23 @@
 				</div>
 				<!-- Modal body -->
 				<div class="p-6 space-y-6 modal-action">
-					<form method="post">
+					<form method="post" asp-page-handler="update">
 						<div class="grid grid-cols-6 gap-6">
-							<div class="col-span-6 sm:col-span-3">
-								<label for="full-name"
-									class="block mb-2 text-sm font-medium text-graydark dark:text-white">Creator</label>
-								<div class="relative pointer-events-none">
-									<input type="text" value="Hahaha" readonly
-										class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
-								</div>
-							</div>
-							<div class="col-span-4 sm:col-span-2">
-								<label for="created-date"
-									class="block mb-2 text-sm font-medium text-graydark dark:text-white">Created
-									Date</label>
-								<div class="relative pointer-events-none">
-									<input type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")"
-										class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
-								</div>
-							</div>
-
-							<div class="col-span-2 sm:col-span-1">
-								<label for="creator-role"
-									class="block mb-2 text-sm font-medium text-graydark dark:text-white">Role</label>
-								<div class="relative pointer-events-none">
-									<input type="text" value="Admin" readonly
-										class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" />
-								</div>
-							</div>
+							<input type="text" id="edit-id" asp-for="iSection.Id" hidden/>
 							<div class="col-span-8 sm:col-span-4">
 								<label
 									class="block mb-2 text-sm font-medium text-graydark dark:text-white">Section Name</label>
-								<input type="text" id="title"
+							<input type="text" id="edit-name" asp-for="iSection.Name"
 									class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-									placeholder="Enter title for this post" required />
+									placeholder="Enter Name for this section" required />
 							</div>
                             <div class="col-span-4 sm:col-span-2">
                             <label for="status"
                                 class="block mb-2 text-sm font-medium text-graydark dark:text-white">Status</label>
-                            <select id="status"
+							<select id="edit-status" asp-for="iSection.ZooSectionStatus"
                                 class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                    <option value="active">active</option>
-                                    <option value="maintenace">maintenace</option>
-                                    <option value="inactive">inactive</option>
-
+								<option value="Available">Available</option>
+								<option value="Unavailable">Unavailable</option>
                             </select>
                         </div>
 
@@ -73,14 +46,14 @@
 								<label class="mb-3 block font-medium text-sm text-black dark:text-white">
 									Description
 								</label>
-								<textarea rows="6" placeholder="Default textarea"  required
+							<textarea rows="6" placeholder="Default textarea" required asp-for="iSection.Description" id="edit-description"
 									class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"></textarea>
 							</div>
 						</div>
-						<div class="items-center flex justify-center rounded-b dark:border-graydark/60 my-4">
-							<button type="submit"
-								class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
 
+						<div class="items-center flex justify-center rounded-b dark:border-graydark/60 my-4">
+						<button type="submit"
+								class="rounded-xl inline-flex items-center justify-center gap-2.5 bg-primary h-fit py-3 px-6 text-center text-sm font-medium text-white hover:bg-opacity-90 ">
 								Submit
 							</button>
 						</div>

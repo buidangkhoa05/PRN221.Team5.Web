@@ -1,3 +1,4 @@
+@model PRN221.Team5.Web.Pages.Dashboard.ManageSections
 <dialog class="modal overflow-x-hidden overflow-y-auto top-4 md:inset-0 min-w-full
 	h-modal sm:min-h-full bg-graydark/30" id="remove_section_modal">
     <div class="modal-box mx-auto my-10 justify-center relative w-full h-full max-w-2xl px-4 md:h-auto">
@@ -16,8 +17,9 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <form method="post">
+                <form method="post" asp-page-handler="delete">
                     <div class="text-center">
+							<input type="text" id="delete-id" asp-for="iSection.Id" hidden/>
                         <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
