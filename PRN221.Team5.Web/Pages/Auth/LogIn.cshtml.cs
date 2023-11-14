@@ -22,7 +22,7 @@ namespace PRN221.Team5.Web.Pages.Auth
         [Required]
         [MinLength(5)]
         public string Username { get; set; }
-        
+
         [BindProperty]
         [Required]
         [MinLength(5)]
@@ -42,27 +42,31 @@ namespace PRN221.Team5.Web.Pages.Auth
         {
             try
             {
+                if (string.IsNullOrEmpty(Username.Trim()) || string.IsNullOrEmpty(Password.Trim()))
+                {
+                    return Page();
+                }
+
                 var account = await _authService.Login(Username, Password);
                 if (account == null)
                 {
                     ModelState.AddModelError("invalid", "Username or password is incorrect");
                     return Page();
                 }
-                else
-                {
-                    var claims = new List<Claim>()
-                    {
-                        new Claim(ClaimTypes.Name, account.Username),
-                        new Claim(ClaimTypes.Role, account.Role.ToString()),
-                        new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())
-                    };
 
-                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var principal = new ClaimsPrincipal(identity);
-                    await HttpContext.SignInAsync(principal);
-                }
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, account.Username),
+                    new Claim(ClaimTypes.Role, account.Role.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(principal);
+
             }
-            catch (Exception) {}
+            catch (Exception) { }
 
             return Page();
         }

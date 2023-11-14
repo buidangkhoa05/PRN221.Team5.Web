@@ -1,4 +1,6 @@
 ﻿
+using Team5.Domain.Entity;
+
 namespace Team5.Domain.Common
 {
     public class PagedList<T> : List<T>
@@ -10,7 +12,6 @@ namespace Team5.Domain.Common
 
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < TotalPages;
-
         public PagedList()
         {
         }
@@ -48,7 +49,7 @@ namespace Team5.Domain.Common
             this.TotalCount = items.Count();
             this.PageSize = pageSize;
             this.CurrentPage = pageNumber;
-            this.TotalPages = (int)Math.Ceiling(items.Count() / (double)pageSize);
+            this.TotalPages = (int)Math.Ceiling(queryList.Count() / (double) pageSize);
 
             this.AddRange(items);
         }

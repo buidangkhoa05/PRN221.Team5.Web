@@ -64,37 +64,22 @@
                                     <div class="flex flex-row gap-1">
 
                                         <input type="number" id="capacity"
-                                            class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                                            
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
-                                        <select id="unit"
-                                            class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                            <option value="gram">gram</option>
-                                            <option value="kilogram">kilogram</option>
-                                            <option value="tons">tons</option>
-                                        </select>
+                                            class="shadow-sm bg-gray border border-gray text-graydark sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/60 dark:border-graydark/80 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
                                     </div>
                                 </div>
-
                                 <div class="col-span-4 sm:col-span-2">
                                     <label for="cage"
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Cage</label>
-                                    <select id="cage"
+                                    <select asp-items="ViewBag.Cages" id="cage"
                                         class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                        <option value="Cage1">Cage1</option>
-                                        <option value="Cage2">Cage2</option>
-                                        <option value="Cage3">Cage3</option>
                                     </select>
                                 </div>
                                 <div class="col-span-4 sm:col-span-2">
                                     <label for="trainer"
                                         class="block mb-2 text-sm font-medium text-graydark dark:text-white">Assign
                                         Trainer</label>
-                                    <select id="status"
+                                    <select asp-items="ViewBag.Trainers" id="status"
                                         class="bg-gray border-none text-graydark text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-graydark/70 dark:border-graydark/60 dark:placeholder-gray dark:text-white dark:focus:ring-primary dark:focus:border-primary">
-                                        <option value="trainer1">trainer1</option>
-                                        <option value="trainer2">trainer2</option>
-                                        <option value="trainer3">trainer3</option>
                                     </select>
                                 </div>
                             </div>
