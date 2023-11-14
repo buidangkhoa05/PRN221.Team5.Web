@@ -26,4 +26,8 @@
 	  <ProjectReference Include="..\PRN221.Team5.Domain\PRN221.Team5.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Configuration\" />
+	</ItemGroup>
+
 </Project>

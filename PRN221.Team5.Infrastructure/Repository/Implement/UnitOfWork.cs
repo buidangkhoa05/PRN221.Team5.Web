@@ -61,6 +61,33 @@ namespace Team5.Infrastructure.Repository
                 return _animal;
             }
         }
+
+        private IGenericRepository<ZooSection> _zooSection;
+        public IGenericRepository<ZooSection> ZooSection
+        {
+            get
+            {
+                if (_zooSection == null)
+                {
+                    _zooSection = new GenericRepository<ZooSection>(_dbContext);
+                }
+                return _zooSection;
+            }
+        }
+
+        private IGenericRepository<Cage> _cage;
+        public IGenericRepository<Cage> Cage
+        {
+            get
+            {
+                if (_cage == null)
+                {
+                    _cage = new GenericRepository<Cage>(_dbContext);
+                }
+                return _cage;
+            }
+        }
+
         #endregion Repository
 
 

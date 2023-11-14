@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PRN221.Team5.Web</title>
+    <link rel="stylesheet" href="~/css/site.css?t=@DateTime.Now.Ticks" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PRN221.Team5.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/satoshi.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" asp-append-version="true">
+
+
+
+</head>
+
+<body
+    x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+    x-init="darkMode=JSON.parse(localStorage.getItem('darkMode'));$watch('darkMode',value=>localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+    @* @await Html.PartialAsync("./Partials/_Preloader.cshtml") *@
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- ===== Sidebar Start ===== -->
+        <!-- ===== Sidebar End ===== -->
+        <!-- ===== Content Area Start ===== -->
+        <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+            <!-- ===== Header Start ===== -->
+            <div class="navbar bg-base-100">
+                <div class="navbar-start">
+                    <div class="dropdown">
+                        <label tabindex="0" class="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </label>
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a>Item 1</a></li>
+                            <li>
+                                <a>Parent</a>
+                                <ul class="p-2">
+                                    <li><a>Submenu 1</a></li>
+                                    <li><a>Submenu 2</a></li>
+                                </ul>
+                            </li>
+                            <li><a>Item 3</a></li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-ghost text-xl">daisyUI</a>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a>Item 1</a></li>
+                        <li tabindex="0">
+                            <details>
+                                <summary>Parent</summary>
+                                <ul class="p-2">
+                                    <li><a>Submenu 1</a></li>
+                                    <li><a>Submenu 2</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li><a>Item 3</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-end">
+                    <a class="btn">Button</a>
+                </div>
+            </div>
+            <!-- ===== Header End ===== -->
+            <!-- ===== Main Content Start ===== -->
+            <main>
+                @RenderBody()
+            </main>
+
+        </div>
+
+    </div>
+    @* @await Html.PartialAsync("../Partials/_ModalViewDetailPost.cshtml") *@
+
+
+
+
+
+
+    <script src="~/js/jquery.js"
+        integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/cdn.min.js"></script>
+    <script src="~/js/cdn1.min.js"></script>
+    <script src="~/js/storage.min.js"></script>
+    <script src="~/js/cdn2.min.js"></script>
+    <script src="~/js/flatpickr.min.js"></script>
+    <script src="~/js/apexcharts.min.js"></script>
+    @* <script defer src="https://unpkg.com/@@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> *@
+
+
+    @* <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"
+    integrity="sha512-9ktqS1nS/L6/PPv4S4FdD2+guYGmKF+5DzxRKYkS/fV5gR0tXoDaLqqQ6V93NlTj6ITsanjwVWZ3xe6YkObIQQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> *@
+
+    <script>
+        $(document).ready(function () {
+            $('#top_animals_month').DataTable({
+                "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+                "responsive": true,
+            });
+
+        });
+        $(document).ready(function () {
+
+            $('#top_account_month').DataTable({
+                "searching": false,
+                "info": false,
+                "lengthChange": false,
+                "responsive": true,
+                "paging": true,
+                "pageLength": 5,
+            });
+        });
+        $(document).ready(function () {
+            $('#top_posts_month').DataTable({
+                "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+                "responsive": true,
+                "columnDefs": [
+                    { "orderable": false, "targets": 'no-sort' }
+                ],
+
+            });
+
+        });
+
+        window.addEventListener('click', function (e) {
+            document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+                if (!dropdown.contains(e.target)) {
+                    // Click was outside the dropdown, close it
+                    dropdown.open = false;
+                }
+            });
+        });
+
+        const dropdownSummary = document.getElementById("dropdownHeader");
+        const svgArrow = document.querySelector("#dropdownHeader svg");
+
+        dropdownSummary.addEventListener("click", function () {
+            // Toggle the rotation angle based on the presence of 'rotate-180' class
+            const isOpen = svgArrow.classList.toggle("rotate-180");
+
+            // Optionally, you can add logic to handle dropdown open/close behavior here
+            if (isOpen) {
+                // Dropdown is open, add your logic here
+            } else {
+                // Dropdown is closed, add your logic here
+            }
+        });
+
+
+
+    </script>
+
+
+    <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+    <script type="module" src="~/js/index.js" asp-append-version="true"></script>
+
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
