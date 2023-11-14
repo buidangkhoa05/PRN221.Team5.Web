@@ -52,7 +52,7 @@ namespace Team5.Application.Repository
         Task<int> UpdateAsync(Expression<Func<T, bool>>? predicate, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> setPropertyCalls);
 
         /// <summary>
-        /// Get an entity is active and match condition predicate
+        /// GetById an entity is active and match condition predicate
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
@@ -79,7 +79,7 @@ namespace Team5.Application.Repository
         Task<TResult?> GetById<TResult>(Guid id, QueryHelper<T, TResult> queryHelper = null, bool isAsNoTracking = true) where TResult : class;
 
         /// <summary>
-        /// Get an entity is active and match condition predicate
+        /// GetById an entity is active and match condition predicate
         /// </summary>
         /// <param name="queryHelper"></param>
         /// <param name="isAsNoTracking"></param>
@@ -87,7 +87,7 @@ namespace Team5.Application.Repository
         Task<T?> GetFirstOrDefault(QueryHelper<T> queryHelper, bool isAsNoTracking = true);
 
         /// <summary>
-        /// Get an entity has mapping dto object is active and match condition predicate
+        /// GetById an entity has mapping dto object is active and match condition predicate
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="queryHelper"></param>

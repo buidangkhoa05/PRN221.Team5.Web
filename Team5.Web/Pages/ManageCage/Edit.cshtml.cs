@@ -29,12 +29,12 @@ namespace Team5.Web.Pages.ManageCage
                 return NotFound();
             }
 
-            var item = await _unitOfWork.Cage.GetFirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
+            Cage = await _unitOfWork.Cage.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (Cage == null)
             {
                 return NotFound();
             }
-            Cage = item;
+
             var AnimalSpecies = (await _unitOfWork.AnimalSpecie.Get()).ToList();
             var ZooSection = (await _unitOfWork.ZooSection.Get()).ToList();
             ViewData["AnimalSpecieId"] = new SelectList(AnimalSpecies, "Id", "Name");
@@ -53,7 +53,14 @@ namespace Team5.Web.Pages.ManageCage
         public async Task<IActionResult> OnPostAsync()
         {
             Cage.UpdatedDate = DateTime.Now;
-            await _unitOfWork.Cage.UpdateAsync(Cage, true);
+            try
+            {
+                Cage.NumberCage = 0;
+                await _unitOfWork.Cage.UpdateAsync(Cage, true);
+            }
+            catch (Exception)
+            {
+            }
 
             return RedirectToPage("./Index");
         }
