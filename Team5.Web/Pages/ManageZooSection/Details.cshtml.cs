@@ -5,37 +5,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageZooSection
 {
     public class DetailsModel : PageModel
     {
-        //private readonly Domain1.ZooManagementContext _context;
-
-        //public DetailsModel(Domain1.ZooManagementContext context)
-        //{
-        //    _context = context;
-        //}
-
-      public ZooSection ZooSection { get; set; } = default!; 
-
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        private readonly IUnitOfWork _unitOfWork;
+        public DetailsModel(IUnitOfWork unitOfWork)
         {
-            //if (id == null || _context.ZooSections == null)
-            //{
-            //    return NotFound();
-            //}
+            _unitOfWork = unitOfWork;
+        }
 
-            //var zoosection = await _context.ZooSections.FirstOrDefaultAsync(m => m.Id == id);
-            //if (zoosection == null)
-            //{
-            //    return NotFound();
-            //}
-            //else 
-            //{
-            //    ZooSection = zoosection;
-            //}
+        public ZooSection ZooSection { get; set; } = default!; 
+
+        public async Task<IActionResult> OnGetAsync(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
+
+            var zoosection = await _unitOfWork.ZooSection.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (zoosection == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                ZooSection = zoosection;
+            }
             return Page();
         }
     }

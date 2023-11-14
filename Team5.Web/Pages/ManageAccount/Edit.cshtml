@@ -31,33 +31,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Account.Role" class="control-label"></label>
-                <input asp-for="Account.Role" class="form-control" />
+                <select asp-for="Account.Role" class="form-control">
+                    <option value="@Role.ZooTrainer">Zoo Trainer</option>
+                    <option value="@Role.Staff">Staff</option>
+                    <option value="@Role.Administrator">Administrator</option>
+                </select>
                 <span asp-validation-for="Account.Role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.CreatedDate" class="control-label"></label>
-                <input asp-for="Account.CreatedDate" class="form-control" />
-                <span asp-validation-for="Account.CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.UpdatedDate" class="control-label"></label>
-                <input asp-for="Account.UpdatedDate" class="form-control" />
-                <span asp-validation-for="Account.UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.CreatedBy" class="control-label"></label>
-                <input asp-for="Account.CreatedBy" class="form-control" />
-                <span asp-validation-for="Account.CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.UpdatedBy" class="control-label"></label>
-                <input asp-for="Account.UpdatedBy" class="form-control" />
-                <span asp-validation-for="Account.UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Account.IsDeleted" /> @Html.DisplayNameFor(model => model.Account.IsDeleted)
-                </label>
             </div>
             <div class="form-group">
                 <label asp-for="Account.Email" class="control-label"></label>
@@ -75,6 +54,15 @@
                 <span asp-validation-for="Account.DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Account.Fullname" class="control-label"></label>
+                <input asp-for="Account.Fullname" class="form-control" />
+                <span asp-validation-for="Account.Fullname" class="text-danger"></span>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <h3 class="alert alert-danger" role="alert">@Model.ErrorMessage</h3>
+            }
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -86,5 +74,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

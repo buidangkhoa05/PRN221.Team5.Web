@@ -28,8 +28,8 @@ namespace PRN221.Team5.Web
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
 
-                options.LoginPath = "/Auth/Login";
-                options.AccessDeniedPath = "/Auth/AccessDenied";
+                options.LoginPath = "/Auth";
+                options.AccessDeniedPath = "/AccessDenied";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 options.SlidingExpiration = true;
                 options.Cookie.HttpOnly = true;

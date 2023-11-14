@@ -5,27 +5,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using PRN221.Team5.Application.Service.Implement;
+using Team5.Domain.Common;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageFood
 {
     public class IndexModel : PageModel
     {
-        private readonly DbContext _context;
+        private readonly IFoodService _foodService;
 
-        public IndexModel()
+        public IndexModel(IFoodService foodService)
         {
-            //_context = context;
+            _foodService = foodService;
         }
 
-        public IList<Food> Food { get;set; } = default!;
+        [BindProperty]
+        public PagedList<Food> Foods { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int pageIndex = 1)
         {
-            //if (_context.Foods != null)
-            //{
-            //    Food = await _context.Foods.ToListAsync();
-            //}
+            Foods = await _foodService.GetAll(new PagingParameters()
+            {
+                PageNumber = pageIndex,
+                PageSize = 10
+            });
         }
     }
 }

@@ -27,7 +27,7 @@
         public PagingParameters(int? pageNumer, int? pageSize)
         {
             PageNumber = pageNumer ?? 1;
-            PageSize = pageSize ?? 10;
+            PageSize = pageSize ?? 5;
         }
 
     }

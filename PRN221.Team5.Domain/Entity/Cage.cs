@@ -11,7 +11,7 @@ namespace PRN221.Team5.Domain.Entity
 {
     public class Cage : BaseEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int NumberCage { get; set; }
         [Required]
         [Range(1, Double.MaxValue)]

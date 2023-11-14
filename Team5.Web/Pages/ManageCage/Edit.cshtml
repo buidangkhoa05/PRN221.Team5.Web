@@ -16,7 +16,7 @@
             <input type="hidden" asp-for="Cage.Id" />
             <div class="form-group">
                 <label asp-for="Cage.NumberCage" class="control-label"></label>
-                <input asp-for="Cage.NumberCage" class="form-control" />
+                <input asp-for="Cage.NumberCage" class="form-control" readonly/>
                 <span asp-validation-for="Cage.NumberCage" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -26,25 +26,25 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cage.Status" class="control-label"></label>
-                <input asp-for="Cage.Status" class="form-control" />
+                <select asp-for="Cage.Status" class="form-control" asp-items="ViewBag.status"></select>
                 <span asp-validation-for="Cage.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cage.ZooSectionId" class="control-label"></label>
+                <label asp-for="Cage.ZooSection" class="control-label"></label>
                 <select asp-for="Cage.ZooSectionId" class="form-control" asp-items="ViewBag.ZooSectionId"></select>
                 <span asp-validation-for="Cage.ZooSectionId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cage.AnimalSpecieId" class="control-label"></label>
+                <label asp-for="Cage.AnimalSpecie" class="control-label"></label>
                 <select asp-for="Cage.AnimalSpecieId" class="form-control" asp-items="ViewBag.AnimalSpecieId"></select>
                 <span asp-validation-for="Cage.AnimalSpecieId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cage.CreatedDate" class="control-label"></label>
-                <input asp-for="Cage.CreatedDate" class="form-control" />
-                <span asp-validation-for="Cage.CreatedDate" class="text-danger"></span>
+                @*<label asp-for="Cage.CreatedDate" class="control-label"></label>*@
+                <input asp-for="Cage.CreatedDate" class="form-control" hidden/>
+                @*<span asp-validation-for="Cage.CreatedDate" class="text-danger"></span>*@
             </div>
-            <div class="form-group">
+         @*   <div class="form-group">
                 <label asp-for="Cage.UpdatedDate" class="control-label"></label>
                 <input asp-for="Cage.UpdatedDate" class="form-control" />
                 <span asp-validation-for="Cage.UpdatedDate" class="text-danger"></span>
@@ -63,7 +63,7 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Cage.IsDeleted" /> @Html.DisplayNameFor(model => model.Cage.IsDeleted)
                 </label>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

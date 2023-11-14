@@ -6,72 +6,51 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageAnimalSpec
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
-
-        public EditModel()
+        private readonly IUnitOfWork _unitOfWork;
+        public EditModel(IUnitOfWork unitOfWork)
         {
-            //_context = context;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
-        public AnimalSpecie AnimalSpecy { get; set; } = default!;
+        public AnimalSpecie AnimalSpecie { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            //if (id == null || _context.AnimalSpecies == null)
-            //{
-            //    return NotFound();
-            //}
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
 
-            //var animalspecy =  await _context.AnimalSpecies.FirstOrDefaultAsync(m => m.Id == id);
-            //if (animalspecy == null)
-            //{
-            //    return NotFound();
-            //}
-            //AnimalSpecy = animalspecy;
+            var item = await _unitOfWork.AnimalSpecie.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            AnimalSpecie = item;
+
             return Page();
         }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(AnimalSpecy).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AnimalSpecyExists(AnimalSpecy.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            AnimalSpecie.UpdatedDate = DateTime.Now;
+            await _unitOfWork.AnimalSpecie.UpdateAsync(AnimalSpecie, true);
 
             return RedirectToPage("./Index");
         }
-
-        private bool AnimalSpecyExists(Guid id)
+        private bool AnimalSpecieExists(Guid id)
         {
             //return (_context.AnimalSpecies?.Any(e => e.Id == id)).GetValueOrDefault();
-            return true;
+            return false;
         }
     }
 }

@@ -5,28 +5,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using PRN221.Team5.Application.Service.Implement;
+using Team5.Domain.Common;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageAnimal
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAnimalService _animalService;
 
-        public IndexModel()
+        public IndexModel(IAnimalService animalService)
         {
-            //_context = context;
+            _animalService = animalService;
         }
 
-        public IList<Animal> Animal { get;set; } = default!;
+        [BindProperty]
+        public PagedList<Animal> Animal { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int pageIndex = 1)
         {
-            //if (_context.Animals != null)
-            //{
-            //    Animal = await _context.Animals
-            //    .Include(a => a.Specie).ToListAsync();
-            //}
+            try
+            {
+                Animal = await _animalService.GetAll(new PagingParameters()
+                {
+                    PageNumber = pageIndex,
+                    PageSize = 5
+                });
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

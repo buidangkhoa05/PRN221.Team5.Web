@@ -6,17 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageCage
 {
     public class EditModel : PageModel
     {
-        private readonly DbContext _context;
-
-        public EditModel()
+        private readonly IUnitOfWork _unitOfWork;
+        public EditModel(IUnitOfWork unitOfWork)
         {
-            //_context = context;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
@@ -24,56 +24,50 @@ namespace Team5.Web.Pages.ManageCage
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-           // if (id == null || _context.Cages == null)
-           // {
-           //     return NotFound();
-           // }
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
 
-           // var cage =  await _context.Cages.FirstOrDefaultAsync(m => m.Id == id);
-           // if (cage == null)
-           // {
-           //     return NotFound();
-           // }
-           // Cage = cage;
-           //ViewData["AnimalSpecieId"] = new SelectList(_context.AnimalSpecies, "Id", "Description");
-           //ViewData["ZooSectionId"] = new SelectList(_context.ZooSections, "Id", "Description");
+            Cage = await _unitOfWork.Cage.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (Cage == null)
+            {
+                return NotFound();
+            }
+
+            var AnimalSpecies = (await _unitOfWork.AnimalSpecie.Get()).ToList();
+            var ZooSection = (await _unitOfWork.ZooSection.Get()).ToList();
+            ViewData["AnimalSpecieId"] = new SelectList(AnimalSpecies, "Id", "Name");
+            ViewData["ZooSectionId"] = new SelectList(ZooSection, "Id", "Name");
+
+            var optionsList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "Available" },
+                new SelectListItem { Value = "1", Text = "Unavailabe" },
+            };
+            ViewData["status"] = new SelectList(optionsList, "Value", "Text");
             return Page();
         }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Cage).State = EntityState.Modified;
-
+            Cage.UpdatedDate = DateTime.Now;
             try
             {
-                await _context.SaveChangesAsync();
+                Cage.NumberCage = 0;
+                await _unitOfWork.Cage.UpdateAsync(Cage, true);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!CageExists(Cage.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
             return RedirectToPage("./Index");
         }
-
         private bool CageExists(Guid id)
         {
             //return (_context.Cages?.Any(e => e.Id == id)).GetValueOrDefault();
-            return true;
+            return false;
         }
     }
 }

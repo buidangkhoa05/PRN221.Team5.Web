@@ -42,7 +42,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Cage.UpdatedDate)
         </dd>
-        <dt class="col-sm-2">
+       @* <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Cage.CreatedBy)
         </dt>
         <dd class="col-sm-10">
@@ -59,18 +59,18 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Cage.IsDeleted)
-        </dd>
+        </dd>*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Cage.AnimalSpecie)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cage.AnimalSpecie.Description)
+            @Html.DisplayFor(model => model.Cage.AnimalSpecie.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Cage.ZooSection)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cage.ZooSection.Description)
+            @Html.DisplayFor(model => model.Cage.ZooSection.Name)
         </dd>
     </dl>
     

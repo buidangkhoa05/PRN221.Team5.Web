@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PRN221.Team5.Domain.Entity;
+﻿using PRN221.Team5.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace PRN221.Team5.Application.Service.Implement
 {
-    public interface IAuthService
+    public interface IAnimalSpecieService
     {
-        public Task<Account?> Login(string username, string password);
+        Task<List<AnimalSpecie>> GetAll();
     }
 }

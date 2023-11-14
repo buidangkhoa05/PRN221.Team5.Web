@@ -164,7 +164,7 @@ namespace Team5.Infrastructure.Repository
 
         #region Retrieve
         /// <summary>
-        /// Get first entity by predicate, this function is AsNoTracking
+        /// GetById first entity by predicate, this function is AsNoTracking
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
@@ -234,7 +234,7 @@ namespace Team5.Infrastructure.Repository
             return await query.SingleOrDefaultAsync();
         }
         /// <summary>
-        /// Get an entity is active and match condition predicate
+        /// GetById an entity is active and match condition predicate
         /// </summary>
         /// <param name="queryHelper"></param>
         /// <param name="isAsNoTracking"></param>
@@ -251,7 +251,7 @@ namespace Team5.Infrastructure.Repository
             return await query.FirstOrDefaultAsync();
         }
         /// <summary>
-        /// Get an entity has mapping dto object is active and match condition predicate
+        /// GetById an entity has mapping dto object is active and match condition predicate
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="queryHelper"></param>

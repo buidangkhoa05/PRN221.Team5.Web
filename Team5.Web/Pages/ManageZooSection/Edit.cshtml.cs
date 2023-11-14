@@ -6,68 +6,61 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManageZooSection
 {
     public class EditModel : PageModel
     {
-        //private readonly Domain1.ZooManagementContext _context;
-
-        //public EditModel(Domain1.ZooManagementContext context)
-        //{
-        //    _context = context;
-        //}
+        private readonly IUnitOfWork _unitOfWork;
+        public EditModel(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         [BindProperty]
         public ZooSection ZooSection { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            //if (id == null || _context.ZooSections == null)
-            //{
-            //    return NotFound();
-            //}
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
 
-            //var zoosection =  await _context.ZooSections.FirstOrDefaultAsync(m => m.Id == id);
-            //if (zoosection == null)
-            //{
-            //    return NotFound();
-            //}
-            //ZooSection = zoosection;
+            var zoosection = await _unitOfWork.ZooSection.GetFirstOrDefaultAsync(m => m.Id == id);
+            if (zoosection == null)
+            {
+                return NotFound();
+            }
+            ZooSection = zoosection;
+            var optionsList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "Available" },
+                new SelectListItem { Value = "1", Text = "Unavailabe" },
+            };
+            ViewData["status"] = new SelectList(optionsList, "Value", "Text");
             return Page();
         }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            ZooSection.UpdatedDate = DateTime.Now;
 
-            //_context.Attach(ZooSection).State = EntityState.Modified;
+            Cage? cage = await _unitOfWork.Cage.GetFirstOrDefaultAsync(x => x.ZooSectionId == ZooSection.Id);
+            if (cage != null && ZooSection.ZooSectionStatus == ZooSectionStatus.Unavailable)
+            {
+                ModelState.AddModelError("ZooSection.ZooSectionStatus",
+                    "This section is already used by cage.");
+                return await OnGetAsync(ZooSection.Id);
+            }
 
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!ZooSectionExists(ZooSection.Id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            await _unitOfWork.ZooSection.UpdateAsync(ZooSection, true);
 
             return RedirectToPage("./Index");
         }
-
         private bool ZooSectionExists(Guid id)
         {
           //return (_context.ZooSections?.Any(e => e.Id == id)).GetValueOrDefault();
@@ -75,3 +68,6 @@ namespace Team5.Web.Pages.ManageZooSection
         }
     }
 }
+
+
+
