@@ -46,12 +46,11 @@
 
 
    
-    <script src="~/js/jquery.js"
-        integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-
+    <script src="~/js/jquery.js"></script>
+@* 
+     integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+     crossorigin="anonymous" referrerpolicy="no-referrer"
+ *@
 
     <script src="~/js/jquery.dataTables.min.js"></script>
     <script src="~/js/cdn.min.js"></script>
@@ -130,13 +129,8 @@
 
     </script>
 
-
     <script type="module" src="~/js/site.js" asp-append-version="true"></script>
     <script type="module" src="~/js/index.js" asp-append-version="true"></script>
-
-
-
-
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
