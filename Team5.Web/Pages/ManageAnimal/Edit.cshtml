@@ -50,11 +50,11 @@
                 <span asp-validation-for="Animal.SpecieId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.CreatedDate" class="control-label"></label>
-                <input asp-for="Animal.CreatedDate" class="form-control" />
-                <span asp-validation-for="Animal.CreatedDate" class="text-danger"></span>
+                @*<label asp-for="Animal.CreatedDate" class="control-label"></label>*@
+                <input asp-for="Animal.CreatedDate" class="form-control" hidden/>
+                @*<span asp-validation-for="Animal.CreatedDate" class="text-danger"></span>*@
             </div>
-            <div class="form-group">
+          @*  <div class="form-group">
                 <label asp-for="Animal.UpdatedDate" class="control-label"></label>
                 <input asp-for="Animal.UpdatedDate" class="form-control" />
                 <span asp-validation-for="Animal.UpdatedDate" class="text-danger"></span>
@@ -73,12 +73,26 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Animal.IsDeleted" /> @Html.DisplayNameFor(model => model.Animal.IsDeleted)
                 </label>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Meal_Food.FoodId" class="control-label"></label>
+                <select asp-for="Meal_Food.FoodId" class="form-control" asp-items="ViewBag.FoodId"></select>
             </div>
             <div class="form-group">
+                <label asp-for="Meal.Quantity" class="control-label"></label>
+                <input asp-for="Meal.Quantity" class="form-control" />
+                <span asp-validation-for="Meal.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meal.FoodFrequency" class="control-label"></label>
+                <input asp-for="Meal.FoodFrequency" class="form-control" />
+                <span asp-validation-for="Meal.FoodFrequency" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
                 <label asp-for="Animal.Dob" class="control-label"></label>
                 <input asp-for="Animal.Dob" class="form-control" />
                 <span asp-validation-for="Animal.Dob" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

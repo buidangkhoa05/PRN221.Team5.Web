@@ -128,6 +128,45 @@ namespace Team5.Infrastructure.Repository
             }
         }
 
+        private IGenericRepository<Meal_Food> _meal_Food;
+        public IGenericRepository<Meal_Food> Meal_Food
+        {
+            get
+            {
+                if (_meal_Food == null)
+                {
+                    _meal_Food = new GenericRepository<Meal_Food>(_dbContext);
+                }
+                return _meal_Food;
+            }
+        }
+
+        private IGenericRepository<Meal_Animal> _meal_Animal;
+        public IGenericRepository<Meal_Animal> Meal_Animal
+        {
+            get
+            {
+                if (_meal_Animal == null)
+                {
+                    _meal_Animal = new GenericRepository<Meal_Animal>(_dbContext);
+                }
+                return _meal_Animal;
+            }
+        }
+
+        private IGenericRepository<Meal> _meal;
+        public IGenericRepository<Meal> Meal
+        {
+            get
+            {
+                if (_meal == null)
+                {
+                    _meal = new GenericRepository<Meal>(_dbContext);
+                }
+                return _meal;
+            }
+        }
+
         #endregion Repository
 
 

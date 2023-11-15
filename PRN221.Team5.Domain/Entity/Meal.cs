@@ -12,15 +12,17 @@ namespace PRN221.Team5.Domain.Entity
     {
         [Required]
         [MinLength(5)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "Name of meal";
 
         [DataType(DataType.Text)]
-        public string Description { get; set; }
+        public string Description { get; set; } = "Description of meal";
 
         [Required]
+        [Range(1, 50)]
         public int Quantity { get; set; }
 
         [Required]
+        [Range(1, 50)]
         public float FoodFrequency { get; set; }
 
         public virtual ICollection<Meal_Animal> Meal_Animals{ get; set; }

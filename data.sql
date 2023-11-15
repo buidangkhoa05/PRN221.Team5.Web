@@ -94,6 +94,11 @@ VALUES
     ('5BA9D1C9-3C9C-45F2-92D4-F79B053A4777', 12, 0, 'D2C385A3-79E2-486C-B8DF-A4C8D72A6D94', '8136F888-41BB-483E-81D3-3A4D03C018B3', GETDATE(), GETDATE(), null, null, 0),
     ('F7DB6C88-B0D9-4F28-ACD7-FA4F77DFB777', 20, 1, '49086296-25EE-4CAD-846D-E07A4439A6DD', '928163CB-4799-4F88-91A3-4401CF413094', GETDATE(), GETDATE(), null, null, 0);
 
+--account
+  INSERT INTO [ZooManagement].[dbo].[Accounts]
+    ([Id], [Username], [Password], [PhoneNumber], [Role], [CreatedDate], [UpdatedDate], [CreatedBy], [UpdatedBy], [IsDeleted], [Email], [Fullname], [DateOfBirth])
+VALUES 
+    ('5ba6468f-5273-42df-8fbf-a81858b95bcf', 'hung', 'hung', '0947339123', 102, GETDATE(), GETDATE(), NULL, NULL, 'False', 'hung@gmail.com', 'nguyen manh hung', '2002-02-10 08:55:00.000');
 
 
 --news
@@ -102,40 +107,40 @@ INSERT INTO [ZooManagement].[dbo].[ZooNews]
 VALUES 
     (NEWID(), N'Cá sấu khổng lồ xuất hiện tại sở thú', N'Tin tức về việc xuất hiện cá sấu lớn trong khu vực sở thú', 
      N'Cá sấu khổng lồ với chiều dài lên đến 5 mét đã xuất hiện tại sở thú. Đây là một sự kiện đặc biệt và thu hút sự chú ý của công chúng.',
-     N'https://example.com/image1.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image1.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Các con sư tử trắng được nuôi dưỡng tốt nhất', N'Thông tin về việc nuôi dưỡng sư tử trắng trong sở thú', 
      N'Các chuyên gia sở thú cho biết rằng việc nuôi dưỡng các con sư tử trắng tại sở thú đã diễn ra tốt đẹp. Các con vật rất khỏe mạnh và phát triển.',
-     N'https://example.com/image2.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image2.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Công việc bảo vệ loài linh cẩu', N'Thông tin về việc bảo vệ loài linh cẩu', 
      N'Sở thú đã tiến hành các hoạt động bảo vệ loài linh cẩu. Điều này giúp duy trì số lượng và môi trường sống của chúng.',
-     N'https://example.com/image3.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image3.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Phát hiện mới về loài khỉ đột tại sở thú', N'Tin tức về phát hiện mới về loài khỉ đột', 
      N'Người quản lý sở thú thông báo về việc phát hiện mới về hành vi và thói quen sinh sống của loài khỉ đột.',
-     N'https://example.com/image4.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image4.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Bí ẩn xung quanh loài gấu trúc', N'Tin tức về loài gấu trúc và bí ẩn xung quanh chúng', 
      N'Các nhà nghiên cứu sở thú tiết lộ về những bí ẩn chưa được giải đáp về loài gấu trúc, góp phần nâng cao hiểu biết về chúng.',
-     N'https://example.com/image5.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image5.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Tiến bộ trong việc bảo tồn voi tại sở thú', N'Tin tức về các tiến bộ trong công tác bảo tồn voi', 
      N'Sở thú đã đạt được nhiều tiến bộ đáng kể trong việc bảo tồn và chăm sóc các con voi. Điều này đã thu hút sự quan tâm lớn từ cộng đồng.',
-     N'https://example.com/image6.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image6.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Cảm xúc của nhân viên sở thú', N'Thông tin về cảm xúc của nhân viên làm việc tại sở thú', 
      N'Nhân viên sở thú chia sẻ về những trải nghiệm và cảm xúc của mình khi làm việc với các loài động vật tại sở thú.',
-     N'https://example.com/image7.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image7.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Hoạt động gần đây của sở thú', N'Tin tức về các hoạt động gần đây của sở thú', 
      N'Sở thú đã tổ chức nhiều hoạt động thú vị và ý nghĩa gần đây, thu hút được sự tham gia của nhiều người dân.',
-     N'https://example.com/image8.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image8.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Câu chuyện về sự sống của loài hươu cao cổ', N'Thông tin về loài hươu cao cổ và sự sống của chúng', 
      N'Câu chuyện về loài hươu cao cổ và cách mà chúng sống, tồn tại trong môi trường tự nhiên.',
-     N'https://example.com/image9.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0),
+     N'https://example.com/image9.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0),
     
     (NEWID(), N'Nghiên cứu mới về loài gấu nâu', N'Tin tức về nghiên cứu mới về loài gấu nâu', 
      N'Nhóm nghiên cứu sở thú tiết lộ về các phát hiện mới và những kết quả đáng chú ý trong nghiên cứu về loài gấu nâu.',
-     N'https://example.com/image10.jpg', '00000000-0000-0000-0000-000000000000', GETDATE(), GETDATE(), null, null, 0);
+     N'https://example.com/image10.jpg', '5ba6468f-5273-42df-8fbf-a81858b95bcf', GETDATE(), GETDATE(), null, null, 0);
