@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +8,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Team5.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/jquery.dataTables.bootstrap5.min.css" asp-append-version="true">
 </head>
+
 <body>
-    <header>
+    @* <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Team5.Web</a>
@@ -54,14 +58,27 @@
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    </header> *@
+     <div class="container-fluid">
 
-    <footer class="border-top footer text-muted">
+        <div class="row flex-nowrap">
+            @await Html.PartialAsync("./Partials/_Sidebar.cshtml")
+             @* @if (User.Identity.IsAuthenticated)
+                    {
+                        <h1>Welcome: <b>@User.Identity.Name</b></h1>
+                        <form method="post" asp-page="/auth" asp-page-handler="logout">
+                            <button type="submit" class="btn">Logout</button>
+                        </form>
+                    } *@
+                     <div class="col py-3">
+             @RenderBody()
+                 </div>
+        </div>
+       
+    </div>
+   
+
+    <footer class="border-top footer text-muted text-center">
         <div class="container">
             &copy; 2023 - Team5.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
@@ -70,7 +87,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+     <script src="~/js/jquery.dataTables.min.js"></script>
+     <script src="~/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/js/cdn.min.js"></script>
+    <script src="~/js/cdn1.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
