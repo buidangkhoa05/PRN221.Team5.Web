@@ -12,5 +12,10 @@ namespace PRN221.Team5.Application.Service.Implement
     {
         public Task<Account?> Login(string username, string password);
         Task<PagedList<Account>> GetAll(PagingParameters pagingParam);
+        Task<bool> Create(Account account);
+        Task<Account> GetById(Guid id);
+        Task<Account> Get(Expression<Func<Account, bool>> filter);
+        Task<bool> Update(Account account);
+        Task<bool> Delete(Guid id);
     }
 }

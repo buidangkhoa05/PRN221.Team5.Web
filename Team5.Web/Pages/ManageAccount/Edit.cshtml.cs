@@ -6,64 +6,56 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PRN221.Team5.Application.Service.Implement;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManagerAccount
 {
     public class EditModel : PageModel
     {
-        //private readonly Domain1.ZooManagementContext _context;
+        private readonly IAccountService _accountService;
 
-        public EditModel()
+        public EditModel(IAccountService accountService)
         {
-            //_context = context;
+            _accountService = accountService;
         }
 
         [BindProperty]
         public Account Account { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            //if (id == null || _context.Accounts == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var account =  await _context.Accounts.FirstOrDefaultAsync(m => m.Id == id);
-            //if (account == null)
-            //{
-            //    return NotFound();
-            //}
-            //Account = account;
+            var account = await _accountService.GetById(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            Account = account;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
+        public string ErrorMessage { get; set; } = default!;
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (Account.DateOfBirth < DateTime.Now.AddDays(-365))
             {
+                ErrorMessage = "Date of birth is invalid";
                 return Page();
             }
 
-            //_context.Attach(Account).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!AccountExists(Account.Id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            try
+            {
+                var isSuccess= await _accountService.Update(Account);
+                if (!isSuccess)
+                {
+                    ErrorMessage = "Update failed";
+                    return Page();
+                }
+            }
+            catch (Exception)
+            {
+            }
 
             return RedirectToPage("./Index");
         }

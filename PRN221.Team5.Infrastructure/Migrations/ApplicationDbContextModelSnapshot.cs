@@ -72,7 +72,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Animal", b =>
@@ -125,7 +125,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasIndex("SpecieId");
 
-                    b.ToTable("Animals");
+                    b.ToTable("Animals", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.AnimalSpecie", b =>
@@ -159,7 +159,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AnimalSpecies");
+                    b.ToTable("AnimalSpecies", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.AnimalTraining", b =>
@@ -204,7 +204,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasIndex("TrainerId");
 
-                    b.ToTable("AnimalTrainings");
+                    b.ToTable("AnimalTrainings", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Cage", b =>
@@ -252,7 +252,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasIndex("ZooSectionId");
 
-                    b.ToTable("Cages");
+                    b.ToTable("Cages", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Cage_Animal", b =>
@@ -298,7 +298,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasIndex("CageId");
 
-                    b.ToTable("Cage_Animals");
+                    b.ToTable("Cage_Animals", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Food", b =>
@@ -332,7 +332,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Foods");
+                    b.ToTable("Foods", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Meal", b =>
@@ -372,7 +372,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Meals");
+                    b.ToTable("Meals", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Meal_Animal", b =>
@@ -408,7 +408,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasIndex("MealId");
 
-                    b.ToTable("Meal_Animals");
+                    b.ToTable("Meal_Animals", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Meal_Food", b =>
@@ -444,7 +444,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasIndex("MealId");
 
-                    b.ToTable("Meal_Food");
+                    b.ToTable("Meal_Food", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.TraineerProfile", b =>
@@ -486,7 +486,7 @@ namespace PRN221.Team5.Application.Migrations
                     b.HasIndex("AccountId")
                         .IsUnique();
 
-                    b.ToTable("TraineerProfiles");
+                    b.ToTable("TraineerProfiles", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.ZooNews", b =>
@@ -533,7 +533,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("ZooNews");
+                    b.ToTable("ZooNews", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.ZooSection", b =>
@@ -570,7 +570,7 @@ namespace PRN221.Team5.Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ZooSections");
+                    b.ToTable("ZooSections", (string)null);
                 });
 
             modelBuilder.Entity("PRN221.Team5.Domain.Entity.Animal", b =>
