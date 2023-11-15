@@ -3,26 +3,73 @@
 @{
     ViewData["Title"] = "Login";
 }
-<h1 class="text-center">Login</h1>
-<form method="post">
-    <div class="form-group">
-        <label>Username</label>
-        <input type="text" class="form-control" asp-for="Account.Username" />
-        <span asp-validation-for="Account.Username" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" asp-for="Account.Password" />
-        <span asp-validation-for="Account.Password" class="text-danger"></span>
-    </div>
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <div class="alert alert-danger" role="alert">
-            @Model.ErrorMessage
-        </div>
-    }
-    <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary" asp-page-handler="login">Login</button>
-    </div>
-</form>
+<section class="vh-100 pt-5">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-start justify-content-center h-100 border rounded p-3">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <a asp-page="/Index"
+                    class="d-flex gap-3 align-items-center justify-content-center text-center pb-3 mb-md-0 me-md-auto text-primary text-decoration-none">
+                    <img width="32" height="32" src="~/images/logo.png" alt="Logo" class="rounded-circle" />
+                    <span class="fs-3 d-none d-sm-inline fw-bolder">ZOO Management</span>
+                </a>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                    class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 card p-3 h-75">
+                <form method="post">
+                    <h3 class="text-center fw-bolder">Login</h3>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Username</label>
+                        <input placeholder="Enter username" type="text" class="form-control" asp-for="Account.Username" />
+                        <span asp-validation-for="Account.Username" class="text-danger"></span>
+                    </div>
 
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <label lass="form-label" for="form1Example23">Password</label>
+                        <input placeholder="Enter password" type="password" class="form-control" asp-for="Account.Password" />
+                        <span asp-validation-for="Account.Password" class="text-danger"></span>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Model.ErrorMessage
+                        </div>
+                    }
+
+
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary w-100 btn-block mt-4"
+                        asp-page-handler="login">Login</button>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+@* <form method="post">
+<div class="form-group">
+<label>Username</label>
+<input type="text" class="form-control" asp-for="Account.Username" />
+<span asp-validation-for="Account.Username" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label>Password</label>
+<input type="password" class="form-control" asp-for="Account.Password" />
+<span asp-validation-for="Account.Password" class="text-danger"></span>
+</div>
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+<div class="alert alert-danger" role="alert">
+@Model.ErrorMessage
+</div>
+}
+<div class="form-group text-center">
+<button type="submit" class="btn btn-primary" asp-page-handler="login">Login</button>
+</div>
+</form> *@
