@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Team5.Domain.Common;
 
 namespace Team5.Web.Pages.ManageTraineerProfile
 {
+    //[Authorize(Roles = "Administrator, Staff")]
     public class IndexModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;

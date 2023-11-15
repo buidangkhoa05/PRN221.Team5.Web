@@ -20,12 +20,33 @@ namespace Team5.Web
                 {
                     policy.RequireAuthenticatedUser();
                 });
+                options.AddPolicy("Admin", policy =>
+                {
+                    policy.RequireRole(Role.Administrator.ToString());
+                });
+                options.AddPolicy("Staff", policy =>
+                {
+                    policy.RequireRole(Role.Administrator.ToString(),Role.Staff.ToString());
+                });
+                options.AddPolicy("Traineer", policy =>
+                {
+                    policy.RequireRole(Role.Administrator.ToString(), Role.Staff.ToString(), Role.ZooTrainer.ToString());
+                });
             });
 
             builder.Services.AddRazorPages(options =>
             {
                 //options.Conventions.AuthorizePage("/Index", "Authen");
-                //options.Conventions.AuthorizeFolder("/", "Authen");
+                options.Conventions.AuthorizeFolder("/", "Authen");
+                options.Conventions.AuthorizeFolder("/ManageAccount", "Admin");
+                options.Conventions.AuthorizeFolder("/ManageAnimal", "Traineer");
+                options.Conventions.AuthorizeFolder("/ManageAnimalSpec", "Traineer");
+                options.Conventions.AuthorizeFolder("/ManageCage", "Traineer");
+                options.Conventions.AuthorizeFolder("/ManageFood", "Traineer");
+                options.Conventions.AuthorizeFolder("/ManageTraineerProfile", "Staff");
+                options.Conventions.AuthorizeFolder("/ManageZooNews", "Staff");
+                options.Conventions.AuthorizeFolder("/ManageZooSection", "Traineer");
+
                 //options.Conventions.AuthorizeFolder("/ManageAnimal", "Authen");
             });
 
@@ -41,7 +62,7 @@ namespace Team5.Web
             {
 
                 options.LoginPath = "/Auth";
-                options.AccessDeniedPath = "/Auth/AccessDenied";
+                options.AccessDeniedPath = "/AccessDenie";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 options.SlidingExpiration = true;
                 options.Cookie.HttpOnly = true;
