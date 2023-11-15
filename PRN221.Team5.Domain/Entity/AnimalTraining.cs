@@ -11,7 +11,7 @@ namespace PRN221.Team5.Domain.Entity
     public class AnimalTraining : BaseEntity
     {
         [Required]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
 
         public DateTime? EndDate { get; set; } = null;
 
