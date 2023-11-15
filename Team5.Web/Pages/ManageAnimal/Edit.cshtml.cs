@@ -109,7 +109,7 @@ namespace Team5.Web.Pages.ManageAnimal
                     AnimalId = Animal.Id
                 });
 
-                await _unitOfWork.Animal.UpdateAsync(animal, true);
+                var result = await _unitOfWork.Animal.UpdateAsync(Animal, isSaveChange: true);
             }
             catch (Exception)
             {
