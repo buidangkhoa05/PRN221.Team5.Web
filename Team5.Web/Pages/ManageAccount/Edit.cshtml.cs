@@ -38,7 +38,7 @@ namespace Team5.Web.Pages.ManagerAccount
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (Account.DateOfBirth < DateTime.Now.AddDays(-365))
+            if (Account.DateOfBirth > DateTime.Now.AddDays(-365))
             {
                 ErrorMessage = "Date of birth is invalid";
                 return Page();
