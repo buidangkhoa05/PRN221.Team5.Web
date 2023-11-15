@@ -2,17 +2,17 @@
 @model Team5.Web.Pages.ManageTraineerProfile.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "TraineerProfile";
 }
 
-<h1>Index</h1>
+<h1>TraineerProfile</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table table-striped" id="trainer_profile">
+<table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TraineerProfile[0].Account.Username)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TraineerProfile[0].JoinDate)
             </th>
@@ -28,24 +28,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.TraineerProfile[0].UpdatedDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TraineerProfile[0].CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TraineerProfile[0].UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TraineerProfile[0].IsDeleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TraineerProfile[0].Account)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.TraineerProfile) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Fullname)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.JoinDate)
             </td>
@@ -62,21 +53,8 @@
                 @Html.DisplayFor(modelItem => item.UpdatedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account.Email)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @* <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> | *@
+                @* <a asp-page="./Details" asp-route-id="@item.Id">Details</a> | *@
             </td>
         </tr>
 }

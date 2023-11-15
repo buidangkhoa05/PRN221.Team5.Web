@@ -11,6 +11,13 @@
     <h4>TraineerProfile</h4>
     <hr />
     <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TraineerProfile.Account.Fullname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TraineerProfile.Account.Fullname)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TraineerProfile.JoinDate)
         </dt>
@@ -29,45 +36,135 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TraineerProfile.Exprerience)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TraineerProfile.CreatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TraineerProfile.CreatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TraineerProfile.UpdatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TraineerProfile.UpdatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TraineerProfile.CreatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TraineerProfile.CreatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TraineerProfile.UpdatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TraineerProfile.UpdatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TraineerProfile.IsDeleted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TraineerProfile.IsDeleted)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TraineerProfile.Account)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TraineerProfile.Account.Email)
-        </dd>
     </dl>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.TraineerProfile?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
+</div>
+
+
+
+<h3>List Animal manage by trainer</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].IsHerd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].UpdatedDate)
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.Animal[0].CreatedBy)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Animal[0].UpdatedBy)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Animal[0].IsDeleted)
+            </th>*@
+            @*        <th>
+            @Html.DisplayNameFor(model => model.Animal[0].Dob)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Animal[0].Specie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AnimalTraining)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.Height)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.IsHerd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.UpdatedDate)
+                </td>
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.Animal.CreatedBy)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Animal.UpdatedBy)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Animal.IsDeleted)
+            </td>*@
+                @* <td>
+            @Html.DisplayFor(modelItem => item.Animal.Dob)
+            </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Animal.Specie.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                    <a asp-page="./AddTrainer" asp-route-id="@item.Id">AddTrainer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* Paging *@
+<div class="btn-group">
+    @if (Model.HasPreviousPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@(Model.PageIndex - 1)" asp-route-id="@Model.TraineerProfile.Id">Previous</a>
+    }
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.PageIndex)
+        {
+            <a class="btn btn-outline-dark disabled">@i</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@i" asp-route-id="@Model.TraineerProfile.Id">@i</a>
+        }
+    }
+    @if (Model.HasNextPage)
+    {
+        <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@(Model.PageIndex + 1)" asp-route-id="@Model.TraineerProfile.Id">Next</a>
+    }
 </div>
