@@ -47,17 +47,21 @@ namespace Team5.Web.Pages.ManageZooSection
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            ZooSection.UpdatedDate = DateTime.Now;
-
-            Cage? cage = await _unitOfWork.Cage.GetFirstOrDefaultAsync(x => x.ZooSectionId == ZooSection.Id);
-            if (cage != null && ZooSection.ZooSectionStatus == ZooSectionStatus.Unavailable)
+            try
             {
-                ModelState.AddModelError("ZooSection.ZooSectionStatus",
-                    "This section is already used by cage.");
-                return await OnGetAsync(ZooSection.Id);
-            }
+                ZooSection.UpdatedDate = DateTime.Now;
 
-            await _unitOfWork.ZooSection.UpdateAsync(ZooSection, true);
+                Cage? cage = await _unitOfWork.Cage.GetFirstOrDefaultAsync(x => x.ZooSectionId == ZooSection.Id);
+                if (cage != null && ZooSection.ZooSectionStatus == ZooSectionStatus.Unavailable)
+                {
+                    ModelState.AddModelError("ZooSection.ZooSectionStatus",
+                        "This section is already used by cage.");
+                    return await OnGetAsync(ZooSection.Id);
+                }
+
+                await _unitOfWork.ZooSection.UpdateAsync(ZooSection, true);
+            }
+            catch { }
 
             return RedirectToPage("./Index");
         }

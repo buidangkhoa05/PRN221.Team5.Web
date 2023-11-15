@@ -31,37 +31,41 @@ namespace Team5.Web.Pages.ManageCage
 
         public async Task OnGetAsync(string? searchString, int? pageIndex)
         {
-            if (pageIndex != null)
+           try
             {
-                PageIndex = pageIndex.Value;
-            }
-            if (searchString != null)
-            {
-                SearchString = searchString;
-                Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                if (pageIndex != null)
                 {
-                    PagingParams = new PagingParameters(PageIndex, PageSize),
-                    OrderByFields = new List<string>
+                    PageIndex = pageIndex.Value;
+                }
+                if (searchString != null)
+                {
+                    SearchString = searchString;
+                    Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                    {
+                        PagingParams = new PagingParameters(PageIndex, PageSize),
+                        OrderByFields = new List<string>
                 {
                     $"UpdatedDate:desc"
                 }.ToArray(),
-                    Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
-                })).ToList();
-            }
-            else
-            {
-                Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                        Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
+                    })).ToList();
+                }
+                else
                 {
-                    PagingParams = new PagingParameters(PageIndex, PageSize),
-                    OrderByFields = new List<string>
+                    Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                    {
+                        PagingParams = new PagingParameters(PageIndex, PageSize),
+                        OrderByFields = new List<string>
                 {
                     $"UpdatedDate:desc"
                 }.ToArray(),
-                    Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
+                        Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
 
-                })).ToList();
+                    })).ToList();
+                }
+                var count = (await _unitOfWork.Cage.Get()).ToList().Count;
             }
-            var count = (await _unitOfWork.Cage.Get()).ToList().Count;
+            catch { }
             TotalPages = (int)Math.Ceiling(count / (double)PageSize);
         }
     }
