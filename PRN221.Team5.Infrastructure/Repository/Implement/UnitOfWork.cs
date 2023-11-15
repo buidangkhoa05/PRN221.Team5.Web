@@ -167,6 +167,19 @@ namespace Team5.Infrastructure.Repository
             }
         }
 
+        private IGenericRepository<AnimalTraining> _AnimalTraining;
+        public IGenericRepository<AnimalTraining> AnimalTraining
+        {
+            get
+            {
+                if (_AnimalTraining == null)
+                {
+                    _AnimalTraining = new GenericRepository<AnimalTraining>(_dbContext);
+                }
+                return _AnimalTraining;
+            }
+        }
+
         private IGenericRepository<Cage_Animal> _cageAnimal;
         public IGenericRepository<Cage_Animal> CageAnimal
         {

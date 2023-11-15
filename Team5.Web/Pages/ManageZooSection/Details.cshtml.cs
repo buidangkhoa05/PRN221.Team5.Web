@@ -31,52 +31,57 @@ namespace Team5.Web.Pages.ManageZooSection
 
         public async Task<IActionResult> OnGetAsync(Guid id, string? searchString, int? pageIndex)
         {
-            if (id == Guid.Empty)
+           try
             {
-                return NotFound();
-            }
-
-            var zoosection = await _unitOfWork.ZooSection.GetFirstOrDefaultAsync(m => m.Id == id);
-            if (zoosection == null)
-            {
-                return NotFound();
-            }
-            
-            ZooSection = zoosection;
-            if (pageIndex != null)
-            {
-                PageIndex = pageIndex.Value;
-            }
-            if (searchString != null)
-            {
-                SearchString = searchString;
-                Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                if (id == Guid.Empty)
                 {
-                    Filter = t => t.ZooSectionId == id,
-                    PagingParams = new PagingParameters(PageIndex, PageSize),
-                    OrderByFields = new List<string>
+                    return NotFound();
+                }
+
+                var zoosection = await _unitOfWork.ZooSection.GetFirstOrDefaultAsync(m => m.Id == id);
+                if (zoosection == null)
+                {
+                    return NotFound();
+                }
+
+                ZooSection = zoosection;
+                if (pageIndex != null)
+                {
+                    PageIndex = pageIndex.Value;
+                }
+                if (searchString != null)
+                {
+                    SearchString = searchString;
+                    Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                    {
+                        Filter = t => t.ZooSectionId == id,
+                        PagingParams = new PagingParameters(PageIndex, PageSize),
+                        OrderByFields = new List<string>
                 {
                     $"UpdatedDate:desc"
                 }.ToArray(),
-                    Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
-                })).ToList();
-            }
-            else
-            {
-                Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                        Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
+                    })).ToList();
+                }
+                else
                 {
-                    Filter = t => t.ZooSectionId == id,
-                    PagingParams = new PagingParameters(PageIndex, PageSize),
-                    OrderByFields = new List<string>
+                    Cage = (await _unitOfWork.Cage.GetWithPagination(new QueryHelper<Cage>()
+                    {
+                        Filter = t => t.ZooSectionId == id,
+                        PagingParams = new PagingParameters(PageIndex, PageSize),
+                        OrderByFields = new List<string>
                 {
                     $"UpdatedDate:desc"
                 }.ToArray(),
-                    Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
+                        Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
 
-                })).ToList();
+                    })).ToList();
+                }
+                var count = (await _unitOfWork.Cage.Get(new QueryHelper<Cage>() { Filter = t => t.ZooSectionId == id })).ToList().Count;
+                TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+
             }
-            var count = (await _unitOfWork.Cage.Get(new QueryHelper<Cage>() { Filter = t => t.ZooSectionId == id})).ToList().Count;
-            TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+            catch { }
             return Page();
         }
     }

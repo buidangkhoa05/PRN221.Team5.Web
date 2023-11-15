@@ -24,25 +24,29 @@ namespace Team5.Web.Pages.ManageCage
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == Guid.Empty)
+           try
             {
-                return NotFound();
-            }
-
-            var item = await _unitOfWork.Cage.GetFirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                var itemWithInclude = (await _unitOfWork.Cage.Get(new QueryHelper<Cage>()
+                if (id == Guid.Empty)
                 {
-                    Filter = t => t.Id == id,
-                    Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
-                })).ToList();
-                Cage = itemWithInclude[0];
+                    return NotFound();
+                }
+
+                var item = await _unitOfWork.Cage.GetFirstOrDefaultAsync(m => m.Id == id);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var itemWithInclude = (await _unitOfWork.Cage.Get(new QueryHelper<Cage>()
+                    {
+                        Filter = t => t.Id == id,
+                        Include = t => t.Include(t => t.AnimalSpecie).Include(t => t.ZooSection)
+                    })).ToList();
+                    Cage = itemWithInclude[0];
+                }
             }
+            catch { }
             return Page();
         }
     }

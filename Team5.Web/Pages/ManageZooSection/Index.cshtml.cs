@@ -35,35 +35,41 @@ namespace Team5.Web.Pages.ManageZooSection
 
 		public async Task OnGetAsync(string? searchString, int? pageIndex)
 		{
-			if (pageIndex != null)
+			try
 			{
-				PageIndex = pageIndex.Value;
-			}
-			if (searchString != null)
-			{
-				SearchString = searchString;
-				ZooSection = (await _unitOfWork.ZooSection.GetWithPagination(new QueryHelper<ZooSection>()
-				{
-					PagingParams = new PagingParameters(PageIndex, PageSize),
-					OrderByFields = new List<string>
-				{
-					$"UpdatedDate:desc"
-				}.ToArray(),
-				})).ToList();
-			}
-			else
-			{
-				ZooSection = (await _unitOfWork.ZooSection.GetWithPagination(new QueryHelper<ZooSection>()
-				{
-					PagingParams = new PagingParameters(PageIndex, PageSize),
-					OrderByFields = new List<string>
-				{
-					$"UpdatedDate:desc"
-				}.ToArray(),
-				})).ToList();
-			}
-			var count = (await _unitOfWork.ZooSection.Get()).ToList().Count;
-			TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+                if (pageIndex != null)
+                {
+                    PageIndex = pageIndex.Value;
+                }
+                if (searchString != null)
+                {
+                    SearchString = searchString;
+                    ZooSection = (await _unitOfWork.ZooSection.GetWithPagination(new QueryHelper<ZooSection>()
+                    {
+                        PagingParams = new PagingParameters(PageIndex, PageSize),
+                        OrderByFields = new List<string>
+                {
+                    $"UpdatedDate:desc"
+                }.ToArray(),
+                    })).ToList();
+                }
+                else
+                {
+                    ZooSection = (await _unitOfWork.ZooSection.GetWithPagination(new QueryHelper<ZooSection>()
+                    {
+                        PagingParams = new PagingParameters(PageIndex, PageSize),
+                        OrderByFields = new List<string>
+                {
+                    $"UpdatedDate:desc"
+                }.ToArray(),
+                    })).ToList();
+                }
+                var count = (await _unitOfWork.ZooSection.Get()).ToList().Count;
+                TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+
+            }
+			catch { }
+		
 		}
 	}
 }
