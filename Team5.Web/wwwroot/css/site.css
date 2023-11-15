@@ -27,7 +27,7 @@ body {
 
 .dataTables_length,
 .dataTables_filter {
-  width: 50% !important;
+  width: 100% !important;
   margin-bottom: 20px !important;
 }
 .dataTables_length label {

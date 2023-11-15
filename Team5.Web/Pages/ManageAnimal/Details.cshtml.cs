@@ -41,6 +41,12 @@ namespace Team5.Web.Pages.ManageAnimal
                 {
                     Filter = t => t.Id == id,
                     Include = t => t.Include(t => t.Specie)
+                    .Include(t => t.AnimalTrainings)
+                                        .ThenInclude(t => t.Trainer)
+                                            .ThenInclude(t => t.Account)
+                    .Include(t => t.Cage_Animals)
+                                        .ThenInclude(t => t.Cage)
+                                            .ThenInclude(t => t.ZooSection)
                 })).ToList();
                 Animal = itemWithInclude[0];
             }

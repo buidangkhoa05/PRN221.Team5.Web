@@ -4,112 +4,238 @@
 @{
     ViewData["Title"] = "Manage Cage";
 }
+<div class="container-fluid">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+        aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active d-flex flex-row gap-1 align-items-center">
+                <svg width="12" height="12" class="mr-4" fill="#6c757d" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                    </path>
+                </svg><span>Dashboard</span>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Food</li>
+        </ol>
+    </nav>
+    <h4>All Food</h4>
+    <div class="d-flex flex-row justify-content-end w-100 mb-2">
+        <button class="btn btn-primary">
+            <a asp-page="Create" class="text-decoration-none text-white">Create New</a>
+        </button>
+    </div>
+    <table class="table table-striped" id="cage">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cage[0].NumberCage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cage[0].Capacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cage[0].Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cage[0].AnimalSpecie)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cage[0].ZooSection)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cage[0].CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cage[0].UpdatedDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cage)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberCage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Capacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnimalSpecie.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ZooSection.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UpdatedDate)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<h1>Manage Cage</h1>
+<div class="container-fluid d-flex justify-content-center">
+    <div class="btn-group mt-4">
+        @if (Model.HasPreviousPage)
+        {
+            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
+        }
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i == Model.PageIndex)
+            {
+                <a class="btn btn-outline-dark disabled">@i</a>
+            }
+            else
+            {
+                <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
+            }
+        }
+        @if (Model.HasNextPage)
+        {
+            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
+        }
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#cage').DataTable(
+                {
+        @* 'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']], *@
+                'paging': false,
+                'info': false,
+
+                'responsive': true,
+                'ordering': false,
+                                        }
+        );
+    });
+    </script>
+}
+
+@* <h1>Manage Cage</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+<a asp-page="Create">Create New</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].NumberCage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].Capacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].Status)
-            </th>
- <th>
-                @Html.DisplayNameFor(model => model.Cage[0].AnimalSpecie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].ZooSection)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].UpdatedDate)
-            </th>
-@*             <th>
-                @Html.DisplayNameFor(model => model.Cage[0].CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cage[0].IsDeleted)
-            </th>
- *@            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<thead>
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].NumberCage)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].Capacity)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].Status)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].AnimalSpecie)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].ZooSection)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].CreatedDate)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].UpdatedDate)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].CreatedBy)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].UpdatedBy)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cage[0].IsDeleted)
+</th>
+
+<th></th>
+</tr>
+</thead>
+<tbody>
 @foreach (var item in Model.Cage) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberCage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
- <td>
-                @Html.DisplayFor(modelItem => item.AnimalSpecie.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZooSection.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-@*             <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
- *@            
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.NumberCage)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Capacity)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Status)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.AnimalSpecie.Name)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.ZooSection.Name)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.CreatedDate)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.UpdatedDate)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.CreatedBy)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.UpdatedBy)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.IsDeleted)
+</td>
+
+<td>
+<a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+</td>
+</tr>
 }
-    </tbody>
+</tbody>
 </table>
 
-@* Paging *@
+Paging
 <div class="btn-group">
-    @if (Model.HasPreviousPage)
-    {
-        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
-    }
-    @for (int i = 1; i <= Model.TotalPages; i++)
-    {
-        if (i == Model.PageIndex)
-        {
-            <a class="btn btn-outline-dark disabled">@i</a>
-        }
-        else
-        {
-            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
-        }
-    }
-    @if (Model.HasNextPage)
-    {
-        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
-    }
-</div>
+@if (Model.HasPreviousPage)
+{
+<a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
+}
+@for (int i = 1; i <= Model.TotalPages; i++)
+{
+if (i == Model.PageIndex)
+{
+<a class="btn btn-outline-dark disabled">@i</a>
+}
+else
+{
+<a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
+}
+}
+@if (Model.HasNextPage)
+{
+<a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
+}
+</div> *@

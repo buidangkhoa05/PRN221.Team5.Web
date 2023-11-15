@@ -1,0 +1,24 @@
+﻿@page
+@model Team5.Web.Pages.ManageCage.AssignAnimalModel
+@{
+}
+<h1>Assign animal to cage</h1>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="CreateCageAnimal.AnimalId" class="control-label"></label>
+        <select asp-for="CreateCageAnimal.AnimalId" class="form-control" asp-items="ViewBag.Animals"></select>
+        <span asp-validation-for="CreateCageAnimal.AnimalId" class="text-danger"></span>
+    </div>
+   <div class="form-group">
+        <input type="hidden" asp-for="CreateCageAnimal.CageId" value="@Model.CageId"></input>
+    </div> 
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

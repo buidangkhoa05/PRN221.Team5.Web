@@ -180,6 +180,18 @@ namespace Team5.Infrastructure.Repository
             }
         }
 
+        private IGenericRepository<Cage_Animal> _cageAnimal;
+        public IGenericRepository<Cage_Animal> CageAnimal
+        {
+            get
+            {
+                if (_cageAnimal == null)
+                {
+                    _cageAnimal = new GenericRepository<Cage_Animal>(_dbContext);
+                }
+                return _cageAnimal;
+            }
+        }
         #endregion Repository
 
 

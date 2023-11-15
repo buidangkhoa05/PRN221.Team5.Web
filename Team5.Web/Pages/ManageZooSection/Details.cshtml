@@ -4,74 +4,136 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="container-fluid d-flex flex-column gap-4">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+        aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active d-flex flex-row gap-1 align-items-center">
+                <svg width="12" height="12" class="mr-4" fill="#6c757d" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                    </path>
+                </svg><span>Dashboard</span>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">All Species</li>
+            <li class="breadcrumb-item active" aria-current="page">Detail</li>
+        </ol>
+    </nav>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.ZooSection?.Id">Edit</a> |
+        <a asp-page="./Index">Back to List</a>
+    </div>
+    <div class="card create-form">
+        <div class="card-header">
+            Detail
+        </div>
+        <div class="card-body">
+            <h5 class="card-title mb-4">AnimalSpecie</h5>
+            <dl class="row">
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.ZooSection.Name)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.ZooSection.Name)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.ZooSection.Description)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.ZooSection.Description)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.ZooSection.ZooSectionStatus)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.ZooSection.ZooSectionStatus)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.ZooSection.CreatedDate)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.ZooSection.CreatedDate)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.ZooSection.UpdatedDate)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.ZooSection.UpdatedDate)
+                </dd>
+            </dl>
+        </div>
+    </div>
 
-<h1>Details</h1>
+
+</div>
+
+@* <h1>Details</h1>
 
 <div>
-    <h4>ZooSection</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.ZooSectionStatus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.ZooSectionStatus)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.CreatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.CreatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.UpdatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.UpdatedDate)
-        </dd>
-@*         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.CreatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.CreatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.UpdatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.UpdatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZooSection.IsDeleted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZooSection.IsDeleted)
-        </dd>
- *@    </dl>
+<h4>ZooSection</h4>
+<hr />
+<dl class="row">
+<dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.Name)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.Name)
+</dd>
+<dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.Description)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.Description)
+</dd>
+<dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.ZooSectionStatus)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.ZooSectionStatus)
+</dd>
+<dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.CreatedDate)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.CreatedDate)
+</dd>
+<dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.UpdatedDate)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.UpdatedDate)
+</dd>
+@* <dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.CreatedBy)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.CreatedBy)
+</dd>
+<dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.UpdatedBy)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.UpdatedBy)
+</dd>
+<dt class="col-sm-2">
+@Html.DisplayNameFor(model => model.ZooSection.IsDeleted)
+</dt>
+<dd class="col-sm-10">
+@Html.DisplayFor(model => model.ZooSection.IsDeleted)
+</dd>
+</dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.ZooSection?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+<a asp-page="./Edit" asp-route-id="@Model.ZooSection?.Id">Edit</a> |
+<a asp-page="./Index">Back to List</a>
+</div> *@
 
-<h5>List Cage in Section</h5>
-
-<p>
-    <a asp-page="../ManageCage/Create">Create New Cage</a>
-</p>
-<table class="table">
+<h5 class="mt-4">List Cage in Section</h5>
+<table class="table table-striped" id="listcage">
+    <p>
+        <a asp-page="../ManageCage/Create">Create New Cage</a>
+    </p>
     <thead>
         <tr>
             <th>
@@ -95,7 +157,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cage[0].UpdatedDate)
             </th>
-            @*             <th>
+            @* <th>
             @Html.DisplayNameFor(model => model.Cage[0].CreatedBy)
             </th>
             <th>
@@ -133,7 +195,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.UpdatedDate)
                 </td>
-                @*             <td>
+                @* <td>
             @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
             <td>
@@ -154,10 +216,11 @@
 </table>
 
 @* Paging *@
-<div class="btn-group">
+<div class="btn-group mt-2">
     @if (Model.HasPreviousPage)
     {
-        <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@(Model.PageIndex - 1)" asp-route-id="@Model.ZooSection.Id">Previous</a>
+        <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@(Model.PageIndex - 1)"
+            asp-route-id="@Model.ZooSection.Id">Previous</a>
     }
     @for (int i = 1; i <= Model.TotalPages; i++)
     {
@@ -167,11 +230,30 @@
         }
         else
         {
-            <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@i" asp-route-id="@Model.ZooSection.Id">@i</a>
+            <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@i"
+                asp-route-id="@Model.ZooSection.Id">@i</a>
         }
     }
     @if (Model.HasNextPage)
     {
-        <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@(Model.PageIndex + 1)" asp-route-id="@Model.ZooSection.Id">Next</a>
+        <a class="btn btn-outline-dark" asp-page="Details" asp-route-pageindex="@(Model.PageIndex + 1)"
+            asp-route-id="@Model.ZooSection.Id">Next</a>
     }
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#listcage').DataTable(
+                {
+        @* 'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']], *@
+                'paging': false,
+                'info': false,
+
+                'responsive': true,
+                'ordering': false,
+                            }
+        );
+                    });
+    </script>
+}

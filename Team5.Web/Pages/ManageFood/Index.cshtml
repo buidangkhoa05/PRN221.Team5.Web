@@ -4,91 +4,130 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Foods[0].Name)
-            </th>
-           @*  <th>
+<div class="container-fluid">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+        aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active d-flex flex-row gap-1 align-items-center">
+                <svg width="12" height="12" class="mr-4" fill="#6c757d" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                    </path>
+                </svg><span>Dashboard</span>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Food</li>
+        </ol>
+    </nav>
+    <h4>All Food</h4>
+    <div class="d-flex flex-row justify-content-end w-100 mb-2">
+        <button class="btn btn-primary">
+            <a asp-page="Create" class="text-decoration-none text-white">Create New</a>
+        </button>
+    </div>
+    <table class="table table-striped" id="food">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foods[0].Name)
+                </th>
+                @* <th>
                 @Html.DisplayNameFor(model => model.Foods[0].CreatedDate)
-            </th>
-            <th>
+                </th>
+                <th>
                 @Html.DisplayNameFor(model => model.Foods[0].UpdatedDate)
-            </th> *@
-            @* <th>
+                </th> *@
+                @* <th>
                 @Html.DisplayNameFor(model => model.Foods[0].CreatedBy)
-            </th>
-            <th>
+                </th>
+                <th>
                 @Html.DisplayNameFor(model => model.Foods[0].UpdatedBy)
-            </th> *@
-            @* <th>
+                </th> *@
+                @* <th>
                 @Html.DisplayNameFor(model => model.Foods[0].IsDeleted)
-            </th> *@
-            <th>
-                @Html.DisplayNameFor(model => model.Foods[0].Type)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Foods)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-           @*  <td>
+                </th> *@
+                <th>
+                    @Html.DisplayNameFor(model => model.Foods[0].Type)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Foods)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    @* <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
+                </td>
+                <td>
                 @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-            <td>
+                </td>
+                <td>
                 @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
+                </td>
+                <td>
                 @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td> *@
-            @* <td>
+                </td> *@
+                    @* <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td> *@
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                @* <a asp-page="./Details" asp-route-id="@item.Id">Details</a> | *@
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-<div class="btn-group">
-    @if (Model.Foods.HasPrevious)
-    {
-        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.Foods.CurrentPage - 1)">Previous</a>
-    }
-    @for (int i = 1; i <= Model.Foods.TotalPages; i++)
-    {
-        if (i == Model.Foods.CurrentPage)
-        {
-            <a class="btn btn-outline-dark disabled">@i</a>
-        }
-        else
-        {
-            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
-        }
-    }
-    @if (Model.Foods.HasNext)
-    {
-        <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.Foods.CurrentPage + 1)">Next</a>
-    }
+                </td> *@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        @* <a asp-page="./Details" asp-route-id="@item.Id">Details</a> | *@
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+<div class="container-fluid d-flex justify-content-center">
+    <div class="btn-group mt-4">
+        @if (Model.Foods.HasPrevious)
+        {
+            <a class="btn btn-outline-secondary text-black" asp-page="Index"
+                asp-route-pageindex="@(Model.Foods.CurrentPage - 1)">Previous</a>
+        }
+        @for (int i = 1; i <= Model.Foods.TotalPages; i++)
+        {
+            if (i == Model.Foods.CurrentPage)
+            {
+                <a class="btn btn-outline-secondary text-black disabled">@i</a>
+            }
+            else
+            {
+                <a class="btn btn-outline-secondary text-black" asp-page="Index" asp-route-pageindex="@i">@i</a>
+            }
+        }
+        @if (Model.Foods.HasNext)
+        {
+            <a class="btn btn-outline-secondary text-black" asp-page="Index" asp-route-pageindex="@(Model.Foods.CurrentPage + 1)">Next</a>
+        }
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#food').DataTable(
+                {
+        @* 'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']], *@
+                'paging': false,
+                'info': false,
+
+                'responsive': true,
+                'ordering': false,
+                                    }
+        );
+                            });
+    </script>
+}
