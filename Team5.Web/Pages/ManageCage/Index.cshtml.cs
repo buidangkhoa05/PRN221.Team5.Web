@@ -31,7 +31,7 @@ namespace Team5.Web.Pages.ManageCage
 
         public async Task OnGetAsync(string? searchString, int? pageIndex)
         {
-           try
+            try
             {
                 if (pageIndex != null)
                 {
@@ -64,9 +64,9 @@ namespace Team5.Web.Pages.ManageCage
                     })).ToList();
                 }
                 var count = (await _unitOfWork.Cage.Get()).ToList().Count;
+                TotalPages = (int)Math.Ceiling(count / (double)PageSize);
             }
             catch { }
-            TotalPages = (int)Math.Ceiling(count / (double)PageSize);
         }
     }
 }

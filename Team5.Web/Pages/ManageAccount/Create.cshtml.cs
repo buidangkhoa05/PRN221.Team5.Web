@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PRN221.Team5.Application.Service.Implement;
+using Team5.Application.Repository;
 //using Domain1;
 
 namespace Team5.Web.Pages.ManagerAccount
@@ -13,10 +14,12 @@ namespace Team5.Web.Pages.ManagerAccount
     public class CreateModel : PageModel
     {
         private readonly IAccountService _accountService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateModel(IAccountService accountService)
+        public CreateModel(IAccountService accountService, IUnitOfWork unitOfWork)
         {
             _accountService = accountService;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult OnGet()
@@ -45,8 +48,21 @@ namespace Team5.Web.Pages.ManagerAccount
                     ErrorMessage = "Username is exist";
                     return Page();
                 }
-
                 var result = await _accountService.Create(Account);
+
+                if (Account.Role == Role.ZooTrainer)
+                {
+                    var trainer = new TraineerProfile
+                    {
+                        Id = Guid.NewGuid(),
+                        AccountId = Account.Id,
+                        JoinDate = DateTime.Now,
+                        Exprerience = "0",
+                        CreatedDate = DateTime.Now,
+                        UpdatedDate = DateTime.Now
+                    };
+                    await _unitOfWork.TrainerProfile.CreateAsync(trainer, true);
+                }
             }
             catch (Exception)
             { }
