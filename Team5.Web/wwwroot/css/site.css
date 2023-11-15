@@ -20,3 +20,98 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.sidebar-item:hover {
+  background-color: #258cfb;
+}
+
+.dataTables_length,
+.dataTables_filter {
+  width: 50% !important;
+  margin-bottom: 20px !important;
+}
+.dataTables_length label {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px;
+  align-items: center !important;
+}
+.dataTables_length select {
+  width: 20% !important;
+  border-radius: 8px !important;
+  border: 1px solid #e5e7eb !important;
+}
+.dataTables_filter label {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 5px !important;
+  align-items: center !important;
+}
+.dataTables_filter input {
+  width: 100% !important;
+  border-radius: 8px !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.dataTables_paginate,
+.dataTables_info {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.dataTables_paginate .paginate_button.active a.page-link{
+  border-radius: 8px !important;  
+  color: #000 !important;
+  background-color: #f1f5f9 !important;
+  
+}
+.dataTables_paginate .paginate_button {
+  padding: 0px !important;
+  margin: 4px 6px !important;
+  
+}
+.dataTables_paginate .paginate_button .page-link{
+  padding: 0.25em 1em !important; 
+  border-color: #e7dada !important;
+  border-radius: 8px !important;
+}
+
+.dataTables_paginate .paginate_button a:hover {
+  border-radius: 8px !important;
+  color: #000 !important;
+}
+.dataTables_paginate .paginate_button:hover {
+  border-radius: 8px !important;
+  border-color: transparent !important;
+  background-color: none !important;
+  background: none !important;
+
+}
+.dataTables_paginate .paginate_button.previous a {
+  border-bottom-left-radius: 8px !important;
+  border-top-left-radius: 8px !important;
+  
+}
+.dataTables_paginate .paginate_button.next a {
+  border-bottom-right-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  
+}
+
+
+
+table.dataTable tbody td {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  border-bottom: none !important;
+}
+table.dataTable thead th {
+  
+  border-bottom: none !important;
+}
+table.dataTable tr.selected {
+  background: #f1f5f9 !important;
+}
+.create-form{
+  width: 500px !important;
+}
