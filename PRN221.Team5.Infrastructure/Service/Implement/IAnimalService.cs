@@ -11,5 +11,6 @@ namespace PRN221.Team5.Application.Service.Implement
     {
         Task<PagedList<Animal>> GetAll(PagingParameters pagingParam);
         Task<Guid> Create(Animal animal);
+        Task<List<Animal>> GetAllNotInCage();
     }
 }

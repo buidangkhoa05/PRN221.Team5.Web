@@ -59,5 +59,35 @@ namespace PRN221.Team5.Application.Service.Interface
                 return Guid.Empty;
             }
         }
+
+
+        public async Task<List<Animal>> GetAllNotInCage()
+        {
+            try
+            {
+                var queryHelper = new QueryHelper<Animal>()
+                {
+                    OrderByFields = new string[]
+                    {
+                        "CreatedDate:desc"
+                    },
+
+                    Include = t => t.Include(a => a.Specie)
+                                    .Include(a => a.AnimalTrainings)
+                                        .ThenInclude(a => a.Trainer)
+                                            .ThenInclude(a => a.Account)
+                                    .Include(a => a.Cage_Animals),
+                    Filter = t => t.Cage_Animals == null || t.Cage_Animals.Count == 0
+                };
+
+                var animals = await _unitOfWork.Animal.Get(queryHelper);
+
+                return animals?.ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

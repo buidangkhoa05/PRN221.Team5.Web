@@ -27,6 +27,7 @@ namespace Team5.Application.Repository
         IGenericRepository<Meal_Food> Meal_Food { get; }
         IGenericRepository<Meal_Animal> Meal_Animal { get; }
         IGenericRepository<Meal> Meal { get; }
+        public IGenericRepository<Cage_Animal> CageAnimal { get; }
         #endregion Repository
     }
 }
