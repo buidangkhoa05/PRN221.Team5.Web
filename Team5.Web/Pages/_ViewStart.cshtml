@@ -1,3 +1,14 @@
 ﻿@{
-    Layout = "_Layout";
+    
+    if (Context.Request.Path == "/Auth")
+    {
+        Layout = "~/Pages/Shared/_LoginLayout.cshtml";
+    }
+    
+    else
+    {
+        Layout = "_Layout";
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+  
 }

@@ -10,7 +10,7 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped" id="new">
     <thead>
         <tr>
             <th>
@@ -111,3 +111,19 @@
         <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
     }
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#new').DataTable(
+                {
+        @* 'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']], *@
+                'paging': false,
+                'info': false,
+
+                'responsive': true,
+                'ordering': false,
+                                        }
+        );
+    });
+    </script>
+}

@@ -92,27 +92,32 @@
 
 
     @* Paging *@
-    <div class="btn-group">
-        @if (Model.HasPreviousPage)
-        {
-            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
-        }
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            if (i == Model.PageIndex)
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="btn-group mt-4">
+            @if (Model.HasPreviousPage)
             {
-                <a class="btn btn-outline-dark disabled">@i</a>
+                <a class="btn btn-outline-secondary text-black" asp-page="Index"
+                    asp-route-pageindex="@(Model.PageIndex - 1)">Previous</a>
             }
-            else
+            @for (int i = 1; i <= Model.TotalPages; i++)
             {
-                <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@i">@i</a>
+                if (i == Model.PageIndex)
+                {
+                    <a class="btn btn-outline-dark disabled text-black">@i</a>
+                }
+                else
+                {
+                    <a class="btn btn-outline-secondary text-black" asp-page="Index" asp-route-pageindex="@i">@i</a>
+                }
             }
-        }
-        @if (Model.HasNextPage)
-        {
-            <a class="btn btn-outline-dark" asp-page="Index" asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
-        }
+            @if (Model.HasNextPage)
+            {
+                <a class="btn btn-outline-secondary text-black" asp-page="Index"
+                    asp-route-pageindex="@(Model.PageIndex + 1)">Next</a>
+            }
+        </div>
     </div>
+
 
 </div>
 @section Scripts {
@@ -120,11 +125,14 @@
         $(document).ready(function () {
             $('#example').DataTable(
                 {
-                    'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']],
-                    'responsive': true,
-                    'ordering': false,
-                }
-            );
-        });
+        @* 'lengthMenu': [[5, 10, 15, -1], [5, 10, 15, 'All']], *@
+                'paging': false,
+                'info': false,
+
+                'responsive': true,
+                'ordering': false,
+                        }
+        );
+                });
     </script>
 }
